@@ -8,9 +8,7 @@ import java.util.stream.Collectors;
 
 import co.edu.uptc.controller.AdminController;
 import co.edu.uptc.controller.GenreController;
-import co.edu.uptc.controller.MovieController;
 import co.edu.uptc.controller.SerieController;
-import co.edu.uptc.controller.SubscriptionController;
 import co.edu.uptc.controller.UserController;
 import co.edu.uptc.model.Genre;
 import co.edu.uptc.model.MultimediaContent;
@@ -20,7 +18,6 @@ import co.edu.uptc.model.Serie;
 import co.edu.uptc.model.UserRegistered;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.ObservableArray;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -913,7 +910,6 @@ public class AdminView {
 
         genreC.setGenres(adminC.loadGenresFromJson());
         genreC.updateGenreComboBox(allGenres, genreC.getGenres());
-        String aux = serie.getGenre();
         allGenres.getSelectionModel().select(serie.getGenre());
         allGenres.valueProperty().addListener((observable, oldValue, newValue) -> {
             handleAllGenresComboBoxSelection(newValue);
