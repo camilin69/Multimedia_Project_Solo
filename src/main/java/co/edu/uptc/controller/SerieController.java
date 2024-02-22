@@ -21,7 +21,8 @@ public class SerieController {
     public int verifySerieInputs(TextField serieNameField, Label serieNameLabel,
                                   TextArea serieDescriptionField, Label serieDescriptionLabel,
                                   TextField serieDirectorField, Label serieDirectorLabel,
-                                  TextField serieCoverField, Label serieCoverLabel){
+                                  TextField serieCoverField, Label serieCoverLabel,
+                                  ComboBox<String> allGenres){
 
         int aux = 0;
 
@@ -49,6 +50,11 @@ public class SerieController {
             aux++;
         }else{
             serieCoverLabel.setTextFill(Color.web("#ff4848"));
+        }
+        if(allGenres.getSelectionModel().getSelectedItem() != null){
+            aux++;
+        }else{
+            allGenres.setStyle("-fx-background-color: red;");
         }
         return aux;
     }

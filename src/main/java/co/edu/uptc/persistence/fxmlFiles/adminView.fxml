@@ -95,12 +95,12 @@
                      <TextField fx:id="serieCoverField" alignment="CENTER" layoutX="40.0" layoutY="375.0" prefHeight="25.0" prefWidth="318.0" promptText="Cover of Serie" />
                      <Label fx:id="serieCoverLabel" layoutX="40.0" layoutY="395.0" prefHeight="25.0" prefWidth="318.0" text="Serie Cover Up Here" textFill="#052659" />
 
-                     <Button fx:id="createSerie" onAction="#createSerie" layoutX="159.0" layoutY="470.0" prefHeight="20" prefWidth="80" style="-fx-background-color: #7DA0CA;" text="Create">
+                     <Button fx:id="createSerie" onAction="#createSerie" layoutX="159.0" layoutY="450.0" prefHeight="20" prefWidth="80" style="-fx-background-color: #7DA0CA;" text="Create">
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <Button fx:id="return" onAction="#adminMenu" layoutX="159.0" layoutY="500.0" prefHeight="20" prefWidth="80" style="-fx-background-color: #7DA0CA;" text="Return">
+                     <Button fx:id="return" onAction="#adminMenu" layoutX="159.0" layoutY="500.0" prefHeight="20" prefWidth="80" style="-fx-background-color: #052659;" text="Return" TextFill="#ffffff">
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
@@ -180,8 +180,8 @@
                         </cursor>
                      </VBox>
 
-                     <ComboBox layoutX="450.0" layoutY="420.0" prefHeight="25.0" prefWidth="320.0" promptText="Genres" />
-                     <ImageView fx:id="addGenre" fitHeight="50.0" fitWidth="44.0" layoutX="796.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
+                     <ComboBox fx:id="allGenres" layoutX="450.0" layoutY="420.0" prefHeight="25.0" prefWidth="320.0" promptText="Genres" />
+                     <ImageView fx:id="addGenre" onMouseClicked="#addGenre" fitHeight="50.0" fitWidth="44.0" layoutX="796.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                            <Image url="@../Icons/addIcon.png" />
                         </image>

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class Genre {
     private String name;
-    private String backgroundCover;
-    private String textCover;
     private ArrayList<Movie> movies;
     private ArrayList<Serie> series;
 
@@ -57,18 +55,6 @@ public class Genre {
                 break;
             }
         }
-    }
-    public String getBackgroundCover() {
-        return backgroundCover;
-    }
-    public void setBackgroundCover(String backgroundCover) {
-        this.backgroundCover = backgroundCover;
-    }
-    public String getTextCover() {
-        return textCover;
-    }
-    public void setTextCover(String textCover) {
-        this.textCover = textCover;
     }
     
     

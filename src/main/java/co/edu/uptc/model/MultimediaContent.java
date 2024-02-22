@@ -10,14 +10,15 @@ public class MultimediaContent {
     private String coverURL;
     private String genre;
     
-    //Serie
-    public MultimediaContent(int id, String name, String director, String description,String coverURL, String imageLocalPathURL) {
+    //Serie - movie
+    public MultimediaContent(int id, String name, String director, String description, String genre, String coverURL, String imageLocalPathURL) {
         this.id = id;
         this.name = name;
         this.director = director;
         this.description = description;
         this.coverURL = coverURL;
         this.imageLocalPathURL = imageLocalPathURL;
+        this.genre = genre;
     }
 
     //Episodes
@@ -29,17 +30,7 @@ public class MultimediaContent {
         this.imageLocalPathURL = imageLocalPathURL;
     }
 
-    //Movie
-    public MultimediaContent(int id, String name, String director, String description,
-                                    String imageLocalPathURL, String videoURL,String coverURL) {
-        this.id = id;
-        this.name = name;
-        this.director = director;
-        this.description = description;
-        this.imageLocalPathURL = imageLocalPathURL;
-        this.videoURL = videoURL;
-        this.coverURL = coverURL;
-    }
+    
 
 
     public String getName() {

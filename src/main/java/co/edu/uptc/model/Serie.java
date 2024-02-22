@@ -6,9 +6,9 @@ import java.util.ArrayList;
 public class Serie extends MultimediaContent {
     private ArrayList<Season> seasons;
     
-    public Serie(int id, String name, String director, String description, String imageLocalPathURL, String coverURL,
+    public Serie(int id, String name, String director, String description,String genre, String imageLocalPathURL, String coverURL,
             ArrayList<Season> seasons) {
-        super(id, name, director, description, coverURL, imageLocalPathURL);
+        super(id, name, director, description, genre, coverURL, imageLocalPathURL);
         this.seasons = seasons;
     }
 

@@ -3,7 +3,6 @@ package co.edu.uptc.controller;
 import java.util.ArrayList;
 
 import co.edu.uptc.model.Genre;
-import co.edu.uptc.model.Movie;
 import co.edu.uptc.model.Serie;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,12 +14,8 @@ import javafx.scene.paint.Color;
 public class GenreController {
     ArrayList<Genre> genres = new ArrayList<>();
 
-    public void createGenre(String name, ArrayList<Movie> moviesToAdd, ArrayList<Serie> seriesToAdd, String textCover, String backgroundCover){
+    public void createGenre(String name){
         Genre newGenre = new Genre(name);
-        newGenre.setMovies(moviesToAdd);
-        newGenre.setSeries(seriesToAdd);
-        newGenre.setTextCover(textCover);
-        newGenre.setBackgroundCover(backgroundCover);
         genres.add(newGenre);
     }
 
@@ -29,7 +24,7 @@ public class GenreController {
 
         if(genreNameField.getText().matches("^[a-zA-Z\\s]+$")){
             aux++;
-            genreNameLabel.setTextFill(Color.web("#807170"));
+            genreNameLabel.setTextFill(Color.web("#021024"));
             if(!genreFound(genreNameField.getText())){
                 aux++;
             }else{
@@ -68,25 +63,18 @@ public class GenreController {
     }
 
 
+    public void updateGenreComboBox(ComboBox<String> allGenres, ArrayList<Genre> genres){
+        ObservableList<String> aux = FXCollections.observableArrayList();
+
+        genres.forEach(e -> {
+            aux.add(e.getName());
+        });
+
+        allGenres.setItems(aux);
+    }
     
 
-    public ObservableList<String> currentGenreSeries(ComboBox<String> currentGenreSeries, ArrayList<Serie> series){
-        ObservableList<String> aux = FXCollections.observableArrayList();
-        for(Serie serie: series){
-            aux.add(serie.getName());
-        }
-        return aux;
-    }
-
-    public ObservableList<String> allSeriesAvailable(ObservableList<String> currentGenreSeries, ArrayList<Serie> allSeries){
-        ObservableList<String> series = FXCollections.observableArrayList();
-        for(Serie serie: allSeries){series.add(serie.getName());}
-
-        for(String serie: currentGenreSeries){
-            series.remove(serie);
-        }
-        return series;
-    }
+   
 
 
 
@@ -95,6 +83,9 @@ public class GenreController {
 
     public ArrayList<Genre> getGenres() {
         return genres;
+    }
+    public Genre getGenre(String genreName){
+        return genres.stream().filter(g -> g.getName().equals(genreName)).findFirst().get();
     }
     public void setGenres(ArrayList<Genre> genres) {
         this.genres = genres;

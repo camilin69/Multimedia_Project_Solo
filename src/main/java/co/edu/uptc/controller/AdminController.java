@@ -106,9 +106,9 @@ public class AdminController {
         }
     }
 
-    public ArrayList<Genre> loadGenresFromJson(String jsonFilePath) {
+    public ArrayList<Genre> loadGenresFromJson() {
         ArrayList<Genre> genres = new ArrayList<>();
-        try (Reader reader = new FileReader(jsonFilePath)) {
+        try (Reader reader = new FileReader(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/genres.json")) {
             Type listType = new TypeToken<List<Genre>>(){}.getType();
             genres = new Gson().fromJson(reader, listType);
         } catch (IOException e) {

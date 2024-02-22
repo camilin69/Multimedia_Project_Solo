@@ -20,6 +20,7 @@ import co.edu.uptc.model.Serie;
 import co.edu.uptc.model.UserRegistered;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ObservableArray;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -86,7 +87,8 @@ public class AdminView {
 
     
 
-    
+    @FXML
+    private ComboBox<String> allGenres;
 
 
     //---------------------------------------------------------------------SERIES ATRIBUTES-------------------------------------------------------------//
@@ -212,6 +214,8 @@ public class AdminView {
 
     private String selectedEpisodeItem = null;
 
+    private String selectedGenreItem = null;
+
     private int serieId;
 
     private ArrayList<Season> currentSeasons = new ArrayList<>();
@@ -224,10 +228,8 @@ public class AdminView {
 
     private AdminController adminC = new AdminController();
     private UserController userC = new UserController();
-    private MovieController movieC = new MovieController();
     private SerieController serieC = new SerieController();
     private GenreController genreC = new GenreController();
-    private SubscriptionController subC = new SubscriptionController();
 
 
     @FXML
@@ -403,13 +405,62 @@ public class AdminView {
         //addMoviePane.setVisible(false);
         //emptyPane.setVisible(false);
         addSeriePane.setVisible(true);
+        genreC.setGenres(adminC.loadGenresFromJson());
+        genreC.updateGenreComboBox(allGenres, genreC.getGenres());
+        allGenres.valueProperty().addListener((observable, oldValue, newValue) -> {
+            handleAllGenresComboBoxSelection(newValue);
+        });
+    }
+
+    @FXML
+    void addGenre(MouseEvent event){
+        Stage addGenreStage = new Stage();
+        addGenreStage.setTitle("Add Genre");
+        addGenreStage.initStyle(StageStyle.DECORATED);
+        addGenreStage.initModality(Modality.APPLICATION_MODAL);
+
+        TextField genreNameField = new TextField();
+        genreNameField.setPromptText("Genre Name");
+        genreNameField.setPrefSize(200, 15);
+
+        Label genreNameLabel = new Label("Genre only contains characteres");
+        genreNameLabel.setTextFill(Color.web("#021024"));
+
+        Button addGenre = new Button("Add");
+        addGenre.setPrefSize(40, 10);
+        addGenre.setCursor(Cursor.HAND);
+        addGenre.setOnAction(e -> {
+            if(genreC.verifyInputs(genreNameField, genreNameLabel) == 2){
+                genreC.createGenre(genreNameField.getText());
+                genreC.updateGenreComboBox(allGenres, genreC.getGenres());
+                adminC.saveGenresToJson(genreC.getGenres());
+                addGenreStage.close();
+            }
+        });
+
+        VBox root = new VBox(10);
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(5, 20, 5, 20));;
+        root.setStyle("-fx-background-color: #021024;");
+        root.getChildren().addAll(genreNameField, genreNameLabel, addGenre);
+        Scene addGenreScene = new Scene(root, 380, 100);
+        addGenreStage.setScene(addGenreScene);
+        addGenreStage.setResizable(false);
+        addGenreStage.showAndWait();
+    }
+
+    public void handleAllGenresComboBoxSelection(String newValue) {
+        if (newValue != null && !newValue.equals(selectedGenreItem)) {
+            System.out.println(newValue);
+        }
     }
 
     @FXML
     void createSerie(ActionEvent event) {
+        adminC.loadGenresFromJson();
         int serieVerifies = serieC.verifySerieInputs(serieNameField, serieNameLabel, serieDescriptionField, serieDescriptionLabel,
-                                              serieDirectorField, serieDirectorLabel, serieCoverField, serieCoverLabel);
-        if(serieVerifies == 4){
+                                              serieDirectorField, serieDirectorLabel, serieCoverField, serieCoverLabel, allGenres);
+        if(serieVerifies == 5){
             if(serieId == 0){serieId = adminC.assignidSerie();}
             String coverPath = System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/series/"+ serieId + serieNameField.getText() + ".png";
             try {
@@ -426,12 +477,14 @@ public class AdminView {
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-            
-            
+
             Serie newSerie = new Serie(serieId, serieNameField.getText(), serieDirectorField.getText(),
-                                     serieDirectorField.getText(), coverPath, serieCoverField.getText(), currentSeasons);
+                                     serieDirectorField.getText(), allGenres.getSelectionModel().getSelectedItem(), coverPath, serieCoverField.getText(), currentSeasons);
             adminC.getAdmin().setSeries(adminC.loadSeriesFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/series.json"));
             adminC.getAdmin().addSerie(newSerie);
+            
+            genreC.getGenre(allGenres.getSelectionModel().getSelectedItem()).addSerie(newSerie);
+            adminC.saveGenresToJson(genreC.getGenres());
             adminC.saveSeriesToJson();
 
             for(Season season: currentSeasons){
@@ -605,6 +658,8 @@ public class AdminView {
             deleteSeason.setVisible(true);
             allEpisodes.setVisible(true);
             addEpisode.setVisible(true);
+            editEpisode.setVisible(false);
+            deleteEpisode.setVisible(false);
             
 
             currentSeason = serieC.currentSeason(currentSeasons, newValue);
@@ -753,8 +808,10 @@ public class AdminView {
     void editEpisode(MouseEvent event){
         episodeMenu("edit");
         allEpisodes.getSelectionModel().clearSelection();
+        
         editEpisode.setVisible(false);
         deleteEpisode.setVisible(false);
+        
     }
 
    
@@ -854,6 +911,15 @@ public class AdminView {
         serieC.saveOldSeasons(oldSeasons, currentSeasons);
         serieC.updateSeasonComboBox(allSeasons, currentSeasons);
 
+        genreC.setGenres(adminC.loadGenresFromJson());
+        genreC.updateGenreComboBox(allGenres, genreC.getGenres());
+        String aux = serie.getGenre();
+        allGenres.getSelectionModel().select(serie.getGenre());
+        allGenres.valueProperty().addListener((observable, oldValue, newValue) -> {
+            handleAllGenresComboBoxSelection(newValue);
+        });
+        
+
         allSeasons.valueProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     handleAllSeasonsComboBoxSelection(newValue);
@@ -866,6 +932,7 @@ public class AdminView {
         });
         createSerie.setText("Save changes");
         createSerie.setOnAction(e -> {
+            adminC.loadGenresFromJson();
             serie.setName(serieNameField.getText());
             serie.setDescription(serieDescriptionField.getText());
             serie.setDirector(serieDirectorField.getText());
@@ -889,7 +956,21 @@ public class AdminView {
             serie.setImageLocalPathURL(coverPath);
             serie.setSeasons(currentSeasons);
             serie.setCoverURL(serieCoverField.getText());
+            String oldGenre = serie.getGenre();
+            String newGenre = allGenres.getSelectionModel().getSelectedItem();
+            serie.setGenre(newGenre);
+            if(!oldGenre.equals(serie.getGenre())){
+                genreC.getGenres().forEach(g -> {
+                    if(g.getName().equals(oldGenre)){
+                        g.removeSerie(serie);
+                    }else if(g.getName().equals(serie.getGenre())){
+                        g.addSerie(serie);
+                    }
+                });
+            }
+            adminC.saveGenresToJson(genreC.getGenres());
             adminC.saveSeriesToJson();
+            
             for(Season season: oldSeasons){
                 for(MultimediaContent episode : season.getEpisodes()){
                     serieC.removeEpisodeData(episode);
@@ -924,8 +1005,6 @@ public class AdminView {
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
-                    
-                    
                 }
             }
             try {
@@ -989,7 +1068,7 @@ public class AdminView {
             adminC.saveSeriesToJson();
 
             userC.setUsers(userC.loadUsersFromJson());
-            genreC.setGenres(adminC.loadGenresFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/genres.json"));
+            genreC.setGenres(adminC.loadGenresFromJson());
             for(UserRegistered user: userC.getUsers()){
                 for(PlayList playlist: user.getplayList()){
                     playlist.removeSerie(serie);
@@ -1018,6 +1097,7 @@ public class AdminView {
         //ImageView clickedImageView = (ImageView) event.getSource();
         //String id = clickedImageView.getId();
         String path = "file:///" + videoPath;
+        path = path.replace(" ", "%20");
         Media media = new Media(path);
         MediaPlayer player = new MediaPlayer(media);
         MediaView mediaView = new MediaView(player);
