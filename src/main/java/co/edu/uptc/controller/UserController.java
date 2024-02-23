@@ -34,55 +34,55 @@ public class UserController {
         int aux = 0;
         if(firstNameField.getText().matches("^[a-zA-Z\\s]+$")){
             aux++;
-            firstNameLabel.setTextFill(Color.web("#cda6ff"));
+            firstNameLabel.setTextFill(Color.web("#021024"));
         }else{
            firstNameLabel.setTextFill(Color.RED); 
         }
         if(lastNameField.getText().matches("^[a-zA-Z\\s]+$")){
             aux++;
-            lastNameLabel.setTextFill(Color.web("#cda6ff"));
+            lastNameLabel.setTextFill(Color.web("#021024"));
         }else{
            lastNameLabel.setTextFill(Color.RED); 
         }
         
         if(emailRegisterField.getText().contains("@uptc.edu.co")){  
             aux++;
-            emailRegisterLabel.setTextFill(Color.web("#cda6ff"));
+            emailRegisterLabel.setTextFill(Color.web("#021024"));
         }else{
             emailRegisterLabel.setTextFill(Color.RED);
         }
         if(passwordRegisterField.getText().matches(".{8,}$")){
-            minCharactersLabel.setTextFill(Color.web("#cda6ff"));
+            minCharactersLabel.setTextFill(Color.web("#021024"));
             aux++;
         }else{
             minCharactersLabel.setTextFill(Color.RED);
         }
         if(verifyPasswordAux(passwordRegisterField.getText(), "[!@#$%^&*(),.?\":{}|<>]")){
             aux++;
-            specialCharactersLabel.setTextFill(Color.web("#cda6ff"));
+            specialCharactersLabel.setTextFill(Color.web("#021024"));
         }else{
             specialCharactersLabel.setTextFill(Color.RED);
         }
         if(verifyPasswordAux(passwordRegisterField.getText(), "[A-Z]")){
             aux++;
-            uppercaseLabel.setTextFill(Color.web("#cda6ff"));
+            uppercaseLabel.setTextFill(Color.web("#021024"));
         }else{
             uppercaseLabel.setTextFill(Color.RED);
         }
         if(verifyPasswordAux(passwordRegisterField.getText(), "[a-z]")){
             aux++;
-            lowercaseLabel.setTextFill(Color.web("#cda6ff"));
+            lowercaseLabel.setTextFill(Color.web("#021024"));
         }else{
             lowercaseLabel.setTextFill(Color.RED);
         }
         if(verifyPasswordAux(passwordRegisterField.getText(), "[0-9]")){
             aux++;
-            minNumberLabel.setTextFill(Color.web("#cda6ff"));
+            minNumberLabel.setTextFill(Color.web("#021024"));
         }else{
             minNumberLabel.setTextFill(Color.RED);
         }
         if(passwordRegisterField.getText().equals(passwordToMatchField.getText())){
-            passwordToMatchLabel.setTextFill(Color.web("#cda6ff"));
+            passwordToMatchLabel.setTextFill(Color.web("#021024"));
             aux++;
         }else{
             passwordToMatchLabel.setTextFill(Color.RED);
