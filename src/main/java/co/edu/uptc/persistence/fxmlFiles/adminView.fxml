@@ -30,24 +30,78 @@
    <children>
       <MenuBar prefHeight="25.0" prefWidth="1000.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;">
         <menus>
-          
-          <Menu mnemonicParsing="false" text="Series">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#seeAvailableSeries" text="See" />
-                  <MenuItem mnemonicParsing="false" onAction="#addSerie" text="Add" />
-                  <MenuItem mnemonicParsing="false" onAction="#seriesToEdit" text="Edit" />
-                  <MenuItem mnemonicParsing="false" onAction="#seriesToDelete" text="Delete" />
-            </items>
-          </Menu>
-            
-            
           <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#returnToLogin" text="Return" />
+                  <MenuItem mnemonicParsing="false" onAction="#returnToAdminMenu" text="Return" />
                </items>
           </Menu>
         </menus>
       </MenuBar>
+
+      <AnchorPane fx:id="welcomePane" layoutY="25.0" prefHeight="575.0" prefWidth="1000.0" style="-fx-background-color: #021024;">
+         <children>
+            <ImageView fitHeight="150" fitWidth="200" layoutX="90.0" layoutY="160.0" pickOnBounds="true" onMouseEntered="#serieOptionsIn" onMouseExited="#serieOptionsOut">
+               <image>
+                  <Image url="@../icons/serieIcon.png" />
+               </image>
+            </ImageView>
+            <VBox fx:id="serieOptions" prefWidth="150" prefHeight="400" layoutX="200" layoutY="240" onMouseEntered="#serieOptionsIn" onMouseExited="#serieOptionsOut" visible="false">
+               <children>
+                  <Button onAction="#seeAvailableSeries" prefWidth="250" prefHeight="80" text="See" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                     <font>
+                        <Font name="SimSun" size="24"/>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <textFill>
+                        <Color fx:constant="WHITE" />
+                     </textFill>
+                  </Button>
+                  <Button onAction="#addSerie" prefWidth="250" prefHeight="80" text="Add" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                     <font>
+                        <Font name="SimSun" size="24"/>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <textFill>
+                        <Color fx:constant="WHITE" />
+                     </textFill>
+                  </Button>
+                  <Button onAction="#seriesToEdit" prefWidth="250" prefHeight="80" text="Edit" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                     <font>
+                        <Font name="SimSun" size="24"/>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <textFill>
+                        <Color fx:constant="WHITE" />
+                     </textFill>
+                  </Button>
+                  <Button onAction="#seriesToDelete" prefWidth="250" prefHeight="80" text="Delete" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                     <font>
+                        <Font name="SimSun" size="24"/>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <textFill>
+                        <Color fx:constant="WHITE" />
+                     </textFill>
+                  </Button>
+               </children>
+            </VBox> 
+            <Label layoutX="329.0" layoutY="14.0" prefHeight="68.0" prefWidth="343.0" text="Welcome Admin" textFill="WHITE">
+               <font>
+                  <Font name="NSimSun" size="46.0" />
+               </font>
+            </Label>
+            
+         </children>
+      </AnchorPane>
+
       <ScrollPane fx:id="scrollMovies" hbarPolicy="NEVER" layoutY="52.0" prefHeight="548.0" prefWidth="1000.0" vbarPolicy="ALWAYS" visible="false">
          <content>
             <GridPane fx:id="multimediaContentGrid" hgap="55.0" maxWidth="998.0" prefHeight="0.0" prefWidth="998.0" vgap="15.0">
@@ -86,7 +140,7 @@
                      <TextField fx:id="serieNameField" alignment="CENTER" layoutX="40.0" layoutY="100.0" prefHeight="25.0" prefWidth="318.0" promptText="Name of Serie" />
                      <Label fx:id="serieNameLabel" layoutX="40.0" layoutY="125.0" prefHeight="25.0" prefWidth="318.0" text="Serie Name Up Here" textFill="#052659" />
 
-                     <TextArea fx:id="serieDescriptionField" layoutX="40.0" layoutY="170.0" prefHeight="100" prefWidth="318.0" promptText="Description of Serie" />
+                     <TextField fx:id="serieDescriptionField" layoutX="40.0" layoutY="170.0" prefHeight="100" prefWidth="318.0" promptText="Description of Serie" />
                      <Label fx:id="serieDescriptionLabel" layoutX="40.0" layoutY="270.0" prefHeight="25.0" prefWidth="318.0" text="Serie Description Up Here" textFill="#052659" />
 
                      <TextField fx:id="serieDirectorField" alignment="CENTER" layoutX="40.0" layoutY="309.0" prefHeight="25.0" prefWidth="318.0" promptText="Director of Serie" />
@@ -194,5 +248,6 @@
          </children>
       </AnchorPane>
 
+      
     </children>
 </AnchorPane>

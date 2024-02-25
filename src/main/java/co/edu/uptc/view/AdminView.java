@@ -37,7 +37,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -65,6 +64,11 @@ public class AdminView {
     private Stage stage;
     private Scene scene;
 
+    @FXML
+    private AnchorPane emptyPane;
+
+    @FXML
+    private AnchorPane welcomePane;
    
     
     @FXML
@@ -100,7 +104,7 @@ public class AdminView {
     private Label serieNameLabel;
 
     @FXML
-    private TextArea serieDescriptionField;
+    private TextField serieDescriptionField;
 
     @FXML
     private Label serieDescriptionLabel;
@@ -130,7 +134,7 @@ public class AdminView {
     private Label episodeNameLabel;
 
     @FXML
-    private TextArea episodeDescriptionField;
+    private TextField episodeDescriptionField;
 
     @FXML
     private Label episodeDescriptionLabel;
@@ -207,6 +211,9 @@ public class AdminView {
     @FXML
     private Button returnButton;
 
+    @FXML
+    private VBox serieOptions;
+
     private String selectedSeasonItem = null;
 
     private String selectedEpisodeItem = null;
@@ -222,6 +229,8 @@ public class AdminView {
     private Season currentSeason;
 
     private MultimediaContent currentEpisode;
+
+    
 
     private AdminController adminC = new AdminController();
     private UserController userC = new UserController();
@@ -686,7 +695,7 @@ public class AdminView {
         episodeNameLabel = new Label("Episode Name Invalid");
         episodeNameLabel.setTextFill(Color.web("#021024"));
 
-        episodeDescriptionField = new TextArea();
+        episodeDescriptionField = new TextField();
         episodeDescriptionField.setPromptText("Episode Description");
         episodeDescriptionField.setPrefSize(100, 200);
         episodeDescriptionLabel = new Label("Episode Description Invalid");
@@ -1087,6 +1096,15 @@ public class AdminView {
         return vbox;
     }
 
+    @FXML
+    void serieOptionsIn(MouseEvent event){
+        serieOptions.setVisible(true);
+    }
+
+    @FXML
+    void serieOptionsOut(MouseEvent event){
+        serieOptions.setVisible(false);
+    }
     //----------------------------------------------------------------FIRST AIDS-------------------------------------------------//
     @FXML
     void player(MouseEvent event, String videoPath) {

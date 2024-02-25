@@ -7,19 +7,21 @@ import java.util.List;
 import co.edu.uptc.model.MultimediaContent;
 import co.edu.uptc.model.Season;
 import co.edu.uptc.model.Serie;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 public class SerieController {
     
 
     public int verifySerieInputs(TextField serieNameField, Label serieNameLabel,
-                                  TextArea serieDescriptionField, Label serieDescriptionLabel,
+                                  TextField serieDescriptionField, Label serieDescriptionLabel,
                                   TextField serieDirectorField, Label serieDirectorLabel,
                                   TextField serieCoverField, Label serieCoverLabel,
                                   ComboBox<String> allGenres){
@@ -30,11 +32,14 @@ public class SerieController {
             serieNameLabel.setTextFill(Color.web("#052659"));
             aux++;
         }else{
+            failAnimation(serieNameField);
             serieNameLabel.setTextFill(Color.web("#ff4848"));
         }
         if(serieDescriptionField.getText().length() < 10){
             serieDescriptionLabel.setText("u think thats descriptive?");
+            failAnimation(serieDescriptionField);
             serieDescriptionLabel.setTextFill(Color.web("#ff4848"));
+
         }else{
             aux++;
             serieDescriptionLabel.setTextFill(Color.web("#052659"));
@@ -43,17 +48,20 @@ public class SerieController {
             serieDirectorLabel.setTextFill(Color.web("#052659"));
             aux++;
         }else{
+            failAnimation(serieDirectorField);
             serieDirectorLabel.setTextFill(Color.web("#ff4848"));
         }
         if(serieCoverField.getText().startsWith("https://")){
             serieCoverLabel.setTextFill(Color.web("#052659"));
             aux++;
         }else{
+            failAnimation(serieCoverField);
             serieCoverLabel.setTextFill(Color.web("#ff4848"));
         }
         if(allGenres.getSelectionModel().getSelectedItem() != null){
             aux++;
         }else{
+            failAnimation(allGenres);
             allGenres.setStyle("-fx-background-color: red;");
         }
         return aux;
@@ -68,10 +76,13 @@ public class SerieController {
                 aux++;
             }else{
                 seasonNameLabel.setText("Seasons can not be repeated");
+                failAnimation(seasonNameField);
+
                 seasonNameLabel.setTextFill(Color.web("#ff4848"));
             }
         }else{
             seasonNameLabel.setText("Only digit a number");
+            failAnimation(seasonNameField);
             seasonNameLabel.setTextFill(Color.web("#ff4848"));
         }
         return aux;
@@ -152,7 +163,7 @@ public class SerieController {
     }
 
     public int verifyEpisodeInputs(TextField episodeNameField, Label episodeNameLabel,
-                                  TextArea episodeDescriptionField,Label episodeDescriptionLabel,
+                                  TextField episodeDescriptionField,Label episodeDescriptionLabel,
                                   TextField episodeVideoField, Label episodeVideoLabel,
                                   TextField episodeCoverField, Label episodeCoverLabel,
                                   Season currentSeason){
@@ -166,14 +177,17 @@ public class SerieController {
                 aux++;
             }else{
                 episodeNameLabel.setText("Episode Name can not be repeated");
+                failAnimation(episodeNameField);
                 episodeNameLabel.setTextFill(Color.web("#ff4848"));
             }
         }else{
+            failAnimation(episodeNameField);
             episodeNameLabel.setText("Episode Name only contains characters and numbers");
             episodeNameLabel.setTextFill(Color.web("#ff4848"));
         }
         
         if(episodeDescriptionField.getText().length() < 10){
+            failAnimation(episodeDescriptionField);
             episodeDescriptionLabel.setText("u think thats descriptive?");
             episodeDescriptionLabel.setTextFill(Color.web("#ff4848"));
         }else{
@@ -184,19 +198,21 @@ public class SerieController {
             episodeVideoLabel.setTextFill(Color.web("#021024"));
             aux++;
         }else{
+            failAnimation(episodeVideoField);
             episodeVideoLabel.setTextFill(Color.web("#ff4848"));
         }
         if(episodeCoverField.getText().startsWith("https://")){
             episodeCoverLabel.setTextFill(Color.web("#021024"));
             aux++;
         }else{
+            failAnimation(episodeCoverField);
             episodeCoverLabel.setTextFill(Color.web("#ff4848"));
         }
         return aux;
     }
 
     public int verifyEpisodeInputsToEdit(TextField episodeNameField, Label episodeNameLabel,
-                                  TextArea episodeDescriptionField, Label episodeDescriptionLabel,
+                                  TextField episodeDescriptionField, Label episodeDescriptionLabel,
                                   TextField episodeVideoField, Label episodeVideoLabel,
                                   TextField episodeCoverField, Label episodeCoverLabel,
                                   Season currentSeason, String oldName){
@@ -212,16 +228,19 @@ public class SerieController {
                 if(!episodeFound(currentSeason, episodeNameField.getText())){
                     aux++;
                 }else{
+                    failAnimation(episodeNameField);
                     episodeNameLabel.setText("Episode Name can not be repeated");
                     episodeNameLabel.setTextFill(Color.web("#ff4848"));
                 }
             }
             
         }else{
+            failAnimation(episodeNameField);
             episodeNameLabel.setText("Episode Name only contains characters and numbers");
             episodeNameLabel.setTextFill(Color.web("#ff4848"));
         }
         if(episodeDescriptionField.getText().length() < 10){
+            failAnimation(episodeDescriptionField);
             episodeDescriptionLabel.setText("u think thats descriptive?");
             episodeDescriptionLabel.setTextFill(Color.web("#ff4848"));
         }else{
@@ -232,16 +251,39 @@ public class SerieController {
             episodeVideoLabel.setTextFill(Color.web("#021024"));
             aux++;
         }else{
+            failAnimation(episodeVideoField);
             episodeVideoLabel.setTextFill(Color.web("#ff4848"));
         }
         if(episodeCoverField.getText().startsWith("https://")){
             episodeCoverLabel.setTextFill(Color.web("#021024"));
             aux++;
         }else{
+            failAnimation(episodeCoverField);
             episodeCoverLabel.setTextFill(Color.web("#ff4848"));
         }
         return aux;
     }
+
+    public void failAnimation(TextField txt){
+        txt.setOpacity(40);
+        txt.setStyle("-fx-background-color: #ff4848");
+        Timeline effect = new Timeline(
+            new KeyFrame(Duration.seconds(2), e -> {txt.setStyle("-fx-background-color: #ffffff");txt.setOpacity(100);})
+        );
+        effect.setCycleCount(1);
+        effect.play();
+    }
+
+    public void failAnimation(ComboBox<String> box){
+        box.setOpacity(40);
+        box.setStyle("-fx-background-color: #ff4848");
+        Timeline effect = new Timeline(
+            new KeyFrame(Duration.seconds(2), e -> {box.setStyle("-fx-background-color: #ffffff");box.setOpacity(100);})
+        );
+        effect.setCycleCount(1);
+        effect.play();
+    }
+
     public boolean episodeFound(Season currentSeason, String episodeName){
         for(MultimediaContent episode: currentSeason.getEpisodes()){
             if(episode.getName().equals(episodeName)){
