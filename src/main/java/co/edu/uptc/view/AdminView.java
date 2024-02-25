@@ -133,6 +133,9 @@ public class AdminView{
     @FXML
     private ComboBox<String> allGenres;
 
+    @FXML
+    private VBox movieOptions;
+
     private String selectedGenreItem = null;
 
     private AdminController adminC = new AdminController();
@@ -568,6 +571,17 @@ public class AdminView{
 
             moviesToDelete(new ActionEvent());
     }
+
+    @FXML
+    void movieOptionsIn(MouseEvent event){
+        movieOptions.setVisible(true);
+    }
+
+    @FXML
+    void movieOptionsOut(MouseEvent event){
+        movieOptions.setVisible(false);
+    }
+
 
     //----------------------------------------------------------------FIRST AIDS-------------------------------------------------//
     @FXML

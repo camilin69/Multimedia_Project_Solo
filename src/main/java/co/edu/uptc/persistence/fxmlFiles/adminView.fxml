@@ -26,17 +26,10 @@
    <children>
       <MenuBar prefHeight="25.0" prefWidth="1000.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;">
         <menus>
-          <Menu mnemonicParsing="false" text="Movies">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#seeAvailableMovies" text="See" />
-              <MenuItem mnemonicParsing="false" onAction="#addMovie" text="Add" />
-                  <MenuItem mnemonicParsing="false" onAction="#moviesToEdit" text="Edit" />
-                  <MenuItem mnemonicParsing="false" onAction="#moviesToDelete" text="Delete" />
-            </items>
-          </Menu>
+          
           <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#returnToLogin" text="Return" />
+                  <MenuItem mnemonicParsing="false" onAction="#returnToAdminMenu" text="Return" />
                </items>
           </Menu>
         </menus>
@@ -65,18 +58,67 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="welcomePane" layoutY="25.0" prefHeight="575.0" prefWidth="1000.0" style="-fx-background-color: #000000;">
+      <AnchorPane fx:id="welcomePane" layoutY="25.0" prefHeight="575.0" prefWidth="1000.0" style="-fx-background-color: #021024;">
          <children>
+            <ImageView fitHeight="150" fitWidth="200" layoutX="400.0" layoutY="160.0" pickOnBounds="true" onMouseEntered="#movieOptionsIn" onMouseExited="#movieOptionsOut">
+               <image>
+                  <Image url="@../icons/movieIcon.png" />
+               </image>
+            </ImageView>
+            <VBox fx:id="movieOptions" prefWidth="150" prefHeight="400" layoutX="500" layoutY="200" onMouseEntered="#movieOptionsIn" onMouseExited="#movieOptionsOut" visible="false">
+               <children>
+                  <Button onAction="#seeAvailableMovies" prefWidth="250" prefHeight="80" text="See" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                     <font>
+                        <Font name="SimSun" size="24"/>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <textFill>
+                        <Color fx:constant="WHITE" />
+                     </textFill>
+                  </Button>
+                  <Button onAction="#addMovie" prefWidth="250" prefHeight="80" text="Add" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                     <font>
+                        <Font name="SimSun" size="24"/>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <textFill>
+                        <Color fx:constant="WHITE" />
+                     </textFill>
+                  </Button>
+                  <Button onAction="#moviesToEdit" prefWidth="250" prefHeight="80" text="Edit" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                     <font>
+                        <Font name="SimSun" size="24"/>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <textFill>
+                        <Color fx:constant="WHITE" />
+                     </textFill>
+                  </Button>
+                  <Button onAction="#moviesToDelete" prefWidth="250" prefHeight="80" text="Delete" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                     <font>
+                        <Font name="SimSun" size="24"/>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <textFill>
+                        <Color fx:constant="WHITE" />
+                     </textFill>
+                  </Button>
+               </children>
+            </VBox> 
             <Label layoutX="329.0" layoutY="14.0" prefHeight="68.0" prefWidth="343.0" text="Welcome Admin" textFill="WHITE">
                <font>
                   <Font name="NSimSun" size="46.0" />
                </font>
             </Label>
-            <ImageView fitHeight="460.0" fitWidth="713.0" layoutX="131.0" layoutY="101.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../icons/admin.png" />
-               </image>
-            </ImageView>
+            
          </children>
       </AnchorPane>
       <AnchorPane fx:id="addMoviePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #021024;" visible="false">
