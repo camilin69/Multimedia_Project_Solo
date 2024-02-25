@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uptc.view.AdminView">
+   <children>
+        
+      <MenuBar prefHeight="25.0" prefWidth="1000.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;">
+        <menus>
+          <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#returnToAdminMenu" text="Return" />
+               </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <ScrollPane fx:id="scrollMovies" hbarPolicy="NEVER" layoutY="52.0" prefHeight="548.0" prefWidth="1000.0" vbarPolicy="ALWAYS" visible="false">
+         <content>
+            <GridPane fx:id="multimediaContentGrid" hgap="55.0" maxWidth="998.0" prefHeight="0.0" prefWidth="998.0" vgap="15.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.0" minWidth="10.0" prefWidth="188.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="10.0" prefWidth="213.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="10.0" prefWidth="213.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="10.0" prefWidth="213.0" />
+              </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <AnchorPane fx:id="titleAnchorPane" layoutY="27.0" prefHeight="25.0" prefWidth="1000.0" style="-fx-background-color: #000000;" visible="false">
+         <children>
+            <Label fx:id="titleText" layoutX="440.0" text="Select a movie to edit" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="welcomePane" layoutY="25.0" prefHeight="575.0" prefWidth="1000.0" style="-fx-background-color: #021024;">
+         <children>
+            <ImageView fitWidth="200" fitHeight="150" layoutX="710" layoutY="160" onMouseEntered="#showSubOptions" onMouseExited="#hideSubOptions">
+                <image>
+                    <Image url="@../icons/subscriptionIcon.png" />
+                </image>
+            </ImageView>
+            <VBox fx:id="subsOptions" layoutX="830" layoutY="270" prefWidth="150" prefHeight="300" onMouseEntered="#showSubOptions" onMouseExited="#hideSubOptions" visible="false">
+                <children>
+                    <Button text="See" prefWidth="100" prefHeight="100" onAction="#seeAvailableSubscriptions" style="-fx-background-color: #052659; -fx-border-color: #5483B3;">
+                        <font>
+                            <Font name="NSimSun" size="18.0" />
+                        </font>
+                        <textFill>
+                            <Color fx:constant="WHITE" />
+                        </textFill>
+                        <cursor>
+                            <Cursor fx:constant ="HAND"/>
+                        </cursor>
+                    </Button>
+                    <Button text="Add" prefWidth="100" prefHeight="100" onAction="#addSubscription" style="-fx-background-color: #052659; -fx-border-color: #5483B3;" >
+                        <font>
+                            <Font name="NSimSun" size="18.0" />
+                        </font>
+                        <textFill>
+                            <Color fx:constant="WHITE" />
+                        </textFill>
+                        <cursor>
+                            <Cursor fx:constant ="HAND"/>
+                        </cursor>
+                    </Button>
+                    <Button text="Edit" prefWidth="100" prefHeight="100" onAction="#subscriptionsToEdit" style="-fx-background-color: #052659; -fx-border-color: #5483B3;">
+                        <font>
+                            <Font name="NSimSun" size="18.0" />
+                        </font>
+                        <textFill>
+                            <Color fx:constant="WHITE" />
+                        </textFill>
+                        <cursor>
+                            <Cursor fx:constant ="HAND"/>
+                        </cursor>
+                    </Button>
+                    <Button text="Delete" prefWidth="100" prefHeight="100" onAction="#subscriptionsToDelete" style="-fx-background-color: #052659; -fx-border-color: #5483B3;">
+                        <font>
+                            <Font name="NSimSun" size="18.0" />
+                        </font>
+                        <textFill>
+                            <Color fx:constant="WHITE" />
+                        </textFill>
+                        <cursor>
+                            <Cursor fx:constant ="HAND"/>
+                        </cursor>
+                    </Button>
+                </children>
+            </VBox>
+            <Label layoutX="329.0" layoutY="14.0" prefHeight="68.0" prefWidth="343.0" text="Welcome Admin" textFill="WHITE">
+               <font>
+                  <Font name="NSimSun" size="46.0" />
+               </font>
+            </Label>
+            
+         </children>
+      </AnchorPane>
+      
+      <AnchorPane fx:id="addSubscriptionPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #021024;" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#052659" height="512.0" layoutX="44.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" width="264.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#052659" height="512.0" layoutX="693.0" layoutY="44.0" stroke="BLACK" strokeType="INSIDE" width="264.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5483B3" height="570.0" layoutX="183.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="635.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#052659" height="43.0" layoutX="192.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" width="616.0" />
+            <Label layoutX="333.0" layoutY="21.0" text="New Subscription" textFill="#ffffff">
+               <font>
+                  <Font name="SimSun" size="42.0" />
+               </font>
+            </Label>
+            <TextField fx:id="subscriptionNameField" layoutX="290.0" layoutY="97.0" prefHeight="25.0" prefWidth="420.0" promptText="Name" />
+            <TextField fx:id="subscriptionDurationField" layoutX="291.0" layoutY="277.0" prefHeight="25.0" prefWidth="420.0" promptText="Duration" />
+            <TextField fx:id="subscriptionDescriptionField" layoutX="290.0" layoutY="153.0" prefHeight="90.0" prefWidth="420.0" promptText="Description" />
+            <TextField fx:id="subscriptionPriceField" layoutX="290.0" layoutY="334.0" prefHeight="25.0" prefWidth="420.0" promptText="Price" />
+            <Label fx:id="subscriptionNameLabel" layoutX="290.0" layoutY="122.0" text="Names only contains characters" textFill="#5483B3" />
+            <Label fx:id="subscriptionDescriptionLabel" layoutX="290.0" layoutY="243.0" text="Not descriptive enough" textFill="#5483B3" />
+            <Label fx:id="subscriptionDurationLabel" layoutX="291.0" layoutY="302.0" text="Duration only contains numbers" textFill="#5483B3" />
+            <Label fx:id="subscriptionPriceLabel" layoutX="290.0" layoutY="359.0" text="Price only contains numbers" textFill="#5483B3" />
+            <Button fx:id="createSubscriptionButton" layoutX="440.0" layoutY="473.0" mnemonicParsing="false" onAction="#createSubscription" style="-fx-background-color: #7DA0CA;" text="Create Subscription" textFill="#ffffff">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow spread="0.51">
+                     <color>
+                        <Color red="0.4901960790157318" green="0.6274510025978088" blue="0.7921568751335144" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Button>
+            <Button layoutX="474.0" layoutY="530.0" mnemonicParsing="false" onAction="#returnToAdminMenu" style="-fx-background-color: #5483B3;" text="Return" textFill="#ffffff" underline="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TextField fx:id="subscriptionCoverField" layoutX="290.0" layoutY="398.0" prefHeight="25.0" prefWidth="420.0" promptText="Cover Link" />
+            <Label fx:id="subscriptionCoverLabel" layoutX="290.0" layoutY="423.0" text="Link invalid" textFill="#5483B3" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="emptyPane" layoutY="54.0" prefHeight="548.0" prefWidth="1000.0" visible="false">
+         <children>
+            <ImageView fitHeight="415.0" fitWidth="616.0" layoutX="293.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/emptyIcon.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="221.0" layoutY="37.0" text="There are no content around here">
+               <font>
+                  <Font name="NSimSun" size="35.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
