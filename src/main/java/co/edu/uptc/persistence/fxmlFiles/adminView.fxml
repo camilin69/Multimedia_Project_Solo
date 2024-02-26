@@ -93,6 +93,60 @@
                   </Button>
                </children>
             </VBox> 
+
+            <ImageView fitHeight="150" fitWidth="200" layoutX="400.0" layoutY="160.0" pickOnBounds="true" onMouseEntered="#movieOptionsIn" onMouseExited="#movieOptionsOut">
+               <image>
+                  <Image url="@../icons/movieIcon.png" />
+               </image>
+            </ImageView>
+            <VBox fx:id="movieOptions" prefWidth="150" prefHeight="400" layoutX="500" layoutY="200" onMouseEntered="#movieOptionsIn" onMouseExited="#movieOptionsOut" visible="false">
+               <children>
+                  <Button onAction="#seeAvailableMovies" prefWidth="250" prefHeight="80" text="See" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                     <font>
+                        <Font name="SimSun" size="24"/>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <textFill>
+                        <Color fx:constant="WHITE" />
+                     </textFill>
+                  </Button>
+                  <Button onAction="#addMovie" prefWidth="250" prefHeight="80" text="Add" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                     <font>
+                        <Font name="SimSun" size="24"/>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <textFill>
+                        <Color fx:constant="WHITE" />
+                     </textFill>
+                  </Button>
+                  <Button onAction="#moviesToEdit" prefWidth="250" prefHeight="80" text="Edit" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                     <font>
+                        <Font name="SimSun" size="24"/>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <textFill>
+                        <Color fx:constant="WHITE" />
+                     </textFill>
+                  </Button>
+                  <Button onAction="#moviesToDelete" prefWidth="250" prefHeight="80" text="Delete" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                     <font>
+                        <Font name="SimSun" size="24"/>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <textFill>
+                        <Color fx:constant="WHITE" />
+                     </textFill>
+                  </Button>
+               </children>
+            </VBox> 
             <Label layoutX="329.0" layoutY="14.0" prefHeight="68.0" prefWidth="343.0" text="Welcome Admin" textFill="WHITE">
                <font>
                   <Font name="NSimSun" size="46.0" />
@@ -234,7 +288,7 @@
                         </cursor>
                      </VBox>
 
-                     <ComboBox fx:id="allGenres" layoutX="450.0" layoutY="420.0" prefHeight="25.0" prefWidth="320.0" promptText="Genres" />
+                     <ComboBox fx:id="allGenresSeries" layoutX="450.0" layoutY="420.0" prefHeight="25.0" prefWidth="320.0" promptText="Genres" />
                      <ImageView fx:id="addGenre" onMouseClicked="#addGenre" fitHeight="50.0" fitWidth="44.0" layoutX="796.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                            <Image url="@../Icons/addIcon.png" />
@@ -247,7 +301,84 @@
             </AnchorPane>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="addMoviePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #021024;" visible="false">
+         <children>
+            <Label layoutX="391.0" layoutY="10.0" text="New Movie" textFill="WHITE">
+               <font>
+                  <Font name="SimSun" size="52.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#052659" height="525.0" layoutX="-0.0" layoutY="75.0" stroke="WHITE" strokeType="INSIDE" width="568.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#052659" height="525.0" layoutX="558.0" layoutY="75.0" stroke="WHITE" strokeType="INSIDE" width="442.0" />
+            <TextField fx:id="nameField" layoutX="13.0" layoutY="105.0" prefHeight="25.0" prefWidth="516.0" promptText="Name of Movie" />
+            <TextField fx:id="directorField" layoutX="13.0" layoutY="378.0" prefHeight="25.0" prefWidth="516.0" promptText="Director" />
+            <TextField fx:id="descriptionField" layoutX="13.0" layoutY="155.0" prefHeight="181.0" prefWidth="516.0" promptText="Description" />
+            <TextField fx:id="movieLinkField" alignment="CENTER" layoutX="603.0" layoutY="277.0" prefHeight="47.0" prefWidth="358.0" promptText="Link of Movie" />
+            <ComboBox fx:id="allGenres" layoutX="610" layoutY="130" prefHeight="15" prefWidth="250" promptText="Genres" />
+            <VBox fx:id="addGenre" alignment="CENTER" layoutX="860" layoutY="100" prefHeight="85" prefWidth="85">
+                <ImageView fitHeight="35" fitWidth="35" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Icons/addIcon.png" />
+                    </image>
+                </ImageView>
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+            </VBox>
+            <TextField fx:id="movieCoverField" alignment="CENTER" layoutX="603.0" layoutY="386.0" prefHeight="47.0" prefWidth="358.0" promptText="Link of Movie Cover" />
+            <Button fx:id="createMovieButton" layoutX="736.0" layoutY="492.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: #7DA0CA;" text="Create Movie" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.4901960790157318" green="0.6274510025978088" blue="0.7921568751335144" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Button>
+            <Button contentDisplay="CENTER" layoutX="750.0" layoutY="550.0" mnemonicParsing="false" onAction="#adminMenu" prefHeight="31.0" prefWidth="63.0" style="-fx-background-color: #052659;" text="Return" textFill="#ffffff" textOverrun="CLIP" underline="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label fx:id="nameLabel" layoutX="17.0" layoutY="134.0" prefHeight="17.0" prefWidth="266.0" text="Movies only contains characters or numbers" textFill="#052659" />
+            <Label fx:id="descriptionLabel" layoutX="14.0" layoutY="335.0" prefHeight="17.0" prefWidth="273.0" text="Not Descriptive enough" textFill="#052659" />
+            <Label fx:id="directorLabel" layoutX="14.0" layoutY="409.0" prefHeight="17.0" prefWidth="273.0" text="Director name only contains characters" textFill="#052659" />
+            <Label fx:id="movieLinkLabel" layoutX="603.0" layoutY="335.0" prefHeight="17.0" prefWidth="80.0" text="Link Wrong" textFill="#052659">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="movieCoverLabel" layoutX="603.0" layoutY="444.0" prefHeight="17.0" prefWidth="80.0" text="Link Wrong" textFill="#052659">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <TextField fx:id="studioField" layoutX="13.0" layoutY="452.0" prefHeight="25.0" prefWidth="516.0" promptText="Studio" />
+            <Label fx:id="studioLabel" layoutX="14.0" layoutY="483.0" prefHeight="17.0" prefWidth="273.0" text="Studios only contains characters or numbers" textFill="#052659" />
+            <TextField fx:id="budgetField" layoutX="13.0" layoutY="525.0" prefHeight="25.0" prefWidth="223.0" promptText="Budget" />
+            <Label fx:id="budgetLabel" layoutX="14.0" layoutY="556.0" prefHeight="17.0" prefWidth="223.0" text="Budget only contains numbers" textFill="#052659" />
+            <TextField fx:id="revenueField" layoutX="305.0" layoutY="524.0" prefHeight="25.0" prefWidth="223.0" promptText="Revenue" />
+            <Label fx:id="revenueLabel" layoutX="306.0" layoutY="555.0" prefHeight="17.0" prefWidth="223.0" text="Revenue only contains numbers" textFill="#052659" />
+         </children>
+      </AnchorPane>
 
+      <AnchorPane fx:id="emptyPane" layoutY="54.0" prefHeight="548.0" prefWidth="1000.0" visible="false">
+         <children>
+            <ImageView fitHeight="415.0" fitWidth="616.0" layoutX="293.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/emptyIcon.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="221.0" layoutY="37.0" text="There are no content around here">
+               <font>
+                  <Font name="NSimSun" size="35.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
       
     </children>
 </AnchorPane>

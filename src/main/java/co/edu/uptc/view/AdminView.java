@@ -8,9 +8,11 @@ import java.util.stream.Collectors;
 
 import co.edu.uptc.controller.AdminController;
 import co.edu.uptc.controller.GenreController;
+import co.edu.uptc.controller.MovieController;
 import co.edu.uptc.controller.SerieController;
 import co.edu.uptc.controller.UserController;
 import co.edu.uptc.model.Genre;
+import co.edu.uptc.model.Movie;
 import co.edu.uptc.model.MultimediaContent;
 import co.edu.uptc.model.PlayList;
 import co.edu.uptc.model.Season;
@@ -90,6 +92,69 @@ public class AdminView {
 
     @FXML
     private ComboBox<String> allGenres;
+
+    @FXML
+    private ComboBox<String> allGenresSeries;
+
+    //--------------------------------------------------------------------------MOVIES ATRIBUTES--------------------------------------------------------------------------//
+    @FXML
+    private AnchorPane addMoviePane;
+
+    @FXML
+    private TextField nameField;
+
+    @FXML
+    private Label nameLabel;
+
+    @FXML
+    private TextField descriptionField;
+
+    @FXML
+    private Label descriptionLabel;
+
+    @FXML
+    private TextField directorField;
+
+    @FXML
+    private Label directorLabel;
+
+    @FXML
+    private TextField studioField;
+
+    @FXML
+    private Label studioLabel;
+
+    @FXML
+    private TextField budgetField;
+
+    @FXML
+    private Label budgetLabel;
+
+    @FXML
+    private TextField revenueField;
+
+    @FXML
+    private Label revenueLabel;
+
+    @FXML
+    private TextField movieLinkField;
+
+    @FXML
+    private Label movieLinkLabel;
+
+    @FXML
+    private TextField movieCoverField;
+
+    @FXML
+    private Label movieCoverLabel;
+
+    @FXML
+    private Button createMovieButton;
+
+
+    @FXML
+    private VBox movieOptions;
+
 
 
     //---------------------------------------------------------------------SERIES ATRIBUTES-------------------------------------------------------------//
@@ -233,9 +298,417 @@ public class AdminView {
     
 
     private AdminController adminC = new AdminController();
+    private MovieController movieC = new MovieController();
     private UserController userC = new UserController();
     private SerieController serieC = new SerieController();
     private GenreController genreC = new GenreController();
+
+    //------------------------------------------------------------MOVIES------------------------------------------------------//
+
+    @FXML
+    void seeAvailableMovies(ActionEvent event){
+        welcomePane.setVisible(false);
+        emptyPane.setVisible(false);
+        scrollMovies.setVisible(true);
+        titleAnchorPane.setVisible(true);
+        titleText.setText("Select a movie to see");
+        addMoviePane.setVisible(false);
+
+        adminC.getAdmin().setMovies(adminC.loadMoviesFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/movies.json"));
+        if(adminC.getAdmin().getMovies().isEmpty()){
+            emptyPane.setVisible(true);
+        }
+        multimediaContentGrid.getChildren().clear();
+        int column = 0;
+        int row = 0;
+
+        for (Movie movie : adminC.getAdmin().getMovies()) {
+            VBox imageView = createMovieImageView(movie);
+            multimediaContentGrid.add(imageView, column, row);
+
+            GridPane.setHalignment(imageView, HPos.CENTER);
+            GridPane.setValignment(imageView, VPos.CENTER);
+
+            column++;
+            if (column > 3) {
+                column = 0;
+                row++;
+            }
+        }
+        
+        
+    }
+
+    
+
+    public VBox createMovieImageView(Movie movie){
+        ImageView newMovie = new ImageView();
+        newMovie.setImage(new Image(new File(movie.getImageLocalPathURL()).toURI().toString()));
+        newMovie.setId(String.valueOf(movie.getId()));
+        newMovie.setFitHeight(250);
+        newMovie.setFitWidth(250);
+        newMovie.setCursor(Cursor.HAND);
+        newMovie.setOnMouseClicked(e -> {
+            player(e, movie.getImageLocalPathURL().replace(".png", ".mp4"));
+        });
+        Label movieLabel = new Label(movie.getName());
+        VBox vbox = new VBox(5);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.getChildren().addAll(newMovie, movieLabel);
+        return vbox;
+    }
+
+    
+
+
+
+    @FXML
+    void addMovie(ActionEvent event){
+        welcomePane.setVisible(false);
+        scrollMovies.setVisible(false);
+        titleAnchorPane.setVisible(false);
+        emptyPane.setVisible(false);
+        addMoviePane.setVisible(true);
+        genreC.setGenres(adminC.loadGenresFromJson());
+        genreC.updateGenreComboBox(allGenres, genreC.getGenres());
+        allGenres.valueProperty().addListener((observable, oldValue, newValue) -> {
+            handleAllGenresComboBoxSelection(newValue);
+        });
+        //Create Movie Button
+        //createMovieButton.setText("Create Movie");
+        createMovieButton.setOnAction(e -> {
+            int aux = movieC.verifyMovieInputs(nameField, nameLabel, descriptionField, descriptionLabel,
+             directorField, directorLabel, movieLinkField, movieLinkLabel, movieCoverField, movieCoverLabel,
+             studioField, studioLabel, budgetField, budgetLabel, revenueField, revenueLabel, allGenres);
+            
+
+            if(aux == 9){
+                int id = adminC.assignidMovie();
+            
+                try {
+                    Task<Void> task = new Task<Void>() {
+                        @Override
+                        protected Void call() throws Exception {
+                            String videoPath = System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/movies/" + id + ".mp4";
+                            adminC.downloadVideo(videoPath, movieLinkField.getText());
+                            return null;
+                        }
+                    };
+                    new Thread(task).start();
+                    showProgressDialog(task);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+
+                String coverPath = System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/movies/"+ id + ".png";
+                try {
+                    Task<Void> task = new Task<Void>() {
+                        @Override
+                        protected Void call() throws Exception {
+                           
+                            adminC.downloadCover(coverPath, movieCoverField.getText());
+                            return null;
+                        }
+                    };
+                    new Thread(task).start();
+                    showProgressDialog(task);
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+                
+                //Create new Movie
+                Movie movie = new Movie(id, nameField.getText(), descriptionField.getText(), directorField.getText(),
+                allGenres.getSelectionModel().getSelectedItem(), coverPath, movieLinkField.getText(),movieCoverField.getText(), studioField.getText(),
+                Double.parseDouble(budgetField.getText()), Double.parseDouble(revenueField.getText()));
+                adminC.getAdmin().setMovies(adminC.loadMoviesFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/movies.json"));
+                adminC.getAdmin().addMovie(movie);
+                adminC.saveMoviesToJson();
+
+                genreC.getGenres().forEach(g -> {
+                    if(g.getName().equals(allGenres.getSelectionModel().getSelectedItem())){
+                        g.addMovie(movie);
+                    }
+                });        
+
+                adminC.saveGenresToJson(genreC.getGenres());
+            
+                try {
+                    adminMenu(event);
+                } catch (IOException e3) {
+                    e3.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+
+    @FXML
+    void moviesToEdit(ActionEvent event){
+        welcomePane.setVisible(false);
+        emptyPane.setVisible(false);
+        scrollMovies.setVisible(true);
+        titleAnchorPane.setVisible(true);
+        
+        titleText.setText("Select a movie to edit");
+
+        adminC.getAdmin().setMovies(adminC.loadMoviesFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/movies.json"));
+        if(adminC.getAdmin().getMovies().isEmpty()){
+            emptyPane.setVisible(true);
+        }
+        multimediaContentGrid.getChildren().clear();
+        int column = 0;
+        int row = 0;
+
+        for (Movie movie : adminC.getAdmin().getMovies()) {
+            VBox imageView = createMovieImageViewToEdit(movie);
+            imageView.setOnMouseClicked(e -> {
+                editMovie(e, movie);
+            });
+            imageView.setCursor(Cursor.HAND);
+            multimediaContentGrid.add(imageView, column, row);
+
+            GridPane.setHalignment(imageView, HPos.CENTER);
+            GridPane.setValignment(imageView, VPos.CENTER);
+
+            column++;
+            if (column > 3) {
+                column = 0;
+                row++;
+            }
+        }
+        
+        
+
+    }
+
+    @FXML
+    void editMovie(MouseEvent event, Movie movie){
+        genreC.setGenres(adminC.loadGenresFromJson());
+        allGenres.getSelectionModel().select(movie.getGenre());
+        genreC.updateGenreComboBox(allGenres, genreC.getGenres());
+        allGenres.valueProperty().addListener((observable, oldValue, newValue) -> {
+            handleAllGenresComboBoxSelection(newValue);
+        });
+        welcomePane.setVisible(false);
+        scrollMovies.setVisible(false);
+        titleAnchorPane.setVisible(false);
+        emptyPane.setVisible(false);
+        addMoviePane.setVisible(true);
+        String oldName = movie.getName();
+        String oldDescription = movie.getDescription();
+        String oldDirector = movie.getDirector();
+        String oldStudio = movie.getStudio();
+        double oldBudget = movie.getBudget();
+        double oldRevenue = movie.getRevenue();
+        String oldVideoURL = movie.getVideoURL();
+        String oldCoverURL = movie.getCoverURL();
+
+        nameField.setText(oldName);
+        descriptionField.setText(oldDescription);
+        directorField.setText(oldDirector);
+        studioField.setText(oldStudio);
+        budgetField.setText(String.valueOf(oldBudget));
+        revenueField.setText(String.valueOf(oldRevenue));
+        movieLinkField.setText(oldVideoURL);
+        movieCoverField.setText(oldCoverURL);
+
+        createMovieButton.setText("Save changes");
+        createMovieButton.setOnAction(e -> {
+
+            int aux = movieC.verifyMovieInputs(nameField, nameLabel, descriptionField, descriptionLabel, 
+            directorField, directorLabel, movieLinkField, movieLinkLabel, movieCoverField, movieCoverLabel,
+             studioField, studioLabel, budgetField, budgetLabel, revenueField, revenueLabel, allGenres);
+            if(aux == 9){
+                genreC.setGenres(adminC.loadGenresFromJson());
+                String oldGenre = movie.getGenre();
+
+                movie.setName(nameField.getText());
+                movie.setDescription(descriptionField.getText());
+                movie.setDirector(directorField.getText());
+                movie.setGenre(allGenres.getSelectionModel().getSelectedItem());
+                movie.setStudio(studioField.getText());
+                movie.setBudget(Double.parseDouble(budgetField.getText()));
+                movie.setRevenue(Double.parseDouble(revenueField.getText()));
+                if(!movieLinkField.getText().equals(oldVideoURL)){
+                    File oldFile = new File(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/movies/", movie.getId() + ".mp4");
+                    oldFile.delete();
+                    try {
+                        Task<Void> task = new Task<Void>() {
+                            @Override
+                            protected Void call() throws Exception {
+                                String videoPath = System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/movies/" + movie.getId() + ".mp4";
+                                adminC.downloadVideo(videoPath, movieLinkField.getText());
+                                return null;
+                            }
+                        };
+                        new Thread(task).start();
+                        showProgressDialog(task);
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                    
+                    movie.setVideoURL(movieLinkField.getText());
+                }
+                if(!movieCoverField.getText().equals(oldCoverURL)){
+                    File oldFile = new File(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/movies/" + movie.getId() + ".png");
+                    oldFile.delete();
+                    try {
+                        Task<Void> task = new Task<Void>() {
+                            @Override
+                            protected Void call() throws Exception {
+                                String coverPath = System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/movies/" + movie.getId() + ".png";
+                                adminC.downloadCover(coverPath, movieCoverField.getText());
+                                return null;
+                            }
+                        };
+                        new Thread(task).start();
+                        showProgressDialog(task);
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                    
+                    movie.setCoverURL(movieCoverField.getText());
+                }
+                
+                if(!oldGenre.equals(allGenres.getSelectionModel().getSelectedItem())){
+                    genreC.getGenres().forEach(g -> {
+                        if(g.getName().equals(oldGenre)){
+                            g.removeMovie(movie);
+                        }else if(g.getName().equals(movie.getGenre())){
+                            g.addMovie(movie);
+                        }
+                    });
+                }
+                genreC.getGenres().forEach(g -> {
+                    if(g.getName().equals(movie.getGenre())){
+                        g.getMovies().forEach(m -> {
+                            if(m.getId() == movie.getId()){
+                                m.setName(movie.getName());
+                                m.setDirector(movie.getDirector());
+                                m.setDescription(movie.getDescription());
+                                m.setGenre(movie.getGenre());
+                                m.setImageLocalPathURL(movie.getImageLocalPathURL());
+                                m.setVideoURL(movie.getVideoURL());
+                                m.setCoverURL(movie.getCoverURL());
+                                m.setBudget(movie.getBudget());
+                                m.setRevenue(movie.getRevenue());
+                                m.setStudio(movie.getStudio());
+                            }
+                        });
+                    }
+                });
+                adminC.saveGenresToJson(genreC.getGenres());
+                adminC.saveMoviesToJson();
+                try {
+                    adminMenu(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+    }
+    
+    public VBox createMovieImageViewToEdit(Movie movie){
+        ImageView newMovie = new ImageView();
+        newMovie.setImage(new Image(new File(movie.getImageLocalPathURL()).toURI().toString()));
+        newMovie.setId(String.valueOf(movie.getId()));
+        newMovie.setFitHeight(250);
+        newMovie.setFitWidth(250);
+        newMovie.setCursor(Cursor.HAND);
+        Label movieLabel = new Label(movie.getName());
+        VBox vbox = new VBox(5);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.getChildren().addAll(newMovie, movieLabel);
+        return vbox;
+    }
+
+
+
+    @FXML
+    void moviesToDelete(ActionEvent event){
+        welcomePane.setVisible(false);
+        emptyPane.setVisible(false);
+        scrollMovies.setVisible(true);
+        titleAnchorPane.setVisible(true);
+        titleText.setText("Select a movie to delete");
+
+        adminC.getAdmin().setMovies(adminC.loadMoviesFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/movies.json"));
+        if(adminC.getAdmin().getMovies().isEmpty()){
+            emptyPane.setVisible(true);
+        }
+        multimediaContentGrid.getChildren().clear();
+        int column = 0;
+        int row = 0;
+
+        for (Movie movie : adminC.getAdmin().getMovies()) {
+            VBox imageView = createMovieImageViewToDelete(movie);
+            imageView.setOnMouseClicked(e -> {
+                deleteMovieFunction(movie);
+            });
+            imageView.setCursor(Cursor.HAND);
+            multimediaContentGrid.add(imageView, column, row);
+
+            GridPane.setHalignment(imageView, HPos.CENTER);
+            GridPane.setValignment(imageView, VPos.CENTER);
+
+            column++;
+            if (column > 3) {
+                column = 0;
+                row++;
+            }
+        }
+        
+        
+    }
+
+    public VBox createMovieImageViewToDelete(Movie movie){
+        ImageView newMovie = new ImageView();
+        newMovie.setImage(new Image(new File(movie.getImageLocalPathURL()).toURI().toString()));
+        newMovie.setId(String.valueOf(movie.getId()));
+        newMovie.setFitHeight(250);
+        newMovie.setFitWidth(250);
+        
+        Label movieLabel = new Label(movie.getName());
+        VBox vbox = new VBox(5);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.getChildren().addAll(newMovie, movieLabel);
+        return vbox;
+    }
+
+    public void deleteMovieFunction(Movie movie){
+        File videoFile = new File(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/movies/" + movie.getId() + ".mp4");
+            videoFile.delete();
+            File coverFile = new File(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/movies/" + movie.getId() + ".png");
+            coverFile.delete();
+            adminC.getAdmin().removeMovie(movie);
+            adminC.saveMoviesToJson();
+            
+            userC.setUsers(userC.loadUsersFromJson());
+            genreC.setGenres(adminC.loadGenresFromJson());
+            for(UserRegistered user: userC.getUsers()){
+                for(PlayList playlist: user.getplayList()){
+                    playlist.removeMovie(movie);
+                }
+            }
+            for(Genre genre: genreC.getGenres()){
+                genre.removeMovie(movie);
+            }
+            userC.saveUsersToJson();
+            adminC.saveGenresToJson(genreC.getGenres());
+
+            moviesToDelete(new ActionEvent());
+    }
+
+    @FXML
+    void movieOptionsIn(MouseEvent event){
+        movieOptions.setVisible(true);
+    }
+
+    @FXML
+    void movieOptionsOut(MouseEvent event){
+        movieOptions.setVisible(false);
+    }
 
 
     @FXML
@@ -412,8 +885,8 @@ public class AdminView {
         //emptyPane.setVisible(false);
         addSeriePane.setVisible(true);
         genreC.setGenres(adminC.loadGenresFromJson());
-        genreC.updateGenreComboBox(allGenres, genreC.getGenres());
-        allGenres.valueProperty().addListener((observable, oldValue, newValue) -> {
+        genreC.updateGenreComboBox(allGenresSeries, genreC.getGenres());
+        allGenresSeries.valueProperty().addListener((observable, oldValue, newValue) -> {
             handleAllGenresComboBoxSelection(newValue);
         });
     }
@@ -439,6 +912,7 @@ public class AdminView {
             if(genreC.verifyInputs(genreNameField, genreNameLabel) == 2){
                 genreC.createGenre(genreNameField.getText());
                 genreC.updateGenreComboBox(allGenres, genreC.getGenres());
+                genreC.updateGenreComboBox(allGenresSeries, genreC.getGenres());
                 adminC.saveGenresToJson(genreC.getGenres());
                 addGenreStage.close();
             }
@@ -465,7 +939,7 @@ public class AdminView {
     void createSerie(ActionEvent event) {
         adminC.loadGenresFromJson();
         int serieVerifies = serieC.verifySerieInputs(serieNameField, serieNameLabel, serieDescriptionField, serieDescriptionLabel,
-                                              serieDirectorField, serieDirectorLabel, serieCoverField, serieCoverLabel, allGenres);
+                                              serieDirectorField, serieDirectorLabel, serieCoverField, serieCoverLabel, allGenresSeries);
         if(serieVerifies == 5){
             if(serieId == 0){serieId = adminC.assignidSerie();}
             String coverPath = System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/series/"+ serieId + serieNameField.getText() + ".png";
@@ -485,11 +959,11 @@ public class AdminView {
             }
 
             Serie newSerie = new Serie(serieId, serieNameField.getText(), serieDirectorField.getText(),
-                                     serieDirectorField.getText(), allGenres.getSelectionModel().getSelectedItem(), coverPath, serieCoverField.getText(), currentSeasons);
+                                     serieDirectorField.getText(), allGenresSeries.getSelectionModel().getSelectedItem(), coverPath, serieCoverField.getText(), currentSeasons);
             adminC.getAdmin().setSeries(adminC.loadSeriesFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/series.json"));
             adminC.getAdmin().addSerie(newSerie);
             
-            genreC.getGenre(allGenres.getSelectionModel().getSelectedItem()).addSerie(newSerie);
+            genreC.getGenre(allGenresSeries.getSelectionModel().getSelectedItem()).addSerie(newSerie);
             adminC.saveGenresToJson(genreC.getGenres());
             adminC.saveSeriesToJson();
 
@@ -918,9 +1392,9 @@ public class AdminView {
         serieC.updateSeasonComboBox(allSeasons, currentSeasons);
 
         genreC.setGenres(adminC.loadGenresFromJson());
-        genreC.updateGenreComboBox(allGenres, genreC.getGenres());
-        allGenres.getSelectionModel().select(serie.getGenre());
-        allGenres.valueProperty().addListener((observable, oldValue, newValue) -> {
+        genreC.updateGenreComboBox(allGenresSeries, genreC.getGenres());
+        allGenresSeries.getSelectionModel().select(serie.getGenre());
+        allGenresSeries.valueProperty().addListener((observable, oldValue, newValue) -> {
             handleAllGenresComboBoxSelection(newValue);
         });
         
@@ -962,7 +1436,7 @@ public class AdminView {
             serie.setSeasons(currentSeasons);
             serie.setCoverURL(serieCoverField.getText());
             String oldGenre = serie.getGenre();
-            String newGenre = allGenres.getSelectionModel().getSelectedItem();
+            String newGenre = allGenresSeries.getSelectionModel().getSelectedItem();
             serie.setGenre(newGenre);
             if(!oldGenre.equals(serie.getGenre())){
                 genreC.getGenres().forEach(g -> {

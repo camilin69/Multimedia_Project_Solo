@@ -6,9 +6,9 @@ public class Movie extends MultimediaContent {
     private double revenue;
 
     //Edit soon
-    public Movie(int id, String name, String director, String description, String imageLocalPathURL, String videoURL,
+    public Movie(int id, String name, String director, String description, String genre, String imageLocalPathURL, String videoURL,
             String coverURL, String studio, double budget, double revenue) {
-        super(id, name, director, description, imageLocalPathURL, videoURL, coverURL);
+        super(id, name, director, description, genre, imageLocalPathURL, videoURL, coverURL);
         this.studio = studio;
         this.budget = budget;
         this.revenue = revenue;
