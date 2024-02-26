@@ -147,6 +147,60 @@
                   </Button>
                </children>
             </VBox> 
+
+            <ImageView fitWidth="200" fitHeight="150" layoutX="710" layoutY="160" onMouseEntered="#showSubOptions" onMouseExited="#hideSubOptions">
+                <image>
+                    <Image url="@../icons/subscriptionIcon.png" />
+                </image>
+            </ImageView>
+            <VBox fx:id="subsOptions" layoutX="830" layoutY="270" prefWidth="150" prefHeight="300" onMouseEntered="#showSubOptions" onMouseExited="#hideSubOptions" visible="false">
+                <children>
+                    <Button text="See" prefWidth="250" prefHeight="80" onAction="#seeAvailableSubscriptions" style="-fx-background-color: #052659; -fx-border-color: #5483B3;">
+                        <font>
+                            <Font name="SimSun" size="24.0" />
+                        </font>
+                        <textFill>
+                            <Color fx:constant="WHITE" />
+                        </textFill>
+                        <cursor>
+                            <Cursor fx:constant ="HAND"/>
+                        </cursor>
+                    </Button>
+                    <Button text="Add" prefWidth="250" prefHeight="80" onAction="#addSubscription" style="-fx-background-color: #052659; -fx-border-color: #5483B3;" >
+                        <font>
+                            <Font name="SimSun" size="24" />
+                        </font>
+                        <textFill>
+                            <Color fx:constant="WHITE" />
+                        </textFill>
+                        <cursor>
+                            <Cursor fx:constant ="HAND"/>
+                        </cursor>
+                    </Button>
+                    <Button text="Edit" prefWidth="250" prefHeight="80" onAction="#subscriptionsToEdit" style="-fx-background-color: #052659; -fx-border-color: #5483B3;">
+                        <font>
+                            <Font name="SimSun" size="24" />
+                        </font>
+                        <textFill>
+                            <Color fx:constant="WHITE" />
+                        </textFill>
+                        <cursor>
+                            <Cursor fx:constant ="HAND"/>
+                        </cursor>
+                    </Button>
+                    <Button text="Delete" prefWidth="250" prefHeight="80" onAction="#subscriptionsToDelete" style="-fx-background-color: #052659; -fx-border-color: #5483B3;">
+                        <font>
+                            <Font name="SimSun" size="24" />
+                        </font>
+                        <textFill>
+                            <Color fx:constant="WHITE" />
+                        </textFill>
+                        <cursor>
+                            <Cursor fx:constant ="HAND"/>
+                        </cursor>
+                    </Button>
+                </children>
+            </VBox>
             <Label layoutX="329.0" layoutY="14.0" prefHeight="68.0" prefWidth="343.0" text="Welcome Admin" textFill="WHITE">
                <font>
                   <Font name="NSimSun" size="46.0" />
@@ -362,6 +416,51 @@
             <Label fx:id="budgetLabel" layoutX="14.0" layoutY="556.0" prefHeight="17.0" prefWidth="223.0" text="Budget only contains numbers" textFill="#052659" />
             <TextField fx:id="revenueField" layoutX="305.0" layoutY="524.0" prefHeight="25.0" prefWidth="223.0" promptText="Revenue" />
             <Label fx:id="revenueLabel" layoutX="306.0" layoutY="555.0" prefHeight="17.0" prefWidth="223.0" text="Revenue only contains numbers" textFill="#052659" />
+         </children>
+      </AnchorPane>
+
+      <AnchorPane fx:id="addSubscriptionPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #021024;" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#052659" height="512.0" layoutX="44.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" width="264.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#052659" height="512.0" layoutX="693.0" layoutY="44.0" stroke="BLACK" strokeType="INSIDE" width="264.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5483B3" height="570.0" layoutX="183.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="635.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#052659" height="43.0" layoutX="192.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" width="616.0" />
+            <Label layoutX="333.0" layoutY="21.0" text="New Subscription" textFill="#ffffff">
+               <font>
+                  <Font name="SimSun" size="42.0" />
+               </font>
+            </Label>
+            <TextField fx:id="subscriptionNameField" layoutX="290.0" layoutY="97.0" prefHeight="25.0" prefWidth="420.0" promptText="Name" />
+            <TextField fx:id="subscriptionDurationField" layoutX="291.0" layoutY="277.0" prefHeight="25.0" prefWidth="420.0" promptText="Duration" />
+            <TextField fx:id="subscriptionDescriptionField" layoutX="290.0" layoutY="153.0" prefHeight="90.0" prefWidth="420.0" promptText="Description" />
+            <TextField fx:id="subscriptionPriceField" layoutX="290.0" layoutY="334.0" prefHeight="25.0" prefWidth="420.0" promptText="Price" />
+            <Label fx:id="subscriptionNameLabel" layoutX="290.0" layoutY="122.0" text="Names only contains characters" textFill="#5483B3" />
+            <Label fx:id="subscriptionDescriptionLabel" layoutX="290.0" layoutY="243.0" text="Not descriptive enough" textFill="#5483B3" />
+            <Label fx:id="subscriptionDurationLabel" layoutX="291.0" layoutY="302.0" text="Duration only contains numbers" textFill="#5483B3" />
+            <Label fx:id="subscriptionPriceLabel" layoutX="290.0" layoutY="359.0" text="Price only contains numbers" textFill="#5483B3" />
+            <Button fx:id="createSubscriptionButton" layoutX="440.0" layoutY="473.0" mnemonicParsing="false" onAction="#createSubscription" style="-fx-background-color: #7DA0CA;" text="Create Subscription" textFill="#ffffff">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow spread="0.51">
+                     <color>
+                        <Color red="0.4901960790157318" green="0.6274510025978088" blue="0.7921568751335144" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Button>
+            <Button layoutX="474.0" layoutY="530.0" mnemonicParsing="false" onAction="#returnToAdminMenu" style="-fx-background-color: #5483B3;" text="Return" textFill="#ffffff" underline="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TextField fx:id="subscriptionCoverField" layoutX="290.0" layoutY="398.0" prefHeight="25.0" prefWidth="420.0" promptText="Cover Link" />
+            <Label fx:id="subscriptionCoverLabel" layoutX="290.0" layoutY="423.0" text="Link invalid" textFill="#5483B3" />
          </children>
       </AnchorPane>
 
