@@ -45,7 +45,7 @@
                   <Image url="@../icons/serieIcon.png" />
                </image>
             </ImageView>
-            <VBox fx:id="serieOptions" prefWidth="150" prefHeight="400" layoutX="200" layoutY="240" onMouseEntered="#serieOptionsIn" onMouseExited="#serieOptionsOut" visible="false">
+            <VBox fx:id="serieOptions" prefWidth="150" prefHeight="400" layoutX="200" layoutY="250" onMouseEntered="#serieOptionsIn" onMouseExited="#serieOptionsOut" visible="false">
                <children>
                   <Button onAction="#seeAvailableSeries" prefWidth="250" prefHeight="80" text="See" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
                      <font>
@@ -99,7 +99,7 @@
                   <Image url="@../icons/movieIcon.png" />
                </image>
             </ImageView>
-            <VBox fx:id="movieOptions" prefWidth="150" prefHeight="400" layoutX="500" layoutY="200" onMouseEntered="#movieOptionsIn" onMouseExited="#movieOptionsOut" visible="false">
+            <VBox fx:id="movieOptions" prefWidth="150" prefHeight="400" layoutX="500" layoutY="250" onMouseEntered="#movieOptionsIn" onMouseExited="#movieOptionsOut" visible="false">
                <children>
                   <Button onAction="#seeAvailableMovies" prefWidth="250" prefHeight="80" text="See" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
                      <font>
@@ -153,7 +153,8 @@
                     <Image url="@../icons/subscriptionIcon.png" />
                 </image>
             </ImageView>
-            <VBox fx:id="subsOptions" layoutX="830" layoutY="270" prefWidth="150" prefHeight="300" onMouseEntered="#showSubOptions" onMouseExited="#hideSubOptions" visible="false">
+            <VBox fx:id="subsOptions" layoutX="820" layoutY="250" prefWidth="150" prefHeight="300" onMouseEntered="#showSubOptions" onMouseExited="#hideSubOptions" visible="false">
+               
                 <children>
                     <Button text="See" prefWidth="250" prefHeight="80" onAction="#seeAvailableSubscriptions" style="-fx-background-color: #052659; -fx-border-color: #5483B3;">
                         <font>
