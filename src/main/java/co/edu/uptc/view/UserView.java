@@ -13,6 +13,8 @@ import co.edu.uptc.model.UserRegistered;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,10 +26,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -75,6 +80,9 @@ public class UserView {
     @FXML
     private AnchorPane subscriptionInfoPane;
 
+    @FXML 
+    private AnchorPane paymentPane;
+
     @FXML
     private Label subNameLabel;
 
@@ -92,6 +100,33 @@ public class UserView {
 
     @FXML
     private Label subEndTimeLabel;
+
+    @FXML
+    private CheckBox credit;
+
+    @FXML
+    private CheckBox debit;
+
+    @FXML
+    private TextField cardNumberField;
+
+    @FXML
+    private Label cardNumberLabel;
+
+    @FXML
+    private TextField mmddField;
+
+    @FXML
+    private Label mmddLabel;
+
+    @FXML
+    private TextField cvvField;
+
+    @FXML
+    private Label cvvLabel;
+
+    @FXML
+    private ComboBox<String> banks;
 
 
 
@@ -176,7 +211,7 @@ public class UserView {
             for (Subscription sub : subC.getSubscriptions()) {
                 VBox imageView = createSubscriptionImageView(sub);
                 imageView.setOnMouseClicked(e -> {
-                    subInformation(sub);
+                    subInformation(sub, e);
                 });
                 imageView.setCursor(Cursor.HAND);
                 multimediaContentGrid.add(imageView, column, row);
@@ -239,7 +274,7 @@ public class UserView {
         return vbox;
     }
 
-    public void subInformation(Subscription sub){
+    public void subInformation(Subscription sub, MouseEvent event){
         Stage informationSub = new Stage();
         informationSub.initStyle(StageStyle.DECORATED); 
         informationSub.initModality(Modality.APPLICATION_MODAL); 
@@ -261,18 +296,24 @@ public class UserView {
         subscribeButton.setStyle("-fx-background-color: #5483B3;");
         subscribeButton.setCursor(Cursor.HAND);
         subscribeButton.setOnAction(e2 -> {
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            paymentPane.setVisible(true);
+            stage.setWidth(600);
+            stage.setHeight(400);
+            ObservableList<String> aux = banks.getItems();
+            aux.addAll("NEQUI", "DAVIPLATA", "BANCOLOMBIA","CAJA SOCIAL", "DAVIVIENDA", "EL BRAYAN");
             //paidMethod();
-            userC.setCurrentUser(currentUser);
-            userC.setUsers(userC.loadUsersFromJson());
+            // userC.setCurrentUser(currentUser);
+            // userC.setUsers(userC.loadUsersFromJson());
 
-            subC.addSubToUser(sub, currentUser);
+            // subC.addSubToUser(sub, currentUser);
 
-            userC.updateUsers(currentUser);
-            userC.saveUsersToJson();
-            userC.setCurrentUser(currentUser);
-            userC.saveCurrentUserToJson();
+            // userC.updateUsers(currentUser);
+            // userC.saveUsersToJson();
+            // userC.setCurrentUser(currentUser);
+            // userC.saveCurrentUserToJson();
             informationSub.close();
-            subscription(e2);
+            // subscription(e2);
         });
         VBox informationBox = new VBox(10);
         informationBox.setStyle("-fx-background-color: #021024;");
@@ -282,6 +323,23 @@ public class UserView {
         informationSub.setTitle("Subscription Information");
         informationSub.setScene(scene);
         informationSub.showAndWait(); 
+    }
+
+    @FXML
+    void paySub(){
+        int aux = subC.verifyInputsPaidMethod(cardNumberField, cardNumberLabel, mmddField, mmddLabel, cvvField, cvvLabel, credit, debit);
+        if(aux == 7){
+        }
+    }
+
+    @FXML
+    void creditCheckBox(ActionEvent event){
+        if(debit.isSelected()){debit.setSelected(false);}
+    }
+
+    @FXML
+    void debitCheckBox(ActionEvent event){
+        if(credit.isSelected()){credit.setSelected(false);}
     }
 
     @FXML

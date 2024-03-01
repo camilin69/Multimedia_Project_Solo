@@ -3,6 +3,9 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -101,7 +104,6 @@
          </children>
       </AnchorPane>
 
-
       <ImageView fx:id="userOptionsButton" fitHeight="40" fitWidth="40" onMouseClicked="#seeUserOptions">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -127,6 +129,29 @@
             </children>
       </AnchorPane>
 
+      <AnchorPane fx:id="paymentPane" prefWidth="600.0" prefHeight="400.0" style="-fx-background-color: #021024;" visible="false">
+         <children>
+            <Label layoutX="170.0" text="Payment Proccess">
+               <font>
+                  <Font name="NSimSun" size="32.0" />
+               </font>
+               <textFill>
+                  <Color fx:constant="WHITE"/>
+               </textFill>
+            </Label>
+            <CheckBox fx:id="credit" onAction="#creditCheckBox" layoutX="25.0" layoutY="65.0" text="Credit" textFill="#ffffff"/>
+            <CheckBox fx:id="debit" onAction="#debitCheckBox" layoutX="120.0" layoutY="65.0" text="Debit" textFill="#ffffff"/>
+            <TextField fx:id="cardNumberField" layoutX="25" layoutY="100" prefWidth="255" prefHeight="25" promptText="Card Number"/>
+            <Label fx:id="cardNumberLabel" layoutX="290" layoutY="105" text="Wrong format. Example, 1234-5678..." textFill="#021024"/>
+            <TextField fx:id="mmddField" layoutX="25" layoutY="140" prefWidth="55" prefHeight="25" promptText="mm/dd"/>
+            <Label fx:id="mmddLabel" layoutX="95" layoutY="145" text="Wrong format" textFill="#021024"/>
+            <TextField fx:id="cvvField" layoutX="246" layoutY="145" prefWidth="35" prefHeight="25" promptText="cvv"/>
+            <Label fx:id="cvvLabel" layoutX="290" layoutY="145" text="It is only 3 numbers" textFill="#021024"/>
+            
+            <ComboBox fx:id="banks" layoutX="170" layoutY="190" prefWidth="255" prefHeight="25" promptText="Bank"/>
+            <Button onAction="#paySub" layoutX="80" layoutY="271" prefWidth="35" prefHeight="25" text="Pay"/>
+         </children>
+      </AnchorPane>
       
    </children>
 </AnchorPane>

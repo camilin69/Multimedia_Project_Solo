@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import co.edu.uptc.model.Subscription;
 import co.edu.uptc.model.UserRegistered;
 import co.edu.uptc.model.UserSubscription;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 public class SubscriptionController {
     ArrayList<Subscription> subscriptions = new ArrayList<>();
@@ -31,107 +34,62 @@ public class SubscriptionController {
         user.setSub(null);
     }
 
-    public int verifyInputs(TextField subscriptionNameField, Label subscriptionNameLabel,
-                            TextArea subscriptionDescriptionField, Label subscriptionDescriptionLabel,
-                            TextField subscriptionDurationField, Label subscriptionDurationLabel,
-                            TextField subscriptionPriceField, Label subscriptionPriceLabel,
-                            TextField subscriptionCoverField, Label subscriptionCoverLabel){
+    public int verifyInputsPaidMethod(TextField cardField, Label cardLabel,
+                            TextField mmddField, Label mmddLabel,
+                            TextField cvvField, Label cvvLabel,
+                            CheckBox credit, CheckBox debit){
 
         int aux = 0;
 
-        if(subscriptionNameField.getText().matches("^[a-zA-Z0-9\\s]+$")){
-            aux++;
-            subscriptionNameLabel.setTextFill(Color.web("#26eb44"));
-            if(!subscriptionFound(subscriptionNameField.getText())){
-                aux++;
-                subscriptionNameLabel.setTextFill(Color.web("#26eb44"));
-            }else{
-                subscriptionNameLabel.setText("Subscriptions can not be repeated");
-                subscriptionNameLabel.setTextFill(Color.RED);
-            }
-        }else{
-            subscriptionNameLabel.setText("Names only contains characters");
-            subscriptionNameLabel.setTextFill(Color.RED);
+        if(!credit.isSelected() && !debit.isSelected()){
+            credit.setTextFill(Color.web("#cd1919"));debit.setTextFill(Color.web("#cd1919"));
+            Timeline effect = new Timeline(new KeyFrame(Duration.seconds(2), e -> {credit.setTextFill(Color.WHITE);debit.setTextFill(Color.WHITE);}));
+            effect.setCycleCount(1);
+            effect.play();
         }
-        if(subscriptionDescriptionField.getText().matches("^[a-zA-Z0-9\\s\\p{Punct}]+$")){
-            aux++;
-            subscriptionDescriptionLabel.setTextFill(Color.web("#26eb44"));
-        }else{
-            subscriptionDescriptionLabel.setTextFill(Color.RED);
-        }
-        if(subscriptionDurationField.getText().matches("\\d+")){
-            aux++;
-            subscriptionDurationLabel.setTextFill(Color.web("#26eb44"));
-        }else{
-            subscriptionDurationLabel.setTextFill(Color.RED);
-        }
-        try{
-            Double.parseDouble(subscriptionPriceField.getText());
-            subscriptionPriceLabel.setTextFill(Color.web("#26eb44"));
-            aux++;
-        }catch(Exception e){
-            subscriptionPriceLabel.setTextFill(Color.RED);
-        }
-        if(subscriptionCoverField.getText().startsWith("https://")){
-            subscriptionCoverLabel.setTextFill(Color.web("#26eb44"));
-            aux++;
-        }else{
-            subscriptionCoverLabel.setTextFill(Color.RED);
-        }
-        return aux;
-    }
-
-    public int verifyInputsToEdit(String oldName, TextField subscriptionNameField, Label subscriptionNameLabel,
-                            TextArea subscriptionDescriptionField, Label subscriptionDescriptionLabel,
-                            TextField subscriptionDurationField, Label subscriptionDurationLabel,
-                            TextField subscriptionPriceField, Label subscriptionPriceLabel,
-                            TextField subscriptionCoverField, Label subscriptionCoverLabel){
-
-        int aux = 0;
-
-        if(subscriptionNameField.getText().matches("^[a-zA-Z0-9\\s]+$")){
-            aux++;
-            subscriptionNameLabel.setTextFill(Color.web("#26eb44"));
-            if(oldName.equals(subscriptionNameField.getText())){
-                aux++;
-            }else{
-                if(!subscriptionFound(subscriptionNameField.getText())){
+        
+        String[] proveCard = cardField.getText().split("-");
+        if(proveCard.length == 4){
+            for(String p: proveCard){
+                if(p.matches("^[0-9\\s]+$")){
+                    //aux == 4
                     aux++;
-                    subscriptionNameLabel.setTextFill(Color.web("#26eb44"));
-                }else{
-                    subscriptionNameLabel.setText("Subscriptions can not be repeated");
-                    subscriptionNameLabel.setTextFill(Color.RED);
+                    cardLabel.setTextFill(Color.web("#021024"));
+                }else{  
+                    cardLabel.setTextFill(Color.web("#cd1919"));
                 }
             }
-            
         }else{
-            subscriptionNameLabel.setText("Names only contains characters");
-            subscriptionNameLabel.setTextFill(Color.RED);
+            cardLabel.setTextFill(Color.web("#cd1919"));
         }
-        if(subscriptionDescriptionField.getText().matches("^[a-zA-Z0-9\\s\\p{Punct}]+$")){
-            aux++;
-            subscriptionDescriptionLabel.setTextFill(Color.web("#26eb44"));
+        
+        String[] proveMMDD = mmddField.getText().split("/");
+        if(mmddField.getText().contains("/")){
+            if(proveMMDD.length == 2){
+                for(String p: proveMMDD){
+                    if(p.matches("^[0-9\\s]+$")){
+                        //aux == 2
+                        aux++;
+                        mmddLabel.setTextFill(Color.web("#021024"));
+                    }else{
+                        mmddLabel.setTextFill(Color.web("#cd1919"));
+                    }
+                }
+            }
         }else{
-            subscriptionDescriptionLabel.setTextFill(Color.RED);
+            mmddLabel.setTextFill(Color.web("#cd1919"));
         }
-        if(subscriptionDurationField.getText().matches("\\d+")){
-            aux++;
-            subscriptionDurationLabel.setTextFill(Color.web("#26eb44"));
+        
+
+        if(cvvField.getText().matches("^[0-9\\s]+$")){
+            if(cvvField.getText().length() == 3){
+                aux++;
+                cvvLabel.setTextFill(Color.web("#021024"));
+            }else{
+                cvvLabel.setTextFill(Color.web("#cd1919"));
+            }
         }else{
-            subscriptionDurationLabel.setTextFill(Color.RED);
-        }
-        try{
-            Double.parseDouble(subscriptionPriceField.getText());
-            subscriptionPriceLabel.setTextFill(Color.web("#26eb44"));
-            aux++;
-        }catch(Exception e){
-            subscriptionPriceLabel.setTextFill(Color.RED);
-        }
-        if(subscriptionCoverField.getText().startsWith("https://")){
-            subscriptionCoverLabel.setTextFill(Color.web("#26eb44"));
-            aux++;
-        }else{
-            subscriptionCoverLabel.setTextFill(Color.RED);
+            cvvLabel.setTextFill(Color.web("#cd1919"));
         }
         return aux;
     }
