@@ -1,16 +1,13 @@
 {
-  "playList": [
-    {
-      "name": "Nigga",
-      "backgroundCover": "#000000FF",
-      "textCover": "#FFFFFFFF",
-      "movies": [],
-      "series": []
-    }
-  ],
-  "firstName": "s",
-  "lastName": "s",
-  "email": "26s@uptc.edu.co",
-  "password": "Cami04...1",
-  "id": 26
+  "sub": {
+    "startTime": 1709252193903,
+    "endTime": 1709252199903,
+    "name": "Deluxe",
+    "duration": 6000,
+    "description": "dsadasdas",
+    "price": 20.0,
+    "coverURL": "https://",
+    "imageLocalPathURL": "C:/Users/HP/Desktop/GitHub Projects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/subscriptions/Deluxe.png"
+  },
+  "id": 0
 }
