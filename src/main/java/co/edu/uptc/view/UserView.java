@@ -13,7 +13,6 @@ import co.edu.uptc.model.UserRegistered;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -124,6 +123,9 @@ public class UserView {
 
     @FXML
     private Label cvvLabel;
+
+    @FXML
+    private Button paySubButton;
 
     @FXML
     private ComboBox<String> banks;
@@ -302,18 +304,9 @@ public class UserView {
             stage.setHeight(400);
             ObservableList<String> aux = banks.getItems();
             aux.addAll("NEQUI", "DAVIPLATA", "BANCOLOMBIA","CAJA SOCIAL", "DAVIVIENDA", "EL BRAYAN");
-            //paidMethod();
-            // userC.setCurrentUser(currentUser);
-            // userC.setUsers(userC.loadUsersFromJson());
-
-            // subC.addSubToUser(sub, currentUser);
-
-            // userC.updateUsers(currentUser);
-            // userC.saveUsersToJson();
-            // userC.setCurrentUser(currentUser);
-            // userC.saveCurrentUserToJson();
+            
+            paySubButton.setOnAction(e -> paySub(e, sub));
             informationSub.close();
-            // subscription(e2);
         });
         VBox informationBox = new VBox(10);
         informationBox.setStyle("-fx-background-color: #021024;");
@@ -325,10 +318,18 @@ public class UserView {
         informationSub.showAndWait(); 
     }
 
-    @FXML
-    void paySub(){
-        int aux = subC.verifyInputsPaidMethod(cardNumberField, cardNumberLabel, mmddField, mmddLabel, cvvField, cvvLabel, credit, debit);
-        if(aux == 7){
+    
+    void paySub(ActionEvent event, Subscription sub){
+        int aux = subC.verifyInputsPaidMethod(cardNumberField, cardNumberLabel, mmddField, mmddLabel, cvvField, cvvLabel, credit, debit, banks);
+        if(aux == 9){
+            currentUser = userC.loadCurrentUserFromJson();
+            userC.setCurrentUser(userC.loadCurrentUserFromJson());
+            userC.setUsers(userC.loadUsersFromJson());
+            subC.addSubToUser(sub, currentUser);
+            userC.updateUsers(currentUser);
+            userC.saveUsersToJson();
+            userC.setCurrentUser(currentUser);
+            userC.saveCurrentUserToJson();
         }
     }
 

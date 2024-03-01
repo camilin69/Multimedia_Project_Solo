@@ -1,13 +1,18 @@
 {
+  "playList": [],
   "sub": {
-    "startTime": 1709252193903,
-    "endTime": 1709252199903,
+    "startTime": 1709304339330,
+    "endTime": 1709304345330,
     "name": "Deluxe",
     "duration": 6000,
     "description": "dsadasdas",
     "price": 20.0,
     "coverURL": "https://",
-    "imageLocalPathURL": "C:/Users/HP/Desktop/GitHub Projects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/subscriptions/Deluxe.png"
+    "imageLocalPathURL": "C:/Users/User/Desktop/GitHub_Repository/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/subscriptions/Deluxe.png"
   },
-  "id": 0
+  "firstName": "das",
+  "lastName": "ddd",
+  "email": "748ddd@uptc.edu.co",
+  "password": "Cami1234...",
+  "id": 748
 }

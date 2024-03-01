@@ -163,7 +163,7 @@ public class UserController {
     public UserRegistered loadCurrentUserFromJson() {
         UserRegistered currentUser = new UserRegistered();
 
-        try (Reader reader = new FileReader(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/currentUser.json")) {
+        try (Reader reader = new FileReader(System.getProperty("user.dir").replace("\\", "/").replace(" ", "20%") + "/src/main/java/co/edu/uptc/persistence/admin-user/currentUser.json")) {
 
             Type type = new TypeToken<UserRegistered>(){}.getType();
             currentUser = new Gson().fromJson(reader, type);

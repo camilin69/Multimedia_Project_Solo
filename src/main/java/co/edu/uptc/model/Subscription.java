@@ -8,6 +8,7 @@ public class Subscription {
     private String coverURL;
     private String imageLocalPathURL;
 
+
     
     //General 
     public Subscription(String name, int duration, String description, double price, String coverURL,
