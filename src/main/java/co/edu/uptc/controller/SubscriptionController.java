@@ -9,6 +9,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
@@ -43,7 +44,6 @@ public class SubscriptionController {
         int aux = 0;
 
         if(!credit.isSelected() && !debit.isSelected()){
-            
             credit.setTextFill(Color.web("#cd1919"));debit.setTextFill(Color.web("#cd1919"));
             Timeline effect = new Timeline(new KeyFrame(Duration.seconds(2), e -> {credit.setTextFill(Color.WHITE);debit.setTextFill(Color.WHITE);}));
             effect.setCycleCount(1);
@@ -65,10 +65,7 @@ public class SubscriptionController {
                 }
             }
         }else{
-            cardField.setStyle("-fx-background-color: #cd1919;");
-            Timeline effect = new Timeline(new KeyFrame(Duration.seconds(2), e -> {cardField.setStyle("-fx-background-color: #ffffff;");}));
-            effect.setCycleCount(1);
-            effect.play();
+            effect(cardField);
             cardLabel.setTextFill(Color.web("#cd1919"));
         }
         
@@ -87,10 +84,7 @@ public class SubscriptionController {
                 }
             }
         }else{
-            mmddField.setStyle("-fx-background-color: #cd1919;");
-            Timeline effect = new Timeline(new KeyFrame(Duration.seconds(2), e -> {mmddField.setStyle("-fx-background-color: #ffffff;");}));
-            effect.setCycleCount(1);
-            effect.play();
+            effect(mmddField);
             mmddLabel.setTextFill(Color.web("#cd1919"));
         }
         
@@ -103,22 +97,58 @@ public class SubscriptionController {
                 cvvLabel.setTextFill(Color.web("#cd1919"));
             }
         }else{
-            cvvField.setStyle("-fx-background-color: #cd1919;");
-            Timeline effect = new Timeline(new KeyFrame(Duration.seconds(2), e -> {cvvField.setStyle("-fx-background-color: #ffffff;");}));
-            effect.setCycleCount(1);
-            effect.play();
+            effect(cvvField);
             cvvLabel.setTextFill(Color.web("#cd1919"));
         }
 
         if(banks.getSelectionModel().getSelectedItem() != null){
             aux++;
         }else{
-            banks.setStyle("-fx-background-color: #cd1919;");
-            Timeline effect = new Timeline(new KeyFrame(Duration.seconds(2), e -> {banks.setStyle("-fx-background-color: #ffffff;");}));
+            effect(banks);
+        }
+        return aux;
+    }
+
+    public int verifyPersonInformation(TextField paymentFirstNameField, Label paymentFirstNameLabel,
+                                       TextField paymentLastNameField, Label paymentLastNameLabel,
+                                       TextField paymentIdField, Label paymentIdLabel, DatePicker date){
+
+        int aux = 0;
+
+        if(paymentFirstNameField.getText().matches("^[a-zA-Z\\s]+$")){
+            paymentFirstNameLabel.setTextFill(Color.web("#021024"));
+            aux++;
+        }else{
+            effect(paymentFirstNameField);
+            paymentFirstNameLabel.setTextFill(Color.web("#ff4848"));
+        }
+        if(paymentLastNameField.getText().matches("^[a-zA-Z\\s]+$")){
+            paymentLastNameLabel.setTextFill(Color.web("#021024"));
+            aux++;
+        }else{
+            effect(paymentLastNameField);
+            paymentFirstNameLabel.setTextFill(Color.web("#ff4848"));
+        }
+        if(paymentIdField.getText().matches("^[0-9\\s]+$")){
+            paymentIdLabel.setTextFill(Color.web("#021024"));
+            aux++;
+        }else{
+            effect(paymentIdField);
+            paymentIdLabel.setTextFill(Color.web("#ff4848"));
+        }
+        if(date.getValue() != null){
+            aux++;
+        }else{
+            date.setOpacity(40);
+            date.setStyle("-fx-background-color: #cd1919;");
+            Timeline effect = new Timeline(new KeyFrame(Duration.seconds(2), e -> {date.setStyle("-fx-background-color: #ffffff;");date.setOpacity(100);}));
             effect.setCycleCount(1);
             effect.play();
         }
+
+
         return aux;
+
     }
 
     public boolean subscriptionFound(String subName){
@@ -138,6 +168,22 @@ public class SubscriptionController {
     }
     public void removeSubscription(Subscription sub){
         subscriptions.remove(sub);
+    }
+
+    public void effect(TextField field){
+        field.setOpacity(40);
+        field.setStyle("-fx-background-color: #cd1919;");
+        Timeline effect = new Timeline(new KeyFrame(Duration.seconds(2), e -> {field.setStyle("-fx-background-color: #ffffff;");field.setOpacity(100);}));
+        effect.setCycleCount(1);
+        effect.play();
+    }
+
+    public void effect(ComboBox<String> box){
+        box.setOpacity(40);
+        box.setStyle("-fx-background-color: #cd1919;");
+        Timeline effect = new Timeline(new KeyFrame(Duration.seconds(2), e -> {box.setStyle("-fx-background-color: #ffffff;");box.setOpacity(100);}));
+        effect.setCycleCount(1);
+        effect.play();
     }
 
     

@@ -27,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
@@ -100,6 +101,8 @@ public class UserView {
     @FXML
     private Label subEndTimeLabel;
 
+    //--------------------------------------------------SUBSCRIPTION PAYMENT--------------------------------//
+
     @FXML
     private CheckBox credit;
 
@@ -130,6 +133,27 @@ public class UserView {
     @FXML
     private ComboBox<String> banks;
 
+    @FXML
+    private TextField paymentFirstNameField;
+
+    @FXML
+    private TextField paymentLastNameField;
+
+    @FXML
+    private TextField paymentIdField;
+
+    @FXML
+    private Label paymentFirstNameLabel;
+
+    @FXML
+    private Label paymentLastNameLabel;
+
+    @FXML
+    private Label paymentIdLabel;
+
+    @FXML
+    private DatePicker bornDate;
+
 
 
     private AdminController adminC = new AdminController();
@@ -147,10 +171,9 @@ public class UserView {
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         }
         root = FXMLLoader.load(getClass().getResource("/co/edu/uptc/persistence/fxmlFiles/userView.fxml"));
-        
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -197,6 +220,8 @@ public class UserView {
     }
     @FXML
     void subscription(ActionEvent event){
+        currentUser = userC.loadCurrentUserFromJson();
+        userC.setCurrentUser(userC.loadCurrentUserFromJson());
         emptyPane.setVisible(false);
         if(currentUser.getSub() == null){
             
@@ -300,13 +325,12 @@ public class UserView {
         subscribeButton.setOnAction(e2 -> {
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             paymentPane.setVisible(true);
-            stage.setWidth(600);
-            stage.setHeight(400);
             ObservableList<String> aux = banks.getItems();
             aux.addAll("NEQUI", "DAVIPLATA", "BANCOLOMBIA","CAJA SOCIAL", "DAVIVIENDA", "EL BRAYAN");
             
             paySubButton.setOnAction(e -> paySub(e, sub));
             informationSub.close();
+            
         });
         VBox informationBox = new VBox(10);
         informationBox.setStyle("-fx-background-color: #021024;");
@@ -321,7 +345,8 @@ public class UserView {
     
     void paySub(ActionEvent event, Subscription sub){
         int aux = subC.verifyInputsPaidMethod(cardNumberField, cardNumberLabel, mmddField, mmddLabel, cvvField, cvvLabel, credit, debit, banks);
-        if(aux == 9){
+        aux = aux + subC.verifyPersonInformation(paymentFirstNameField, paymentFirstNameLabel, paymentLastNameField, paymentLastNameLabel, paymentIdField, paymentIdLabel, bornDate);
+        if(aux == 13){
             currentUser = userC.loadCurrentUserFromJson();
             userC.setCurrentUser(userC.loadCurrentUserFromJson());
             userC.setUsers(userC.loadUsersFromJson());
@@ -330,6 +355,11 @@ public class UserView {
             userC.saveUsersToJson();
             userC.setCurrentUser(currentUser);
             userC.saveCurrentUserToJson();
+            try {
+                userMenu(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -353,7 +383,6 @@ public class UserView {
         userC.saveUsersToJson();
         userC.setCurrentUser(currentUser);
         userC.saveCurrentUserToJson();
-        subscriptionInfoPane.setVisible(false);
         subscription(event);
     }
 

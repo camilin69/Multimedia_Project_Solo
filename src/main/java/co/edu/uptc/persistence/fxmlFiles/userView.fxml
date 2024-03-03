@@ -2,11 +2,12 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,6 +16,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #021024;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uptc.view.UserView">
@@ -53,7 +55,7 @@
          </children>
       </AnchorPane>
 
-      <AnchorPane fx:id="subscriptionInfoPane" layoutX="-1.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #021024;" visible="false">
+      <AnchorPane fx:id="subscriptionInfoPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #021024;" visible="false">
          <children>
             <Label fx:id="subNameLabel" layoutX="50.0" layoutY="14.0" text="Subscription Name" textFill="WHITE">
                <font>
@@ -76,7 +78,7 @@
                   <Font name="NSimSun" size="28.0" />
                </font>
             </Label>
-            <Button layoutX="930.0" layoutY="579.0" mnemonicParsing="false" onAction="#unsuscribe" prefWidth="70.0" style="-fx-background-color: #021024;" text="Unsubscribe" textFill="WHITE" underline="true">
+            <Button layoutX="936.0" layoutY="14.0" mnemonicParsing="false" onAction="#unsuscribe" prefHeight="15.0" prefWidth="50.0" style="-fx-background-color: #021024;" text="Unsubscribe" textFill="WHITE" underline="true">
                <font>
                   <Font size="7.0" />
                </font>
@@ -129,29 +131,52 @@
             </children>
       </AnchorPane>
 
-      <AnchorPane fx:id="paymentPane" prefWidth="600.0" prefHeight="400.0" style="-fx-background-color: #021024;" visible="false">
+      <AnchorPane fx:id="paymentPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #021024;" visible="false">
          <children>
-            <Label layoutX="170.0" text="Payment Proccess">
+            <Label layoutX="372.0" layoutY="6.0" text="Payment Proccess">
                <font>
-                  <Font name="NSimSun" size="32.0" />
+                  <Font name="NSimSun" size="34.0" />
                </font>
                <textFill>
-                  <Color fx:constant="WHITE"/>
+                  <Color fx:constant="WHITE" />
                </textFill>
             </Label>
-            <CheckBox fx:id="credit" onAction="#creditCheckBox" layoutX="25.0" layoutY="65.0" text="Credit" textFill="#ffffff"/>
-            <CheckBox fx:id="debit" onAction="#debitCheckBox" layoutX="120.0" layoutY="65.0" text="Debit" textFill="#ffffff"/>
-            <TextField fx:id="cardNumberField" layoutX="25" layoutY="100" prefWidth="255" prefHeight="25" promptText="Card Number"/>
-            <Label fx:id="cardNumberLabel" layoutX="290" layoutY="105" text="Wrong format. Example, 1234-5678..." textFill="#021024"/>
-            <TextField fx:id="mmddField" layoutX="25" layoutY="140" prefWidth="55" prefHeight="25" promptText="mm/dd"/>
-            <Label fx:id="mmddLabel" layoutX="95" layoutY="145" text="Wrong format" textFill="#021024"/>
-            <TextField fx:id="cvvField" layoutX="246" layoutY="145" prefWidth="35" prefHeight="25" promptText="cvv"/>
-            <Label fx:id="cvvLabel" layoutX="290" layoutY="145" text="It is only 3 numbers" textFill="#021024"/>
+            <CheckBox fx:id="credit" layoutX="615.0" layoutY="129.0" onAction="#creditCheckBox" text="Credit" textFill="#ffffff" />
+            <CheckBox fx:id="debit" layoutX="710.0" layoutY="129.0" onAction="#debitCheckBox" text="Debit" textFill="#ffffff" />
+            <TextField fx:id="cardNumberField" layoutX="615.0" layoutY="164.0" prefHeight="25" prefWidth="255" promptText="Card Number" />
+            <Label fx:id="cardNumberLabel" layoutX="616.0" layoutY="189.0" prefHeight="17.0" prefWidth="255.0" text="Wrong format. Example, 1234-5678..." textFill="#021024" wrapText="true" />
+            <TextField fx:id="mmddField" layoutX="615.0" layoutY="244.0" prefHeight="25" prefWidth="55" promptText="mm/dd" />
+            <Label fx:id="mmddLabel" layoutX="605.0" layoutY="274.0" text="Wrong format" textFill="#021024" />
+            <TextField fx:id="cvvField" layoutX="836.0" layoutY="249.0" prefHeight="25" prefWidth="35" promptText="cvv" />
+            <Label fx:id="cvvLabel" layoutX="802.0" layoutY="274.0" text="It is only 3 numbers" textFill="#021024" />
             
-            <ComboBox fx:id="banks" layoutX="170" layoutY="190" prefWidth="255" prefHeight="25" promptText="Bank"/>
-            <Button fx:id="paySubButton" layoutX="280" layoutY="270" prefWidth="35" prefHeight="25" text="Pay"/>
-            <Button onAction="#userMenu" layoutX="280" layoutY="290" prefWidth="35" prefHeight="25" text="Return" style="-fx-background-color: #021024;" textFill="#ffffff"/>
-            
+            <ComboBox fx:id="banks" layoutX="615.0" layoutY="338.0" prefHeight="25" prefWidth="255" promptText="Bank" />
+            <Button fx:id="paySubButton" layoutX="482.0" layoutY="473.0" prefHeight="25" prefWidth="35" style="-fx-background-color: #5483B3;" text="Pay">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.3294117748737335" green="0.5137255191802979" blue="0.7019608020782471" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Button>
+            <Button layoutX="465.0" layoutY="514.0" onAction="#userMenu" prefHeight="25" prefWidth="70" style="-fx-background-color: #021024;" text="Return" textFill="#ffffff">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Line endX="-2.0" endY="319.0" layoutX="502.0" layoutY="120.0" startX="-2.0" startY="-28.0" stroke="WHITE" />
+            <Label layoutX="524.0" layoutY="94.0" textFill="WHITE" />
+            <TextField fx:id="paymentFirstNameField" layoutX="112.0" layoutY="144.0" prefHeight="25" prefWidth="313.0" promptText="FirstName Card Owner" />
+            <TextField fx:id="paymentLastNameField" layoutX="112.0" layoutY="204.0" prefHeight="25" prefWidth="313.0" promptText="lastName Card Owner" />
+            <DatePicker fx:id="bornDate" layoutX="112.0" layoutY="323.0" prefHeight="25.0" prefWidth="313.0" promptText="Born date" />
+            <TextField fx:id="paymentIdField" layoutX="112.0" layoutY="259.0" prefHeight="25" prefWidth="313.0" promptText="ID Card Owner" />
+            <Label fx:id="paymentFirstNameLabel" layoutX="112.0" layoutY="169.0" prefHeight="17.0" prefWidth="188.0" text="Names only contains characteres" textFill="#021024" />
+            <Label fx:id="paymentLastNameLabel" layoutX="112.0" layoutY="229.0" prefHeight="17.0" prefWidth="188.0" text="Names only contains characteres" textFill="#021024" />
+            <Label fx:id="paymentIdLabel" layoutX="112.0" layoutY="284.0" prefHeight="17.0" prefWidth="188.0" text="ID only contains numbers" textFill="#021024" />
          </children>
       </AnchorPane>
       
