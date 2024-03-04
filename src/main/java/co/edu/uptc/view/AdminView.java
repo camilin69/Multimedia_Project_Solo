@@ -357,7 +357,7 @@ public class AdminView {
         titleText.setText("Select a movie to see");
         addMoviePane.setVisible(false);
 
-        adminC.getAdmin().setMovies(adminC.loadMoviesFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/movies.json"));
+        adminC.getAdmin().setMovies(adminC.loadMoviesFromJson());
         if(adminC.getAdmin().getMovies().isEmpty()){
             emptyPane.setVisible(true);
         }
@@ -463,7 +463,7 @@ public class AdminView {
                 Movie movie = new Movie(id, nameField.getText(), descriptionField.getText(), directorField.getText(),
                 allGenres.getSelectionModel().getSelectedItem(), coverPath, movieLinkField.getText(),movieCoverField.getText(), studioField.getText(),
                 Double.parseDouble(budgetField.getText()), Double.parseDouble(revenueField.getText()));
-                adminC.getAdmin().setMovies(adminC.loadMoviesFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/movies.json"));
+                adminC.getAdmin().setMovies(adminC.loadMoviesFromJson());
                 adminC.getAdmin().addMovie(movie);
                 adminC.saveMoviesToJson();
 
@@ -495,7 +495,7 @@ public class AdminView {
         
         titleText.setText("Select a movie to edit");
 
-        adminC.getAdmin().setMovies(adminC.loadMoviesFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/movies.json"));
+        adminC.getAdmin().setMovies(adminC.loadMoviesFromJson());
         if(adminC.getAdmin().getMovies().isEmpty()){
             emptyPane.setVisible(true);
         }
@@ -676,7 +676,7 @@ public class AdminView {
         titleAnchorPane.setVisible(true);
         titleText.setText("Select a movie to delete");
 
-        adminC.getAdmin().setMovies(adminC.loadMoviesFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/movies.json"));
+        adminC.getAdmin().setMovies(adminC.loadMoviesFromJson());
         if(adminC.getAdmin().getMovies().isEmpty()){
             emptyPane.setVisible(true);
         }
@@ -790,7 +790,7 @@ public class AdminView {
         titleText.setText("Select a serie to see");
         //addMoviePane.setVisible(false);
 
-        adminC.getAdmin().setSeries(adminC.loadSeriesFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/series.json"));
+        adminC.getAdmin().setSeries(adminC.loadSeriesFromJson());
         if(adminC.getAdmin().getSeries().isEmpty()){
             //emptyPane.setVisible(true);
         }
@@ -1003,7 +1003,7 @@ public class AdminView {
 
             Serie newSerie = new Serie(serieId, serieNameField.getText(), serieDirectorField.getText(),
                                      serieDirectorField.getText(), allGenresSeries.getSelectionModel().getSelectedItem(), coverPath, serieCoverField.getText(), currentSeasons);
-            adminC.getAdmin().setSeries(adminC.loadSeriesFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/series.json"));
+            adminC.getAdmin().setSeries(adminC.loadSeriesFromJson());
             adminC.getAdmin().addSerie(newSerie);
             
             genreC.getGenre(allGenresSeries.getSelectionModel().getSelectedItem()).addSerie(newSerie);
@@ -1375,7 +1375,7 @@ public class AdminView {
         titleText.setText("Select a serie to edit");
         //addMoviePane.setVisible(false);
 
-        adminC.getAdmin().setSeries(adminC.loadSeriesFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/series.json"));
+        adminC.getAdmin().setSeries(adminC.loadSeriesFromJson());
         if(adminC.getAdmin().getSeries().isEmpty()){
             //emptyPane.setVisible(true);
         }
@@ -1546,7 +1546,7 @@ public class AdminView {
         titleText.setText("Select a serie to delete");
         //addMoviePane.setVisible(false);
 
-        adminC.getAdmin().setSeries(adminC.loadSeriesFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/series.json"));
+        adminC.getAdmin().setSeries(adminC.loadSeriesFromJson());
         if(adminC.getAdmin().getSeries().isEmpty()){
             //emptyPane.setVisible(true);
         }

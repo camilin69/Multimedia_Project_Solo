@@ -62,10 +62,10 @@ public class AdminController {
         }
     }
 
-    public ArrayList<Movie> loadMoviesFromJson(String jsonFilePath) {
+    public ArrayList<Movie> loadMoviesFromJson() {
         ArrayList<Movie> movies = new ArrayList<>();
 
-        try (Reader reader = new FileReader(jsonFilePath)) {
+        try (Reader reader = new FileReader(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/movies.json")) {
 
             Type listType = new TypeToken<List<Movie>>(){}.getType();
             movies = new Gson().fromJson(reader, listType);
@@ -86,9 +86,9 @@ public class AdminController {
         }
     }
 
-    public ArrayList<Serie> loadSeriesFromJson(String jsonFilePath) {
+    public ArrayList<Serie> loadSeriesFromJson() {
         ArrayList<Serie> series = new ArrayList<>();
-        try (Reader reader = new FileReader(jsonFilePath)) {
+        try (Reader reader = new FileReader(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/series.json")) {
             Type listType = new TypeToken<List<Serie>>(){}.getType();
             series = new Gson().fromJson(reader, listType);
         } catch (IOException e) {

@@ -32,7 +32,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#returnToAdminMenu" text="Return" />
+                  <MenuItem mnemonicParsing="false" onAction="#returnToLogin" text="Return" />
                </items>
           </Menu>
         </menus>
