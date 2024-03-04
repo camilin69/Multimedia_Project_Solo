@@ -1,6 +1,16 @@
 [
   {
     "playList": [],
+    "sub": {
+      "startTime": 1709563802876,
+      "endTime": 1709563862876,
+      "name": "Nigga",
+      "duration": 60000,
+      "description": "Whattttttttttttttttttttttttttttttttt",
+      "price": 321321.0,
+      "coverURL": "https://",
+      "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/subscriptions/Nigga.png"
+    },
     "firstName": "Camilo",
     "lastName": "Merchan",
     "email": "508a@uptc.edu.co",

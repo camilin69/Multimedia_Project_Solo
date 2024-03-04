@@ -421,6 +421,7 @@ public class UserView {
     }
 
     public VBox createMovieImageView(Movie movie){
+        currentUser = userC.loadCurrentUserFromJson();
         ImageView newMovie = new ImageView();
         newMovie.setImage(new Image(new File(movie.getImageLocalPathURL()).toURI().toString()));
         newMovie.setId(String.valueOf(movie.getId()));
@@ -440,9 +441,10 @@ public class UserView {
                 }
             }
             if(currentUser.getSub() == null){
-                int rand = (int) (Math.random() * 5) + 1;
-                String pathadd = System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/adds/add"+ rand + ".mp4";
-                playerAdd(e, movie.getImageLocalPathURL().replace(".png", ".mp4"), pathadd);
+                movieNoSubs(movie);
+                // int rand = (int) (Math.random() * 5) + 1;
+                // String pathadd = System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/adds/add"+ rand + ".mp4";
+                // playerAdd(e, movie.getImageLocalPathURL().replace(".png", ".mp4"), pathadd);
             }else{
                 player(e, movie.getImageLocalPathURL().replace(".png", ".mp4"));
             }
@@ -592,9 +594,10 @@ public class UserView {
                 }
             }
             if(currentUser.getSub() == null){
-                int rand = (int) (Math.random() * 5) + 1;
-                String pathadd = System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/adds/add"+ rand + ".mp4";
-                playerAdd(e, episode.getImageLocalPathURL().replace(".png", ".mp4"), pathadd);
+                episodeNoSubs(episode);
+                // int rand = (int) (Math.random() * 5) + 1;
+                // String pathadd = System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/adds/add"+ rand + ".mp4";
+                // playerAdd(e, episode.getImageLocalPathURL().replace(".png", ".mp4"), pathadd);
             }else{
                 player(e, episode.getImageLocalPathURL().replace(".png", ".mp4"));
             }
@@ -1586,6 +1589,84 @@ public class UserView {
         stage.show();
         player.play();
     }
+
+    public void movieNoSubs(Movie movie){
+        Stage noSubs = new Stage();
+        noSubs.initStyle(StageStyle.DECORATED);
+        noSubs.initModality(Modality.APPLICATION_MODAL);
+        noSubs.setResizable(false);
+
+        Label name = new Label("Name: " + movie.getName());
+        name.setFont(new Font("NSimSun",24));
+        name.setTextFill(Color.WHITE);
+        Label description = new Label("Description: " + movie.getDescription());
+        description.setFont(new Font("NSimSun",20));
+        description.setTextFill(Color.WHITE);
+        Label director = new Label("Director: " + movie.getDirector());
+        director.setFont(new Font("NSimSun",20));
+        director.setTextFill(Color.WHITE);
+        Label genre = new Label("Genre: " + movie.getGenre());
+        genre.setFont(new Font("NSimSun",20));
+        genre.setTextFill(Color.WHITE);
+        Label studio = new Label("Studio: " + movie.getStudio());
+        studio.setFont(new Font("NSimSun",20));
+        studio.setTextFill(Color.WHITE);
+        Label revenue = new Label("Revenue: " + movie.getRevenue());
+        revenue.setFont(new Font("NSimSun",20));
+        revenue.setTextFill(Color.WHITE);
+        Label budget = new Label("Budget: " + movie.getBudget());
+        budget.setFont(new Font("NSimSun",20));
+        budget.setTextFill(Color.WHITE);
+
+        ImageView cover = new ImageView();
+        cover.setFitHeight(240);
+        cover.setFitWidth(240);
+        cover.setImage(new Image(new File(movie.getImageLocalPathURL()).toURI().toString()));
+
+        VBox root = new VBox(10);
+        root.setStyle("-fx-background-color: #052659;");
+        root.setAlignment(Pos.CENTER);
+        root.getChildren().addAll(name, description, director, genre, studio, revenue, budget, cover);
+
+        Scene scene = new Scene(root, 300, 500);
+        noSubs.setScene(scene);
+        noSubs.showAndWait();
+    }
+
+    public void episodeNoSubs(MultimediaContent episode){
+        Stage noSubs = new Stage();
+        noSubs.initStyle(StageStyle.DECORATED);
+        noSubs.initModality(Modality.APPLICATION_MODAL);
+        noSubs.setResizable(false);
+
+        Label name = new Label("Name: " + episode.getName());
+        name.setFont(new Font("NSimSun",24));
+        name.setTextFill(Color.WHITE);
+        Label description = new Label("Description: " + episode.getDescription());
+        description.setFont(new Font("NSimSun",20));
+        description.setTextFill(Color.WHITE);
+        Label director = new Label("Director: " + episode.getDirector());
+        director.setFont(new Font("NSimSun",20));
+        director.setTextFill(Color.WHITE);
+        Label genre = new Label("Genre: " + episode.getGenre());
+        genre.setFont(new Font("NSimSun",20));
+        genre.setTextFill(Color.WHITE);
+
+        ImageView cover = new ImageView();
+        cover.setFitHeight(240);
+        cover.setFitWidth(240);
+        cover.setImage(new Image(new File(episode.getImageLocalPathURL()).toURI().toString()));
+
+        VBox root = new VBox(10);
+        root.setStyle("-fx-background-color: #052659;");
+        root.setAlignment(Pos.CENTER);
+        root.getChildren().addAll(name, description, director, genre, cover);
+
+        Scene scene = new Scene(root, 300, 500);
+        noSubs.setScene(scene);
+        noSubs.showAndWait();
+    }
+
     public void emptyPaneOnly(){
         emptyPane.setVisible(true);
         searchPane.setVisible(false);

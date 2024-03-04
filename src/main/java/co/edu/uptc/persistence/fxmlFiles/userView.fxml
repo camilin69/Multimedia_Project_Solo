@@ -27,6 +27,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #021024;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uptc.view.UserView">
    <children>
+
+      
       
       <AnchorPane fx:id="newContentSearchPane" layoutY="145.0" prefHeight="400" prefWidth="1000">
          <children>
@@ -162,6 +164,124 @@
          </image>
       </ImageView>
 
+      <AnchorPane fx:id="userOptionsPane" layoutX="-200.0" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #052659;">
+            <children>
+                <Button fx:id="searchButton" contentDisplay="RIGHT" layoutX="28.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchMenu" onMouseEntered="#searchEnteredButtonManagement" onMouseExited="#searchExitedButtonManagement" prefHeight="60.0" prefWidth="140.0" style="-fx-background-color: #5483B3;" text="Search">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <font>
+                     <Font name="SimSun" size="24.0" />
+                  </font>
+                  <textFill>
+                     <Color fx:constant="WHITE" />
+                  </textFill>
+               </Button>
+
+               <Button fx:id="serieButton" layoutX="28.0" layoutY="110.0" mnemonicParsing="false" onAction="#seeAvailableSeriesMouse" onMouseEntered="#serieEnteredButtonManagement" onMouseExited="#serieExitedButtonManagement" prefHeight="60.0" prefWidth="140.0" style="-fx-background-color: #5483B3;" text="Series">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <font>
+                     <Font name="NSimSun" size="24.0" />
+                  </font>
+                  <textFill>
+                     <Color fx:constant="WHITE" />
+                  </textFill>
+               </Button>
+               <Button fx:id="movieButton" layoutX="28.0" layoutY="221.0" mnemonicParsing="false" onAction="#seeAvailableMoviesMouse" onMouseEntered="#movieEnteredButtonManagement" onMouseExited="#movieExitedButtonManagement" prefHeight="60.0" prefWidth="140.0" style="-fx-background-color: #5483B3;" text="Movies">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="SimSun" size="24.0" />
+                     </font>
+                     <textFill>
+                        <Color fx:constant="WHITE" />
+                     </textFill>
+               </Button>
+               <Button fx:id="playlistButton" layoutX="28.0" layoutY="325.0" mnemonicParsing="false" onMouseEntered="#playlistEnteredButtonManagement" onMouseExited="#playlistExitedButtonManagement" prefHeight="60.0" prefWidth="140.0" style="-fx-background-color: #5483B3;" text="PlayList">
+                    <cursor>
+                    <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <font>
+                    <Font name="SimSun" size="24.0" />
+                    </font>
+                    <textFill>
+                        <Color fx:constant="WHITE" />
+                    </textFill>
+               </Button>
+               <Button fx:id="subscriptionButton" layoutX="28.0" layoutY="430.0" mnemonicParsing="false" onMouseClicked="#subscriptionMouse" onMouseEntered="#subscriptionEnteredButtonManagement" onMouseExited="#subscriptionExitedButtonManagement" prefHeight="60.0" prefWidth="140.0" style="-fx-background-color: #5483B3;" text="Subs">
+                    <cursor>
+                    <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <font>
+                    <Font name="SimSun" size="24.0" />
+                    </font>
+                    <textFill>
+                        <Color fx:constant="WHITE" />
+                    </textFill>
+               </Button>
+            <Button layoutX="28.0" layoutY="526.0" mnemonicParsing="false" onAction="#returnToLogin" onMouseEntered="#subscriptionEnteredButtonManagement" onMouseExited="#subscriptionExitedButtonManagement" prefHeight="60.0" prefWidth="140.0" style="-fx-background-color: #5483B3;" text="Log-Out" textFill="#e10000">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="SimSun" size="24.0" />
+               </font>
+            </Button>
+      
+            <VBox fx:id="playlistOptions" layoutX="70.0" layoutY="375.0" onMouseEntered="#playlistEnteredButtonManagement" onMouseExited="#playlistExitedButtonManagement" prefHeight="136.0" prefWidth="98.0" visible="false">
+                  <children>
+                  <Button fx:id="seePlaylistButton" mnemonicParsing="false" onAction="#seeAvailablePlaylists" onMouseEntered="#seePlaylistMouseEntered" onMouseExited="#seePlaylistMouseExited" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #7DA0CA; -fx-border-color: #C1E8FF;" text="See">
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+                      <font>
+                          <Font name="NSimSun" size="18.0" />
+                      </font>
+                      <textFill>
+                          <Color fx:constant="WHITE" />
+                      </textFill>
+                  </Button>
+                  <Button fx:id="addPlaylistButton" mnemonicParsing="false" onAction="#addPlaylist" onMouseEntered="#addPlaylistMouseEntered" onMouseExited="#addPlaylistMouseExited" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #7DA0CA; -fx-border-color: #C1E8FF;" text="Add">
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+                      <font>
+                          <Font name="SimSun" size="18.0" />
+                      </font>
+                      <textFill>
+                          <Color fx:constant="WHITE" />
+                      </textFill>
+                  </Button>
+                  <Button fx:id="editPlaylistButton" mnemonicParsing="false" onAction="#playlistsToEdit" onMouseEntered="#editPlaylistMouseEntered" onMouseExited="#editPlaylistMouseExited" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #7DA0CA; -fx-border-color: #C1E8FF;" text="Edit">
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+                      <font>
+                          <Font name="SimSun" size="18.0" />
+                      </font>
+                      <textFill>
+                          <Color fx:constant="WHITE" />
+                      </textFill>
+                  </Button>
+                  <Button fx:id="deletePlaylistButton" mnemonicParsing="false" onAction="#playlistsToDelete" onMouseEntered="#deletePlaylistMouseEntered" onMouseExited="#deletePlaylistMouseExited" prefHeight="25.0" prefWidth="133.0" style="-fx-background-color: #7DA0CA; -fx-border-color: #C1E8FF;" text="Delete">
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+                      <font>
+                          <Font name="NSimSun" size="18.0" />
+                      </font>
+                      <textFill>
+                          <Color fx:constant="WHITE" />
+                      </textFill>
+                  </Button>
+                  </children>
+              </VBox>
+            </children>
+      </AnchorPane>
+
         <AnchorPane fx:id="paymentPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #021024;" visible="false">
          <children>
             <Label layoutX="372.0" layoutY="6.0" text="Payment Proccess">
@@ -210,6 +330,10 @@
             <Label fx:id="paymentIdLabel" layoutX="112.0" layoutY="284.0" prefHeight="17.0" prefWidth="188.0" text="ID only contains numbers" textFill="#021024" />
          </children>
       </AnchorPane>
+
+
+      
+
       
       <AnchorPane fx:id="playListPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #000000;" visible="false">
          <children>
@@ -373,123 +497,7 @@
          </children>
       </AnchorPane> 
 
-         <AnchorPane fx:id="userOptionsPane" layoutX="-200.0" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #052659;">
-            <children>
-                <Button fx:id="searchButton" contentDisplay="RIGHT" layoutX="28.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchMenu" onMouseEntered="#searchEnteredButtonManagement" onMouseExited="#searchExitedButtonManagement" prefHeight="60.0" prefWidth="140.0" style="-fx-background-color: #5483B3;" text="Search">
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor>
-                  <font>
-                     <Font name="SimSun" size="24.0" />
-                  </font>
-                  <textFill>
-                     <Color fx:constant="WHITE" />
-                  </textFill>
-               </Button>
-
-               <Button fx:id="serieButton" layoutX="28.0" layoutY="110.0" mnemonicParsing="false" onAction="#seeAvailableSeriesMouse" onMouseEntered="#serieEnteredButtonManagement" onMouseExited="#serieExitedButtonManagement" prefHeight="60.0" prefWidth="140.0" style="-fx-background-color: #5483B3;" text="Series">
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor>
-                  <font>
-                     <Font name="NSimSun" size="24.0" />
-                  </font>
-                  <textFill>
-                     <Color fx:constant="WHITE" />
-                  </textFill>
-               </Button>
-               <Button fx:id="movieButton" layoutX="28.0" layoutY="221.0" mnemonicParsing="false" onAction="#seeAvailableMoviesMouse" onMouseEntered="#movieEnteredButtonManagement" onMouseExited="#movieExitedButtonManagement" prefHeight="60.0" prefWidth="140.0" style="-fx-background-color: #5483B3;" text="Movies">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <font>
-                        <Font name="SimSun" size="24.0" />
-                     </font>
-                     <textFill>
-                        <Color fx:constant="WHITE" />
-                     </textFill>
-               </Button>
-               <Button fx:id="playlistButton" layoutX="28.0" layoutY="325.0" mnemonicParsing="false" onMouseEntered="#playlistEnteredButtonManagement" onMouseExited="#playlistExitedButtonManagement" prefHeight="60.0" prefWidth="140.0" style="-fx-background-color: #5483B3;" text="PlayList">
-                    <cursor>
-                    <Cursor fx:constant="HAND" />
-                    </cursor>
-                    <font>
-                    <Font name="SimSun" size="24.0" />
-                    </font>
-                    <textFill>
-                        <Color fx:constant="WHITE" />
-                    </textFill>
-               </Button>
-               <Button fx:id="subscriptionButton" layoutX="28.0" layoutY="430.0" mnemonicParsing="false" onMouseClicked="#subscriptionMouse" onMouseEntered="#subscriptionEnteredButtonManagement" onMouseExited="#subscriptionExitedButtonManagement" prefHeight="60.0" prefWidth="140.0" style="-fx-background-color: #5483B3;" text="Subs">
-                    <cursor>
-                    <Cursor fx:constant="HAND" />
-                    </cursor>
-                    <font>
-                    <Font name="SimSun" size="24.0" />
-                    </font>
-                    <textFill>
-                        <Color fx:constant="WHITE" />
-                    </textFill>
-               </Button>
-            <Button layoutX="28.0" layoutY="526.0" mnemonicParsing="false" onAction="#returnToLogin" onMouseEntered="#subscriptionEnteredButtonManagement" onMouseExited="#subscriptionExitedButtonManagement" prefHeight="60.0" prefWidth="140.0" style="-fx-background-color: #5483B3;" text="Log-Out" textFill="#e10000">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="SimSun" size="24.0" />
-               </font>
-            </Button>
-      
-            <VBox fx:id="playlistOptions" layoutX="70.0" layoutY="375.0" onMouseEntered="#playlistEnteredButtonManagement" onMouseExited="#playlistExitedButtonManagement" prefHeight="136.0" prefWidth="98.0" visible="false">
-                  <children>
-                  <Button fx:id="seePlaylistButton" mnemonicParsing="false" onAction="#seeAvailablePlaylists" onMouseEntered="#seePlaylistMouseEntered" onMouseExited="#seePlaylistMouseExited" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #7DA0CA; -fx-border-color: #C1E8FF;" text="See">
-                      <cursor>
-                          <Cursor fx:constant="HAND" />
-                      </cursor>
-                      <font>
-                          <Font name="NSimSun" size="18.0" />
-                      </font>
-                      <textFill>
-                          <Color fx:constant="WHITE" />
-                      </textFill>
-                  </Button>
-                  <Button fx:id="addPlaylistButton" mnemonicParsing="false" onAction="#addPlaylist" onMouseEntered="#addPlaylistMouseEntered" onMouseExited="#addPlaylistMouseExited" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #7DA0CA; -fx-border-color: #C1E8FF;" text="Add">
-                      <cursor>
-                          <Cursor fx:constant="HAND" />
-                      </cursor>
-                      <font>
-                          <Font name="SimSun" size="18.0" />
-                      </font>
-                      <textFill>
-                          <Color fx:constant="WHITE" />
-                      </textFill>
-                  </Button>
-                  <Button fx:id="editPlaylistButton" mnemonicParsing="false" onAction="#playlistsToEdit" onMouseEntered="#editPlaylistMouseEntered" onMouseExited="#editPlaylistMouseExited" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #7DA0CA; -fx-border-color: #C1E8FF;" text="Edit">
-                      <cursor>
-                          <Cursor fx:constant="HAND" />
-                      </cursor>
-                      <font>
-                          <Font name="SimSun" size="18.0" />
-                      </font>
-                      <textFill>
-                          <Color fx:constant="WHITE" />
-                      </textFill>
-                  </Button>
-                  <Button fx:id="deletePlaylistButton" mnemonicParsing="false" onAction="#playlistsToDelete" onMouseEntered="#deletePlaylistMouseEntered" onMouseExited="#deletePlaylistMouseExited" prefHeight="25.0" prefWidth="133.0" style="-fx-background-color: #7DA0CA; -fx-border-color: #C1E8FF;" text="Delete">
-                      <cursor>
-                          <Cursor fx:constant="HAND" />
-                      </cursor>
-                      <font>
-                          <Font name="NSimSun" size="18.0" />
-                      </font>
-                      <textFill>
-                          <Color fx:constant="WHITE" />
-                      </textFill>
-                  </Button>
-                  </children>
-              </VBox>
-            </children>
-      </AnchorPane>
+         
 
       
       

@@ -89,7 +89,7 @@ public class LoginView implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         emailField.setText("508a@uptc.edu.co");
         passwordField.setText("Cami1234...");
-        //emailField.setText("Elon1@uptc.admin.co");
+        // emailField.setText("Elon1@uptc.admin.co");
         // passwordField.setText("1");
         userC.setUsers(userC.loadUsersFromJson());
         Media media = new Media("file:///" + System.getProperty("user.dir").replace("\\", "/").replace(" ", "%20") + "/src/main/java/co/edu/uptc/persistence/icons/backgroundLoginMenu.mp4");
