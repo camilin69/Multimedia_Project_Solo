@@ -2,18 +2,19 @@ package co.edu.uptc.view;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 
 import co.edu.uptc.controller.AdminController;
-import co.edu.uptc.controller.SubscriptionController;
+import co.edu.uptc.controller.GenreController;
 import co.edu.uptc.controller.UserController;
-import co.edu.uptc.model.Subscription;
+import co.edu.uptc.model.Movie;
+import co.edu.uptc.model.MultimediaContent;
+import co.edu.uptc.model.Season;
+import co.edu.uptc.model.Serie;
 import co.edu.uptc.model.UserRegistered;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +28,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
@@ -35,10 +35,13 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -46,9 +49,7 @@ import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class UserView {
@@ -76,92 +77,72 @@ public class UserView {
 
     private boolean optionsActivated = false;
 
-    //--------------------------------------------------SUBSCRIPTION ATRIBUTES--------------------------------//
+    //--------------------------------------------------SEARCH-----------------------------------------------------------------//
     @FXML
-    private AnchorPane subscriptionInfoPane;
-
-    @FXML 
-    private AnchorPane paymentPane;
-
+    private TextField searchField;
+    
     @FXML
-    private Label subNameLabel;
+    private Button searchButton;
 
     @FXML
-    private ImageView subImage;
+    private AnchorPane newContentSearchPane;
 
     @FXML
-    private Label subDescriptionLabel;
+    private HBox newMoviesBox;
 
     @FXML
-    private Label subDurationLabel;
+    private HBox newSeriesBox;
 
     @FXML
-    private Label subPriceLabel;
+    private AnchorPane notFoundSearchPane;
 
     @FXML
-    private Label subEndTimeLabel;
-
-    //--------------------------------------------------SUBSCRIPTION PAYMENT--------------------------------//
+    private CheckBox byName;
 
     @FXML
-    private CheckBox credit;
+    private CheckBox byDirector;
 
     @FXML
-    private CheckBox debit;
+    private CheckBox byGenre;
 
     @FXML
-    private TextField cardNumberField;
+    private ComboBox<String> genres;
 
-    @FXML
-    private Label cardNumberLabel;
+    private int column = 0;
+    private int row = 0;
+    private String selectedGenreItem = null;
 
-    @FXML
-    private TextField mmddField;
+    
 
-    @FXML
-    private Label mmddLabel;
-
-    @FXML
-    private TextField cvvField;
-
-    @FXML
-    private Label cvvLabel;
-
-    @FXML
-    private Button paySubButton;
-
-    @FXML
-    private ComboBox<String> banks;
-
-    @FXML
-    private TextField paymentFirstNameField;
-
-    @FXML
-    private TextField paymentLastNameField;
-
-    @FXML
-    private TextField paymentIdField;
-
-    @FXML
-    private Label paymentFirstNameLabel;
-
-    @FXML
-    private Label paymentLastNameLabel;
-
-    @FXML
-    private Label paymentIdLabel;
-
-    @FXML
-    private DatePicker bornDate;
+    
 
 
 
     private AdminController adminC = new AdminController();
     private UserController userC = new UserController();
     private UserRegistered currentUser = new UserRegistered();
-    private SubscriptionController subC = new SubscriptionController();
+    private GenreController genreC = new GenreController();
+
+    
 
 
+    public void initialize(){
+        adminC.getAdmin().setMovies(adminC.loadMoviesFromJson());
+        for(int i = 0; i < 4; i++){
+            VBox imageView = createMovieImageView(adminC.getAdmin().getMovies().get(i));
+            newMoviesBox.getChildren().add(imageView);
+        }
+        genreC.setGenres(adminC.loadGenresFromJson());
+        genreC.getGenres().forEach(g -> {
+            genres.getItems().add(g.getName());
+        });
+        genres.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                handleSearchGenres(newValue);
+            }
+        });
+        genres.getSelectionModel().select(0);
+    }
 
     @FXML
     void userMenu(ActionEvent event) throws IOException{
@@ -174,6 +155,7 @@ public class UserView {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
+        
         stage.show();
     }
 
@@ -213,177 +195,371 @@ public class UserView {
         }
     }
 
-    //----------------------------------------------SUBSCRIPTION---------------------------------------------------------//
+    //----------------------------------------------MOVIES------------------------------------------------------------------//
     @FXML
-    void subscriptionMouse(MouseEvent event){
-        subscription(new ActionEvent());
-    }
-    @FXML
-    void subscription(ActionEvent event){
-        currentUser = userC.loadCurrentUserFromJson();
-        userC.setCurrentUser(userC.loadCurrentUserFromJson());
-        emptyPane.setVisible(false);
-        if(currentUser.getSub() == null){
-            
-            subC.setSubscriptions(adminC.loadSubscriptionsFromJson(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/subscriptions.json"));
-            if(subC.getSubscriptions().isEmpty()){
-                emptyPane.setVisible(true);
-            }else{
-                scrollPane.setVisible(true);
-            }
-            multimediaContentGrid.getChildren().clear();
-            int column = 0;
-            int row = 0;
-
-            for (Subscription sub : subC.getSubscriptions()) {
-                VBox imageView = createSubscriptionImageView(sub);
-                imageView.setOnMouseClicked(e -> {
-                    subInformation(sub, e);
-                });
-                imageView.setCursor(Cursor.HAND);
-                multimediaContentGrid.add(imageView, column, row);
-
-                GridPane.setHalignment(imageView, HPos.CENTER);
-                GridPane.setValignment(imageView, VPos.CENTER);
-
-                column++;
-                if (column > 3) {
-                    column = 0;
-                    row++;
-                }
-            }
-        }else{
-            
-            if (System.currentTimeMillis() > currentUser.getSub().getEndTime()) {
-                userC.setCurrentUser(currentUser);
-                userC.setUsers(userC.loadUsersFromJson());
-                currentUser.setSub(null);
-                userC.updateUsers(currentUser);
-                userC.saveUsersToJson();
-                userC.setCurrentUser(currentUser);
-                userC.saveCurrentUserToJson();
-                
-                subscription(event);
-
-            }else{
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy H:mm:ss");
-
-                Date endTimeDate = new Date(currentUser.getSub().getEndTime());
-
-                String formattedEndTime = dateFormat.format(endTimeDate);
-
-                subNameLabel.setText("Subscribed to: " + currentUser.getSub().getName());
-                subDescriptionLabel.setText("Description: " + currentUser.getSub().getDescription());
-                subDurationLabel.setText("Duration (Millis): " + currentUser.getSub().getDuration());
-                subPriceLabel.setText("Price: " + currentUser.getSub().getPrice());
-                subEndTimeLabel.setText("End Time: " + formattedEndTime);
-                subImage.setImage(new Image(new File(currentUser.getSub().getImageLocalPathURL()).toURI().toString()));
-                subscriptionInfoPane.setVisible(true);
-            }
-            
-            
-            
-        }
-    }
-
-    public VBox createSubscriptionImageView(Subscription sub){
-        ImageView newSub = new ImageView();
-        newSub.setImage(new Image(new File(sub.getImageLocalPathURL()).toURI().toString()));
-        newSub.setId(String.valueOf(sub.getName()));
-        newSub.setFitHeight(250);
-        newSub.setFitWidth(250);
-        Label subName = new Label(sub.getName());
-        subName.setTextFill(Color.BLACK);
-
-        VBox vbox = new VBox(5); 
-        vbox.setAlignment(Pos.CENTER); 
-        vbox.getChildren().addAll(newSub, subName);
-        return vbox;
-    }
-
-    public void subInformation(Subscription sub, MouseEvent event){
-        Stage informationSub = new Stage();
-        informationSub.initStyle(StageStyle.DECORATED); 
-        informationSub.initModality(Modality.APPLICATION_MODAL); 
-        informationSub.setResizable(false);
-
-        Label name = new Label("Name: " + sub.getName());
-        Label description = new Label("Description: " + sub.getDescription());
-        Label duration = new Label("Label: " + sub.getDuration());
-        Label price = new Label("Price: " + sub.getPrice());
-        name.setTextFill(Color.WHITE);
-        description.setTextFill(Color.WHITE);
-        duration.setTextFill(Color.WHITE);
-        price.setTextFill(Color.WHITE);
-        ImageView cover = new ImageView();
-        cover.setImage(new Image(new File(sub.getImageLocalPathURL()).toURI().toString()));
-        cover.setFitWidth(200);
-        cover.setFitHeight(200);
-        Button subscribeButton = new Button("Subscribe!");
-        subscribeButton.setStyle("-fx-background-color: #5483B3;");
-        subscribeButton.setCursor(Cursor.HAND);
-        subscribeButton.setOnAction(e2 -> {
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            paymentPane.setVisible(true);
-            ObservableList<String> aux = banks.getItems();
-            aux.addAll("NEQUI", "DAVIPLATA", "BANCOLOMBIA","CAJA SOCIAL", "DAVIVIENDA", "EL BRAYAN");
-            
-            paySubButton.setOnAction(e -> paySub(e, sub));
-            informationSub.close();
-            
-        });
-        VBox informationBox = new VBox(10);
-        informationBox.setStyle("-fx-background-color: #021024;");
-        informationBox.setAlignment(Pos.CENTER);
-        informationBox.getChildren().addAll(name, description, duration, price, cover, subscribeButton);
-        Scene scene = new Scene(informationBox, 210, 350);
-        informationSub.setTitle("Subscription Information");
-        informationSub.setScene(scene);
-        informationSub.showAndWait(); 
+    void seeAvailableMoviesMouse(MouseEvent event){
+        adminC.getAdmin().setMovies(adminC.loadMoviesFromJson());
+        seeAvailableMovies(adminC.getAdmin().getMovies());
     }
 
     
-    void paySub(ActionEvent event, Subscription sub){
-        int aux = subC.verifyInputsPaidMethod(cardNumberField, cardNumberLabel, mmddField, mmddLabel, cvvField, cvvLabel, credit, debit, banks);
-        aux = aux + subC.verifyPersonInformation(paymentFirstNameField, paymentFirstNameLabel, paymentLastNameField, paymentLastNameLabel, paymentIdField, paymentIdLabel, bornDate);
-        if(aux == 13){
-            currentUser = userC.loadCurrentUserFromJson();
-            userC.setCurrentUser(userC.loadCurrentUserFromJson());
-            userC.setUsers(userC.loadUsersFromJson());
-            subC.addSubToUser(sub, currentUser);
-            userC.updateUsers(currentUser);
-            userC.saveUsersToJson();
-            userC.setCurrentUser(currentUser);
-            userC.saveCurrentUserToJson();
-            try {
-                userMenu(event);
-            } catch (IOException e) {
-                e.printStackTrace();
+    void seeAvailableMovies(ArrayList<Movie> movies){
+        //subscriptionInfoPane.setVisible(false);
+        
+        emptyPane.setVisible(false);
+        adminC.getAdmin().setMovies(adminC.loadMoviesFromJson());
+
+        if(movies.isEmpty()){
+            emptyPane.setVisible(true);
+            emptyPane.setPrefHeight(510);emptyPane.setLayoutY(90);
+        }
+        column = 0;
+        row = 0;
+        multimediaContentGrid.getChildren().clear();
+
+        for (Movie movie : movies) {
+            VBox imageView = createMovieImageView(movie);
+            multimediaContentGrid.add(imageView, column, row);
+
+            GridPane.setHalignment(imageView, HPos.CENTER);
+            GridPane.setValignment(imageView, VPos.CENTER);
+
+            column++;
+            if (column > 3) {
+                column = 0;
+                row++;
             }
         }
     }
 
+    public VBox createMovieImageView(Movie movie){
+        ImageView newMovie = new ImageView();
+        newMovie.setImage(new Image(new File(movie.getImageLocalPathURL()).toURI().toString()));
+        newMovie.setId(String.valueOf(movie.getId()));
+        newMovie.setFitHeight(250);
+        newMovie.setFitWidth(240);
+        newMovie.setCursor(Cursor.HAND);
+        newMovie.setOnMouseClicked(e -> {
+            if (currentUser.getSub() != null) {
+                if (System.currentTimeMillis() > currentUser.getSub().getEndTime()) {
+                    userC.setCurrentUser(currentUser);
+                    userC.setUsers(userC.loadUsersFromJson());
+                    
+                    currentUser.setSub(null);
+                    userC.saveUsersToJson();
+                    userC.setCurrentUser(currentUser);
+                    userC.saveCurrentUserToJson();
+                }
+            }
+            if(currentUser.getSub() == null){
+                int rand = (int) (Math.random() * 5) + 1;
+                String pathadd = System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/adds/add"+ rand + ".mp4";
+                playerAdd(e, movie.getImageLocalPathURL().replace(".png", ".mp4"), pathadd);
+            }else{
+                player(e, movie.getImageLocalPathURL().replace(".png", ".mp4"));
+            }
+            
+            
+        });
+        Label movieLabel = new Label(movie.getName());
+        movieLabel.setTextFill(Color.WHITE);
+        VBox vbox = new VBox(5);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.getChildren().addAll(newMovie, movieLabel);
+        return vbox;
+    }
+
+    //-------------------------------------------------------------SERIES-------------------------------------------------------------//
     @FXML
-    void creditCheckBox(ActionEvent event){
-        if(debit.isSelected()){debit.setSelected(false);}
+    void seeAvailableSeriesMouse(MouseEvent event){
+        adminC.getAdmin().setSeries(adminC.loadSeriesFromJson());
+        seeAvailableSeries(adminC.getAdmin().getSeries());
+    }
+    
+    void seeAvailableSeries(ArrayList<Serie> series){
+        emptyPane.setVisible(false);
+        //subscriptionInfoPane.setVisible(false);
+        if(series.isEmpty()){
+            emptyPane.setVisible(true);
+            emptyPane.setPrefHeight(510);emptyPane.setLayoutY(90);
+        }
+
+        for (Serie serie : series) {
+            VBox imageView = createSerieImageView(serie);
+            multimediaContentGrid.add(imageView, column, row);
+
+            GridPane.setHalignment(imageView, HPos.CENTER);
+            GridPane.setValignment(imageView, VPos.CENTER);
+
+            column++;
+            if (column > 3) {
+                column = 0;
+                row++;
+            }
+        }
+    }
+
+    public VBox createSerieImageView(Serie serie){
+        ImageView newSerie = new ImageView();
+        newSerie.setImage(new Image(new File(serie.getImageLocalPathURL()).toURI().toString()));
+        newSerie.setId(String.valueOf(serie.getId()));
+        newSerie.setFitHeight(240);
+        newSerie.setFitWidth(240);
+        newSerie.setCursor(Cursor.HAND);
+        newSerie.setOnMouseClicked(e -> {
+            seeAvailableSeasons(e, serie);
+        });
+        Label serieName = new Label(serie.getName());
+        serieName.setTextFill(Color.WHITE);
+
+        VBox vbox = new VBox(5); 
+        vbox.setAlignment(Pos.CENTER); 
+        vbox.getChildren().addAll(newSerie, serieName);
+        return vbox;
+    }
+
+    void seeAvailableSeasons(MouseEvent event, Serie serie){
+        emptyPane.setVisible(false);
+        multimediaContentGrid.getChildren().clear();
+        column = 0;
+        row = 0;
+        if(serie.getSeasons().isEmpty()){
+            emptyPane.setVisible(true);
+        }
+        for (Season season : serie.getSeasons()) {
+            Parent imageView = createSeasonImageView(season);
+            multimediaContentGrid.add(imageView, column, row);
+
+            GridPane.setHalignment(imageView, HPos.CENTER);
+            GridPane.setValignment(imageView, VPos.CENTER);
+
+            column++;
+            if (column > 3) {
+                column = 0;
+                row++;
+            }
+        }
+    }
+
+    public Parent createSeasonImageView(Season season){
+        Rectangle newSeasonBackground = new Rectangle(240,240);
+        newSeasonBackground.setFill(Color.web(season.getBackgroundCover()));
+        newSeasonBackground.setCursor(Cursor.HAND);
+        Label newSeasonText = new Label(season.getSeasonName());
+        newSeasonText.setTextFill(Color.web(season.getTextCover()));
+        StackPane imageView = new StackPane();
+        imageView.getChildren().addAll(newSeasonBackground, newSeasonText);
+        imageView.setOnMouseClicked(e -> {
+            seeAvailableEpisodes(e, season);
+        });
+        return imageView;
+    }
+
+    void seeAvailableEpisodes(MouseEvent event, Season season){
+        emptyPane.setVisible(false);
+        multimediaContentGrid.getChildren().clear();
+        column = 0;
+        row = 0;
+        if(season.getEpisodes().isEmpty()){
+            emptyPane.setVisible(true);
+        }
+        for (MultimediaContent episode : season.getEpisodes()) {
+            VBox imageView = createEpisodeImageView(episode);
+            multimediaContentGrid.add(imageView, column, row);
+
+            GridPane.setHalignment(imageView, HPos.CENTER);
+            GridPane.setValignment(imageView, VPos.CENTER);
+
+            column++;
+            if (column > 3) {
+                column = 0;
+                row++;
+            }
+        }
+    }
+
+    public VBox createEpisodeImageView(MultimediaContent episode){
+        ImageView newEpisode = new ImageView();
+        newEpisode.setImage(new Image(new File(episode.getImageLocalPathURL()).toURI().toString()));
+        newEpisode.setId(String.valueOf(episode.getId()));
+        newEpisode.setFitHeight(240);
+        newEpisode.setFitWidth(240);
+        newEpisode.setCursor(Cursor.HAND);
+        newEpisode.setOnMouseClicked(e -> {
+            if (currentUser.getSub() != null) {
+                if (System.currentTimeMillis() > currentUser.getSub().getEndTime()) {
+                    userC.setCurrentUser(currentUser);
+                    userC.setUsers(userC.loadUsersFromJson());
+
+                    currentUser.setSub(null);
+                    userC.saveUsersToJson();
+                    userC.setCurrentUser(currentUser);
+                    userC.saveCurrentUserToJson();
+                }
+            }
+            if(currentUser.getSub() == null){
+                int rand = (int) (Math.random() * 5) + 1;
+                String pathadd = System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/adds/add"+ rand + ".mp4";
+                playerAdd(e, episode.getImageLocalPathURL().replace(".png", ".mp4"), pathadd);
+            }else{
+                player(e, episode.getImageLocalPathURL().replace(".png", ".mp4"));
+            }
+            
+            
+            
+        });
+        Label episodeName = new Label(episode.getName());
+        episodeName.setTextFill(Color.WHITE);
+
+        VBox vbox = new VBox(5); 
+        vbox.setAlignment(Pos.CENTER); 
+        vbox.getChildren().addAll(newEpisode, episodeName);
+        return vbox;
+        
+    }
+
+    //-------------------------------------------------------SEARCH---------------------------------------------------------------//
+
+    @FXML
+    void searchMenu(ActionEvent event){
+        //ALl PANES == visible(false)
     }
 
     @FXML
-    void debitCheckBox(ActionEvent event){
-        if(credit.isSelected()){credit.setSelected(false);}
+    void search(KeyEvent event){
+        if(searchField.getText().isEmpty()){
+            scrollPane.setVisible(false);
+            scrollPane.setPrefHeight(600);
+            scrollPane.setLayoutY(0);
+            newContentSearchPane.setVisible(true);
+            emptyPane.setVisible(false);
+        }else{
+            scrollPane.setVisible(true);
+            scrollPane.setPrefHeight(510);
+            scrollPane.setLayoutY(90);
+            newContentSearchPane.setVisible(false);
+            contentManagement();
+
+        }
+    }
+
+    public void contentManagement(){
+        scrollPane.setVisible(true);
+        scrollPane.setPrefHeight(510);
+        scrollPane.setLayoutY(90);
+        notFoundSearchPane.setVisible(false);
+        ArrayList<Movie> moviesFound = new ArrayList<>();
+        ArrayList<Serie> seriesFound = new ArrayList<>();
+        if(byName.isSelected() || (!byName.isSelected() && !byDirector.isSelected() && !byGenre.isSelected())){
+            moviesFound = moviesFound("name");
+            seriesFound = seriesFound("name");
+        }else if(byDirector.isSelected()){
+            moviesFound = moviesFound("director");
+            seriesFound = seriesFound("director");
+        }else if(byGenre.isSelected()){
+            moviesFound = genreC.getGenre(genres.getSelectionModel().getSelectedItem()).getMovies();
+            seriesFound = genreC.getGenre(genres.getSelectionModel().getSelectedItem()).getSeries();
+        }
+        if(!moviesFound.isEmpty()){
+            seeAvailableMovies(moviesFound);
+        }
+        if(!seriesFound.isEmpty()){
+            if(moviesFound.isEmpty()){
+                multimediaContentGrid.getChildren().clear();
+                column = 0;
+                row = 0;
+            }
+            seeAvailableSeries(seriesFound);
+        }
+        if(moviesFound.isEmpty() && seriesFound.isEmpty()){
+            notFoundSearchPane.setVisible(true);
+        }
+    }
+
+    public ArrayList<Movie> moviesFound(String by){
+        adminC.getAdmin().setMovies(adminC.loadMoviesFromJson());
+        ArrayList<Movie> allContent = new ArrayList<>();
+        adminC.getAdmin().getMovies().forEach(m -> {
+            if(by.equals("name")){
+                if(m.getName().toLowerCase().contains(searchField.getText().toLowerCase())){
+                    allContent.add(m);
+                }
+            }else if(by.equals("director")){
+                if(m.getDirector().toLowerCase().contains(searchField.getText().toLowerCase())){
+                    allContent.add(m);
+                }
+            }else if(by.equals("genre")){
+                if(m.getGenre().toLowerCase().contains(searchField.getText().toLowerCase())){
+                    allContent.add(m);
+                }
+            }
+            
+        });
+        return allContent;
+    }
+    public ArrayList<Serie> seriesFound(String by){
+        adminC.getAdmin().setSeries(adminC.loadSeriesFromJson());
+
+        
+        ArrayList<Serie> allContent = new ArrayList<>();
+        adminC.getAdmin().getSeries().forEach(s -> {
+            if(by.equals("name")){
+                if(s.getName().toLowerCase().contains(searchField.getText().toLowerCase())){
+                    allContent.add(s);
+                }
+            }else if(by.equals("director")){
+                if(s.getDirector().toLowerCase().contains(searchField.getText().toLowerCase())){
+                    allContent.add(s);
+                }
+            }else if(by.equals("genre")){
+                if(s.getGenre().toLowerCase().contains(searchField.getText().toLowerCase())){
+                    allContent.add(s);
+                }
+            }
+            
+        });
+        return allContent;
+    }
+
+
+    @FXML
+    void byNameSelected(ActionEvent event){
+        scrollPane.setVisible(false);
+        scrollPane.setPrefHeight(600);
+        scrollPane.setLayoutY(0);
+        byDirector.setSelected(false);
+        byGenre.setSelected(false);
+        if(!searchField.getText().isEmpty()){
+            contentManagement();
+        }
     }
 
     @FXML
-    void unsuscribe(ActionEvent event){
-        subscriptionInfoPane.setVisible(false);
-        userC.setCurrentUser(currentUser);
-        userC.setUsers(userC.loadUsersFromJson());
-        subC.cancelSub(currentUser);
-        userC.updateUsers(currentUser);
-        userC.saveUsersToJson();
-        userC.setCurrentUser(currentUser);
-        userC.saveCurrentUserToJson();
-        subscription(event);
+    void byDirectorSelected(ActionEvent event){
+        scrollPane.setVisible(false);
+        scrollPane.setPrefHeight(600);
+        scrollPane.setLayoutY(0);
+        byName.setSelected(false);
+        byGenre.setSelected(false);
+        if(!searchField.getText().isEmpty()){
+            contentManagement();
+        }
+    }
+
+    @FXML
+    void byGenreSelected(ActionEvent event){
+        byName.setSelected(false);
+        byDirector.setSelected(false);
+        contentManagement();
+        
+    }
+
+    public void handleSearchGenres(String newValue){
+        if (newValue != null && !newValue.equals(selectedGenreItem)) {
+            if(byGenre.isSelected()){
+                contentManagement();
+            }
+        }
     }
 
     //-------------------------------------------------------FIRST AIDS-----------------------------------------------------------//
@@ -667,15 +843,15 @@ public class UserView {
     }
 
     @FXML
-    void subscriptionEnteredButtonManagement(MouseEvent event){
-        subscriptionButton.setStyle("-fx-background-color: #00B9E5;");
-        subscriptionButton.setFont(new Font("SimSun", 26));
+    void searchEnteredButtonManagement(MouseEvent event){
+        searchButton.setStyle("-fx-background-color: #7DA0CA;");
+        searchButton.setFont(new Font("SimSun", 26));
     }
 
     @FXML
-    void subscriptionExitedButtonManagement(MouseEvent event){
-        subscriptionButton.setStyle("-fx-background-color:  #3AA6E0;");
-        subscriptionButton.setFont(new Font("SimSun", 24));
+    void searchExitedButtonManagement(MouseEvent event){
+        searchButton.setStyle("-fx-background-color:  #5483B3;");
+        searchButton.setFont(new Font("SimSun", 24));
     }
     
 

@@ -13,30 +13,51 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import co.edu.uptc.model.Admin;
+import co.edu.uptc.model.Genre;
+import co.edu.uptc.model.Movie;
+import co.edu.uptc.model.Serie;
 import co.edu.uptc.model.Subscription;
 import javafx.scene.paint.Color;
 
 public class AdminController {
     private Admin admin = new Admin("Elon", "Musk", 1, "Elon1@uptc.admin.co", "1");
 
-    public void saveSubscriptionsToJson(ArrayList<Subscription> subs){
-        try (FileWriter writer = new FileWriter(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/subscriptions.json")) {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(subs, writer);
+
+    public ArrayList<Movie> loadMoviesFromJson() {
+        ArrayList<Movie> movies = new ArrayList<>();
+
+        try (Reader reader = new FileReader(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/movies.json")) {
+
+            Type listType = new TypeToken<List<Movie>>(){}.getType();
+            movies = new Gson().fromJson(reader, listType);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return movies;
     }
 
-    public ArrayList<Subscription> loadSubscriptionsFromJson(String jsonFilePath) {
-        ArrayList<Subscription> subscriptions = new ArrayList<>();
-        try (Reader reader = new FileReader(jsonFilePath)) {
-            Type listType = new TypeToken<List<Subscription>>(){}.getType();
-            subscriptions = new Gson().fromJson(reader, listType);
+    public ArrayList<Serie> loadSeriesFromJson() {
+        ArrayList<Serie> series = new ArrayList<>();
+        try (Reader reader = new FileReader(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/series.json")) {
+            Type listType = new TypeToken<List<Serie>>(){}.getType();
+            series = new Gson().fromJson(reader, listType);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return subscriptions;
+        return series;
+    }
+
+    public ArrayList<Genre> loadGenresFromJson() {
+        ArrayList<Genre> genres = new ArrayList<>();
+        try (Reader reader = new FileReader(System.getProperty("user.dir").replace("\\", "/") + "/src/main/java/co/edu/uptc/persistence/admin-user/genres.json")) {
+            Type listType = new TypeToken<List<Genre>>(){}.getType();
+            genres = new Gson().fromJson(reader, listType);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return genres;
     }
 
     public void downloadCover(String path, String coverURL){

@@ -4,27 +4,40 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #021024;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uptc.view.UserView">
    <children>
+
       
+
+      <AnchorPane fx:id="newContentSearchPane" layoutY="145.0" prefHeight="400" prefWidth="1000">
+         <children>
+            <Label layoutY="3.0" text="Check out this new movies!" textFill="#ffffff">
+               <font>
+                  <Font name="NSimSun" size="22.0" />
+               </font>
+            </Label>
+            <HBox fx:id="newMoviesBox" alignment="CENTER" layoutY="25.0" prefHeight="376.0" prefWidth="1000">
+            </HBox>
+
+         </children>
+      </AnchorPane>
+
       <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="1000.0" vbarPolicy="ALWAYS" visible="false">
          <content>
-            <GridPane fx:id="multimediaContentGrid" hgap="10.0" maxWidth="1050.0" prefHeight="6.0" prefWidth="1000.0" vgap="10.0">
+            <GridPane fx:id="multimediaContentGrid" hgap="10.0" maxWidth="1050.0" prefHeight="6.0" prefWidth="1000.0" style="-fx-background-color: #021024;" vgap="10.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="240.0" percentWidth="0.0" prefWidth="240.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="240.0" percentWidth="0.0" prefWidth="240.0" />
@@ -37,6 +50,21 @@
             </GridPane>
          </content>
       </ScrollPane>
+
+      <AnchorPane fx:id="notFoundSearchPane" layoutY="90" prefHeight="510" prefWidth="1000" style="-fx-background-color: #021024;" visible="false">
+         <children>
+            <Label layoutX="440" layoutY="90" text="Not found" textFill="#ffffff">
+               <font>
+                  <Font name="NSimSun" size="28.0" />
+               </font>
+            </Label> 
+            <ImageView fitHeight="250" fitWidth="250" layoutX="400" layoutY="130">
+               <image>
+                  <Image url="@../icons/notFoundIcon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="emptyPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #021024;" visible="false">
          <children>
             <ImageView fitHeight="500.0" fitWidth="1000.0" layoutX="260" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
@@ -55,56 +83,6 @@
          </children>
       </AnchorPane>
 
-      <AnchorPane fx:id="subscriptionInfoPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #021024;" visible="false">
-         <children>
-            <Label fx:id="subNameLabel" layoutX="50.0" layoutY="14.0" text="Subscription Name" textFill="WHITE">
-               <font>
-                  <Font name="SimSun" size="49.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="subImage" fitHeight="250.0" fitWidth="250.0" layoutX="375.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="subDescriptionLabel" layoutX="45.0" layoutY="324.0" text="Description: " textFill="WHITE">
-               <font>
-                  <Font name="NSimSun" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="subDurationLabel" layoutX="38.0" layoutY="425.0" text="Duration: " textFill="WHITE">
-               <font>
-                  <Font name="NSimSun" size="28.0" />
-               </font>
-            </Label>
-            <Label fx:id="subPriceLabel" layoutX="38.0" layoutY="468.0" text="Price: " textFill="WHITE">
-               <font>
-                  <Font name="NSimSun" size="28.0" />
-               </font>
-            </Label>
-            <Button layoutX="936.0" layoutY="14.0" mnemonicParsing="false" onAction="#unsuscribe" prefHeight="15.0" prefWidth="50.0" style="-fx-background-color: #021024;" text="Unsubscribe" textFill="WHITE" underline="true">
-               <font>
-                  <Font size="7.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="500.0" layoutY="567.0" mnemonicParsing="false" onAction="#returnToUserMenu" style="-fx-background-color: #5483B3;" text="Return">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.3294117748737335" green="0.5137255191802979" blue="0.7019608020782471" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Button>
-            <Label fx:id="subEndTimeLabel" layoutX="38.0" layoutY="507.0" text="End time: " textFill="WHITE">
-               <font>
-                  <Font name="NSimSun" size="28.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
 
       <ImageView fx:id="userOptionsButton" fitHeight="40" fitWidth="40" onMouseClicked="#seeUserOptions">
          <cursor>
@@ -117,66 +95,28 @@
 
       <AnchorPane fx:id="userOptionsPane" layoutX="-190.0" prefHeight="600" prefWidth="170" style="-fx-background-color: #052659;">
             <children>
-               <Button fx:id="subscriptionButton" layoutX="10.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#subscriptionMouse" onMouseEntered="#subscriptionEnteredButtonManagement" onMouseExited="#subscriptionExitedButtonManagement" prefHeight="60.0" prefWidth="150.0" style="-fx-background-color: #5483B3;" text="Subs">
-                    <cursor>
-                    <Cursor fx:constant="HAND" />
-                    </cursor>
-                    <font>
-                    <Font name="SimSun" size="24.0" />
-                    </font>
-                    <textFill>
-                        <Color fx:constant="WHITE" />
-                    </textFill>
+               <Button fx:id="searchButton" onAction="#searchMenu" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseEntered="#searchEnteredButtonManagement" onMouseExited="#searchExitedButtonManagement" prefHeight="60.0" prefWidth="150.0" style="-fx-background-color: #5483B3;" text="Search">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <font>
+                     <Font name="SimSun" size="24.0" />
+                  </font>
+                  <textFill>
+                     <Color fx:constant="WHITE" />
+                  </textFill>
                </Button>
             </children>
       </AnchorPane>
+      <TextField fx:id="searchField" alignment="CENTER" layoutX="245.0" layoutY="40.0" onKeyReleased="#search" opacity="0.40" prefHeight="25.0" prefWidth="515.0" promptText="Search" style="-fx-font-size: 20px; -fx-border-radius: 50px; -fx-background-radius: 50px;" />
 
-      <AnchorPane fx:id="paymentPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #021024;" visible="false">
+      <AnchorPane layoutX="780" layoutY="25" prefHeight="60" prefWidth="100">
          <children>
-            <Label layoutX="372.0" layoutY="6.0" text="Payment Proccess">
-               <font>
-                  <Font name="NSimSun" size="34.0" />
-               </font>
-               <textFill>
-                  <Color fx:constant="WHITE" />
-               </textFill>
-            </Label>
-            <CheckBox fx:id="credit" layoutX="615.0" layoutY="129.0" onAction="#creditCheckBox" text="Credit" textFill="#ffffff" />
-            <CheckBox fx:id="debit" layoutX="710.0" layoutY="129.0" onAction="#debitCheckBox" text="Debit" textFill="#ffffff" />
-            <TextField fx:id="cardNumberField" layoutX="615.0" layoutY="164.0" prefHeight="25" prefWidth="255" promptText="Card Number" />
-            <Label fx:id="cardNumberLabel" layoutX="616.0" layoutY="189.0" prefHeight="17.0" prefWidth="255.0" text="Wrong format. Example, 1234-5678..." textFill="#021024" wrapText="true" />
-            <TextField fx:id="mmddField" layoutX="615.0" layoutY="244.0" prefHeight="25" prefWidth="55" promptText="mm/dd" />
-            <Label fx:id="mmddLabel" layoutX="605.0" layoutY="274.0" text="Wrong format" textFill="#021024" />
-            <TextField fx:id="cvvField" layoutX="836.0" layoutY="249.0" prefHeight="25" prefWidth="35" promptText="cvv" />
-            <Label fx:id="cvvLabel" layoutX="802.0" layoutY="274.0" text="It is only 3 numbers" textFill="#021024" />
-            
-            <ComboBox fx:id="banks" layoutX="615.0" layoutY="338.0" prefHeight="25" prefWidth="255" promptText="Bank" />
-            <Button fx:id="paySubButton" layoutX="482.0" layoutY="473.0" prefHeight="25" prefWidth="35" style="-fx-background-color: #5483B3;" text="Pay">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.3294117748737335" green="0.5137255191802979" blue="0.7019608020782471" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Button>
-            <Button layoutX="465.0" layoutY="514.0" onAction="#userMenu" prefHeight="25" prefWidth="70" style="-fx-background-color: #021024;" text="Return" textFill="#ffffff">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Line endX="-2.0" endY="319.0" layoutX="502.0" layoutY="120.0" startX="-2.0" startY="-28.0" stroke="WHITE" />
-            <Label layoutX="524.0" layoutY="94.0" textFill="WHITE" />
-            <TextField fx:id="paymentFirstNameField" layoutX="112.0" layoutY="144.0" prefHeight="25" prefWidth="313.0" promptText="FirstName Card Owner" />
-            <TextField fx:id="paymentLastNameField" layoutX="112.0" layoutY="204.0" prefHeight="25" prefWidth="313.0" promptText="lastName Card Owner" />
-            <DatePicker fx:id="bornDate" layoutX="112.0" layoutY="323.0" prefHeight="25.0" prefWidth="313.0" promptText="Born date" />
-            <TextField fx:id="paymentIdField" layoutX="112.0" layoutY="259.0" prefHeight="25" prefWidth="313.0" promptText="ID Card Owner" />
-            <Label fx:id="paymentFirstNameLabel" layoutX="112.0" layoutY="169.0" prefHeight="17.0" prefWidth="188.0" text="Names only contains characteres" textFill="#021024" />
-            <Label fx:id="paymentLastNameLabel" layoutX="112.0" layoutY="229.0" prefHeight="17.0" prefWidth="188.0" text="Names only contains characteres" textFill="#021024" />
-            <Label fx:id="paymentIdLabel" layoutX="112.0" layoutY="284.0" prefHeight="17.0" prefWidth="188.0" text="ID only contains numbers" textFill="#021024" />
+            <CheckBox fx:id="byName" layoutX="10" layoutY="10" onAction="#byNameSelected" prefHeight="10" prefWidth="80" selected="true" text="ByName" textFill="#ffffff" />
+            <CheckBox fx:id="byDirector" layoutX="10" layoutY="30" onAction="#byDirectorSelected" prefHeight="10" text="ByDirector" textFill="#ffffff" />
+            <CheckBox fx:id="byGenre" onAction="#byGenreSelected" layoutX="10" layoutY="50" prefHeight="10" text="ByGenre" textFill="#ffffff" />
+            <ComboBox fx:id="genres" layoutX="80" layoutY="50" prefHeight="10" promptText="Genres"/>
+
          </children>
       </AnchorPane>
       
