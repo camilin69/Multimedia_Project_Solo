@@ -87,6 +87,7 @@ public class LoginView implements Initializable{
     //--------------------------------------------------LOGIN-------------------------------------------------------------------//
 
     public void initialize(URL location, ResourceBundle resources) {
+        userC.setUsers(userC.loadUsersFromJson());
         Media media = new Media("file:///" + System.getProperty("user.dir").replace("\\", "/").replace(" ", "%20") + "/src/main/java/co/edu/uptc/persistence/icons/backgroundLoginMenu.mp4");
         MediaPlayer player = new MediaPlayer(media);
         backgroundLogin.setMediaPlayer(player);
@@ -167,8 +168,8 @@ public class LoginView implements Initializable{
             emailLabel.setTextFill(Color.RED);
             passwordLabel.setTextFill(Color.web("#021024"));
         }else{
-            passwordLabel.setTextFill(Color.web("##021024"));
-            emailLabel.setTextFill(Color.web("##021024"));
+            passwordLabel.setTextFill(Color.web("#021024"));
+            emailLabel.setTextFill(Color.web("#021024"));
         }
     }
 
