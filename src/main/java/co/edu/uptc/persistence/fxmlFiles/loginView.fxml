@@ -17,49 +17,47 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uptc.view.LoginView">
    <children>
       <MediaView fx:id="backgroundLogin" fitHeight="600.0" fitWidth="1000.0" />
-      <Pane layoutX="500.0" layoutY="14.0" opacity="0.61" prefHeight="573.0" prefWidth="485.0" style="-fx-background-color: #006CFF; -fx-background-radius: 50;">
+      <Pane layoutX="500.0" layoutY="14.0" opacity="0.79" prefHeight="573.0" prefWidth="485.0" style="-fx-background-color: #021024; -fx-background-radius: 50;">
          <children>
-            <TextField fx:id="emailField" alignment="CENTER" layoutX="84.0" layoutY="243.0" onKeyReleased="#getEmail" prefHeight="36.0" prefWidth="317.0" promptText="Email" style="-fx-background-color: #70D6FF; -fx-background-radius: 40;">
+            <TextField fx:id="emailField" alignment="CENTER" layoutX="84.0" layoutY="243.0" onKeyReleased="#getEmail" prefHeight="36.0" prefWidth="317.0" promptText="Email" style="-fx-background-color: #C1E8FF; -fx-background-radius: 40;">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="84.0" layoutY="343.0" prefHeight="36.0" prefWidth="317.0" promptText="Password" style="-fx-background-color: #70D6FF; -fx-background-radius: 40;">
+            <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="84.0" layoutY="343.0" prefHeight="36.0" prefWidth="317.0" promptText="Password" style="-fx-background-color: #C1E8FF; -fx-background-radius: 40;">
                <font>
                   <Font size="20.0" />
                </font>
             </PasswordField>
-            <Button fx:id="loginButton" layoutX="203.0" layoutY="467.0" mnemonicParsing="false" onAction="#logIn" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #006A94;" text="Log-in" textFill="WHITE">
+            <Button fx:id="loginButton" layoutX="203.0" layoutY="467.0" mnemonicParsing="false" onAction="#logIn" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #7DA0CA;" text="Log-in" textFill="WHITE">
                <effect>
-                  <DropShadow />
+                  <DropShadow>
+                     <color>
+                        <Color red="0.4901960790157318" green="0.6274510025978088" blue="0.7921568751335144" />
+                     </color></DropShadow>
                </effect>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="registerButton" layoutX="213.0" layoutY="534.0" mnemonicParsing="false" onAction="#registerUserMenu" style="-fx-background-color: #006CFF;" text="Register" textFill="WHITE" underline="true">
+            <Button fx:id="registerButton" layoutX="213.0" layoutY="534.0" mnemonicParsing="false" onAction="#registerUserMenu" style="-fx-background-color: #021024;" text="Register" textFill="WHITE" underline="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Ellipse fill="#ff73ff" layoutX="244.0" layoutY="127.0" radiusX="170.0" radiusY="80.0" stroke="BLACK" strokeType="INSIDE" />
+            <Ellipse fill="#5483b3" layoutX="244.0" layoutY="127.0" radiusX="170.0" radiusY="80.0" stroke="BLACK" strokeType="INSIDE" />
             <Label layoutX="112.0" layoutY="86.0" text="NEXTFLIX">
                <font>
                   <Font name="Bauhaus 93" size="71.0" />
                </font>
             </Label>
-            <Label fx:id="emailLabel" layoutX="99.0" layoutY="294.0" prefHeight="25.0" prefWidth="291.0" text="EmailLabel" textFill="#006cff">
+            <Label fx:id="emailLabel" layoutX="99.0" layoutY="294.0" prefHeight="25.0" prefWidth="291.0" text="EmailLabel" textFill="#021024">
                <font>
                   <Font name="Consolas" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="passwordLabel" layoutX="97.0" layoutY="395.0" prefHeight="25.0" prefWidth="291.0" text="Password incorrect" textFill="#006cff">
+            <Label fx:id="passwordLabel" layoutX="97.0" layoutY="395.0" prefHeight="25.0" prefWidth="291.0" text="Password incorrect" textFill="#021024">
                <font>
                   <Font size="15.0" />
-               </font>
-            </Label>
-            <Label fx:id="emailLabel1" layoutX="109.0" layoutY="304.0" prefHeight="25.0" prefWidth="291.0" text="EmailLabel" textFill="#006cff">
-               <font>
-                  <Font name="Consolas" size="15.0" />
                </font>
             </Label>
          </children>
@@ -80,7 +78,7 @@
                <effect>
                   <DropShadow>
                      <color>
-                        <Color red="0.6313725709915161" green="0.3529411852359772" blue="1.0" />
+                        <Color red="0.3294117748737335" green="0.5137255191802979" blue="0.7019608020782471" />
                      </color>
                   </DropShadow>
                </effect>
@@ -92,16 +90,16 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <TextField fx:id="emailRegisterField" layoutX="60.0" layoutY="249.0" prefHeight="25.0" prefWidth="485.0" promptText="Email (@uptc.edu.co)"/>
-            <Label fx:id="firstNameLabel" layoutX="570.0" layoutY="113.0" text="First Name only contains characters" textFill="#021024"/>
-            <Label fx:id="lastNameLabel" layoutX="570.0" layoutY="180.0" text="Last Name only contains characters" textFill="#021024"/>
-            <Label fx:id="emailRegisterLabel" layoutX="570.0" layoutY="253.0" text="Email must contains domain &quot;@uptc.edu.co&quot; " textFill="#021024"/>
-            <Label fx:id="minCharactersLabel" alignment="TOP_LEFT" layoutX="570.0" layoutY="313.0" prefHeight="17.0" prefWidth="202.0" text="Min 8 characters" textFill="#021024"/>
-            <Label fx:id="specialCharactersLabel" alignment="TOP_LEFT" layoutX="570.0" layoutY="330.0" prefHeight="17.0" prefWidth="202.0" text="Min 1 special character" textFill="#021024"/>
-            <Label fx:id="uppercaseLabel" alignment="TOP_LEFT" layoutX="570.0" layoutY="347.0" prefHeight="17.0" prefWidth="202.0" text="Min 1 uppercase" textFill="#021024"/>
-            <Label fx:id="lowercaseLabel" alignment="TOP_LEFT" layoutX="570.0" layoutY="364.0" prefHeight="17.0" prefWidth="202.0" text="Min 1 lowercase" textFill="#021024"/>
-            <Label fx:id="passwordToMatchLabel" layoutX="570.0" layoutY="449.0" text="Passwords do not match yet" textFill="#021024"/>
-            <Label fx:id="minNumberLabel" alignment="TOP_LEFT" layoutX="570.0" layoutY="381.0" prefHeight="17.0" prefWidth="202.0" text="Min 1 number" textFill="#021024"/>
+            <TextField fx:id="emailRegisterField" layoutX="60.0" layoutY="249.0" prefHeight="25.0" prefWidth="485.0" promptText="Email (@uptc.edu.co)" />
+            <Label fx:id="firstNameLabel" layoutX="570.0" layoutY="113.0" text="First Name only contains characters" textFill="#021024" />
+            <Label fx:id="lastNameLabel" layoutX="570.0" layoutY="180.0" text="Last Name only contains characters" textFill="#021024" />
+            <Label fx:id="emailRegisterLabel" layoutX="570.0" layoutY="253.0" text="Email must contains domain &quot;@uptc.edu.co&quot; " textFill="#021024" />
+            <Label fx:id="minCharactersLabel" alignment="TOP_LEFT" layoutX="570.0" layoutY="313.0" prefHeight="17.0" prefWidth="202.0" text="Min 8 characters" textFill="#021024" />
+            <Label fx:id="specialCharactersLabel" alignment="TOP_LEFT" layoutX="570.0" layoutY="330.0" prefHeight="17.0" prefWidth="202.0" text="Min 1 special character" textFill="#021024" />
+            <Label fx:id="uppercaseLabel" alignment="TOP_LEFT" layoutX="570.0" layoutY="347.0" prefHeight="17.0" prefWidth="202.0" text="Min 1 uppercase" textFill="#021024" />
+            <Label fx:id="lowercaseLabel" alignment="TOP_LEFT" layoutX="570.0" layoutY="364.0" prefHeight="17.0" prefWidth="202.0" text="Min 1 lowercase" textFill="#021024" />
+            <Label fx:id="passwordToMatchLabel" layoutX="570.0" layoutY="449.0" text="Passwords do not match yet" textFill="#021024" />
+            <Label fx:id="minNumberLabel" alignment="TOP_LEFT" layoutX="570.0" layoutY="381.0" prefHeight="17.0" prefWidth="202.0" text="Min 1 number" textFill="#021024" />
          </children>
       </AnchorPane>
       

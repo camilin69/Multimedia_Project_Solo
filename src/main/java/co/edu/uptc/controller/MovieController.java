@@ -111,7 +111,7 @@ public class MovieController {
             effect.play();
             revenueLabel.setTextFill(Color.RED);
         }
-        if(movieLinkField.getText().startsWith("https://www.youtube.com/")){
+        if(movieLinkField.getText().startsWith("https://www.youtube.com/watch?v=")){
             movieLinkLabel.setTextFill(Color.web("#052659"));
             aux++;
         }else{

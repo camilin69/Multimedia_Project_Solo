@@ -150,7 +150,7 @@
                 <CheckBox fx:id="byName" layoutX="654.0" layoutY="6.0" onAction="#byNameSelected" prefHeight="10" prefWidth="80" selected="true" text="ByName" textFill="#ffffff" />
                 <CheckBox fx:id="byDirector" layoutX="655.0" layoutY="29.0" onAction="#byDirectorSelected" prefHeight="10" text="ByDirector" textFill="#ffffff" />
                 <CheckBox fx:id="byGenre" layoutX="655.0" layoutY="53.0" onAction="#byGenreSelected" prefHeight="10" text="ByGenre" textFill="#ffffff" />
-                <ComboBox fx:id="genres" layoutX="735.0" layoutY="49.0" prefHeight="10" promptText="Genres" />
+                <ComboBox fx:id="genres" layoutX="735.0" layoutY="44.0" prefHeight="10" promptText="Genres" />
                 <TextField fx:id="searchField" alignment="CENTER" layoutX="121.0" layoutY="16.0" onKeyReleased="#search" opacity="0.40" prefHeight="25.0" prefWidth="515.0" promptText="Search" style="-fx-font-size: 20px; -fx-border-radius: 50px; -fx-background-radius: 50px;" />
 
             </children>

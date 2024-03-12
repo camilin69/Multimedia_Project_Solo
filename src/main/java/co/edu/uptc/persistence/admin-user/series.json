@@ -1,153 +1,157 @@
 [
-    {
-      "seasons": [
-        {
-          "seasonName": "Season 1",
-          "episodes": [
-            {
-              "id": 912,
-              "name": "Nigga being Dumb",
-              "description": "dsa",
-              "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season1NiggabeingDumb.png",
-              "videoURL": "https://www.youtube.com/watch?v\u003d0Kvw2BPKjz0",
-              "coverURL": "https://media.vogue.es/photos/5ebc032a62e90b6607c16c1d/2:3/w_2560%2Cc_limit/CP_15-09-05_1485.jpg"
-            },
-            {
-              "id": 912,
-              "name": "Nigga dumb again",
-              "description": "dsa",
-              "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season1Niggadumbagain.png",
-              "videoURL": "https://www.youtube.com/watch?v\u003dmfokPqeSNcw",
-              "coverURL": "https://i.blogs.es/a7956b/michael-scott/1366_2000.jpeg"
-            }
-          ],
-          "backgroundCover": "#001A80FF",
-          "textCover": "#FFFFFF"
-        },
-        {
-          "seasonName": "Season 2",
-          "episodes": [
-            {
-              "id": 912,
-              "name": "Not that again",
-              "description": "fdsfds",
-              "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season2Notthatagain.png",
-              "videoURL": "https://www.youtube.com/watch?v\u003d_R3HQQRdNc0",
-              "coverURL": "https://resizer.glanacion.com/resizer/v2/the-Z5CTGL4MCRASXLHRUQCISDOYD4.jpg?auth\u003d21c21b0bc99f28300f6dcda533d8f67e4dd2294f9ffb28d82d32fde24a6b2904\u0026width\u003d1920\u0026height\u003d1280\u0026quality\u003d70\u0026smart\u003dtrue"
-            },
-            {
-              "id": 912,
-              "name": "wtf niggga",
-              "description": "dsa",
-              "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season2wtfniggga.png",
-              "videoURL": "https://www.youtube.com/watch?v\u003d8GxqvnQyaxs",
-              "coverURL": "https://indiehoy.com/wp-content/uploads/2020/09/the-office.jpg"
-            }
-          ],
-          "backgroundCover": "#FFCC80FF",
-          "textCover": "#000000FF"
-        },
-        {
-          "seasonName": "Season 3",
-          "episodes": [
-            {
-              "id": 912,
-              "name": "Almos ending",
-              "description": "dsa",
-              "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season3Almosending.png",
-              "videoURL": "https://www.youtube.com/watch?v\u003dumDr0mPuyQc",
-              "coverURL": "https://alafueraart.files.wordpress.com/2021/02/the-office-1200.jpg"
-            },
-            {
-              "id": 912,
-              "name": "End",
-              "description": "dsa",
-              "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season3End.png",
-              "videoURL": "https://www.youtube.com/watch?v\u003dlC5lsemxaJo",
-              "coverURL": "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2022/07/office-2766993.jpg?tf\u003d3840x"
-            }
-          ],
-          "backgroundCover": "#000000",
-          "textCover": "#FFFFFF"
-        }
-      ],
-      "id": 912,
-      "name": "The Office",
-      "director": "dsa",
-      "description": "dsa",
-      "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912The Office.png",
-      "coverURL": "https://es.web.img3.acsta.net/pictures/14/02/04/13/20/128334.jpg"
-    },
-    {
-      "seasons": [
-        {
-          "seasonName": "1",
-          "episodes": [],
-          "backgroundCover": "#000000",
-          "textCover": "#FFFFFF"
-        },
-        {
-          "seasonName": "2",
-          "episodes": [],
-          "backgroundCover": "#000000",
-          "textCover": "#FFFFFF"
-        }
-      ],
-      "id": 231,
-      "name": "South park",
-      "director": "Trey Parker",
-      "description": "Trey Parker",
-      "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/231South park.png",
-      "coverURL": "https://static.wikia.nocookie.net/doblaje/images/f/fb/Poster-South-Park.jpg/revision/latest?cb\u003d20201015031131\u0026path-prefix\u003des"
-    },
-    {
-      "seasons": [
-        {
-          "seasonName": "1",
-          "episodes": [],
-          "backgroundCover": "#000000",
-          "textCover": "#FFFFFF"
-        },
-        {
-          "seasonName": "2",
-          "episodes": [],
-          "backgroundCover": "#000000",
-          "textCover": "#FFFFFF"
-        },
-        {
-          "seasonName": "3",
-          "episodes": [],
-          "backgroundCover": "#000000",
-          "textCover": "#FFFFFF"
-        }
-      ],
-      "id": 246,
-      "name": "Family Guy",
-      "director": "Travis Scott",
-      "description": "Travis Scott",
-      "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/246Family Guy.png",
-      "coverURL": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/star/7238583A12BC3EE570A6D8E240D67D0E6CACE9C782B434F7FFE09747512BDE0C/scale?width\u003d1200\u0026aspectRatio\u003d1.78\u0026format\u003djpeg"
-    },
-    {
-      "seasons": [
-        {
-          "seasonName": "1",
-          "episodes": [],
-          "backgroundCover": "#000000",
-          "textCover": "#FFFFFF"
-        },
-        {
-          "seasonName": "2",
-          "episodes": [],
-          "backgroundCover": "#000000",
-          "textCover": "#FFFFFF"
-        }
-      ],
-      "id": 341,
-      "name": "Kid vs Cat",
-      "director": "Kanye West",
-      "description": "Kanye West",
-      "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/341Kid vs Cat.png",
-      "coverURL": "https://encrypted-tbn3.gstatic.com/images?q\u003dtbn:ANd9GcRuUBZXgFkigyS2AXqFJ2fHedOpiHRKmKzjzMi3CavUsyHwDk9M"
-    }
-  ]
+  {
+    "seasons": [
+      {
+        "seasonName": "Season 1",
+        "episodes": [
+          {
+            "id": 912,
+            "name": "Nigga being Dumb",
+            "description": "dsa",
+            "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season1NiggabeingDumb.png",
+            "videoURL": "https://www.youtube.com/watch?v\u003d0Kvw2BPKjz0",
+            "coverURL": "https://media.vogue.es/photos/5ebc032a62e90b6607c16c1d/2:3/w_2560%2Cc_limit/CP_15-09-05_1485.jpg"
+          },
+          {
+            "id": 912,
+            "name": "Nigga dumb again",
+            "description": "dsa",
+            "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season1Niggadumbagain.png",
+            "videoURL": "https://www.youtube.com/watch?v\u003dmfokPqeSNcw",
+            "coverURL": "https://i.blogs.es/a7956b/michael-scott/1366_2000.jpeg"
+          }
+        ],
+        "backgroundCover": "#001A80FF",
+        "textCover": "#FFFFFF"
+      },
+      {
+        "seasonName": "Season 2",
+        "episodes": [
+          {
+            "id": 912,
+            "name": "Not that again",
+            "description": "fdsfds",
+            "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season2Notthatagain.png",
+            "videoURL": "https://www.youtube.com/watch?v\u003d_R3HQQRdNc0",
+            "coverURL": "https://resizer.glanacion.com/resizer/v2/the-Z5CTGL4MCRASXLHRUQCISDOYD4.jpg?auth\u003d21c21b0bc99f28300f6dcda533d8f67e4dd2294f9ffb28d82d32fde24a6b2904\u0026width\u003d1920\u0026height\u003d1280\u0026quality\u003d70\u0026smart\u003dtrue"
+          },
+          {
+            "id": 912,
+            "name": "wtf niggga",
+            "description": "dsa",
+            "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season2wtfniggga.png",
+            "videoURL": "https://www.youtube.com/watch?v\u003d8GxqvnQyaxs",
+            "coverURL": "https://indiehoy.com/wp-content/uploads/2020/09/the-office.jpg"
+          }
+        ],
+        "backgroundCover": "#FFCC80FF",
+        "textCover": "#000000FF"
+      },
+      {
+        "seasonName": "Season 3",
+        "episodes": [
+          {
+            "id": 912,
+            "name": "Almos ending",
+            "description": "dsa",
+            "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season3Almosending.png",
+            "videoURL": "https://www.youtube.com/watch?v\u003dumDr0mPuyQc",
+            "coverURL": "https://alafueraart.files.wordpress.com/2021/02/the-office-1200.jpg"
+          },
+          {
+            "id": 912,
+            "name": "End",
+            "description": "dsa",
+            "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season3End.png",
+            "videoURL": "https://www.youtube.com/watch?v\u003dlC5lsemxaJo",
+            "coverURL": "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2022/07/office-2766993.jpg?tf\u003d3840x"
+          }
+        ],
+        "backgroundCover": "#000000",
+        "textCover": "#FFFFFF"
+      }
+    ],
+    "id": 912,
+    "name": "The Office",
+    "director": "dsa",
+    "description": "dsa",
+    "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912The Office.png",
+    "coverURL": "https://es.web.img3.acsta.net/pictures/14/02/04/13/20/128334.jpg",
+    "genre": "Action"
+  },
+  {
+    "seasons": [
+      {
+        "seasonName": "1",
+        "episodes": [],
+        "backgroundCover": "#000000",
+        "textCover": "#FFFFFF"
+      },
+      {
+        "seasonName": "2",
+        "episodes": [],
+        "backgroundCover": "#000000",
+        "textCover": "#FFFFFF"
+      }
+    ],
+    "id": 231,
+    "name": "South park",
+    "director": "Trey Parker",
+    "description": "Trey Parker",
+    "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/231South park.png",
+    "coverURL": "https://static.wikia.nocookie.net/doblaje/images/f/fb/Poster-South-Park.jpg/revision/latest?cb\u003d20201015031131\u0026path-prefix\u003des",
+    "genre": "Terror"
+  },
+  {
+    "seasons": [
+      {
+        "seasonName": "1",
+        "episodes": [],
+        "backgroundCover": "#000000",
+        "textCover": "#FFFFFF"
+      },
+      {
+        "seasonName": "2",
+        "episodes": [],
+        "backgroundCover": "#000000",
+        "textCover": "#FFFFFF"
+      },
+      {
+        "seasonName": "3",
+        "episodes": [],
+        "backgroundCover": "#000000",
+        "textCover": "#FFFFFF"
+      }
+    ],
+    "id": 246,
+    "name": "Family Guy",
+    "director": "Travis Scott",
+    "description": "Travis Scott",
+    "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/246Family Guy.png",
+    "coverURL": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/star/7238583A12BC3EE570A6D8E240D67D0E6CACE9C782B434F7FFE09747512BDE0C/scale?width\u003d1200\u0026aspectRatio\u003d1.78\u0026format\u003djpeg",
+    "genre": "Suspense"
+  },
+  {
+    "seasons": [
+      {
+        "seasonName": "1",
+        "episodes": [],
+        "backgroundCover": "#000000",
+        "textCover": "#FFFFFF"
+      },
+      {
+        "seasonName": "2",
+        "episodes": [],
+        "backgroundCover": "#000000",
+        "textCover": "#FFFFFF"
+      }
+    ],
+    "id": 341,
+    "name": "Kid vs Cat",
+    "director": "Kanye West",
+    "description": "Kanye West",
+    "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/341Kid vs Cat.png",
+    "coverURL": "https://encrypted-tbn3.gstatic.com/images?q\u003dtbn:ANd9GcRuUBZXgFkigyS2AXqFJ2fHedOpiHRKmKzjzMi3CavUsyHwDk9M",
+    "genre": "Terror"
+  }
+]

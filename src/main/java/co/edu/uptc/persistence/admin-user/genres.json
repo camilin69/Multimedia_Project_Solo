@@ -1,22 +1,332 @@
 [
   {
     "name": "Terror",
-    "movies": [],
-    "series": []
+    "movies": [
+      {
+        "studio": "dsa",
+        "budget": 432,
+        "revenue": 654,
+        "id": 651,
+        "name": "Elemental",
+        "director": "dsa",
+        "description": "dsa",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/movies/651.png",
+        "videoURL": "https://www.youtube.com/watch?v=hXzcyx9V0xw",
+        "coverURL": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSKZfm-U7Hj5kb_dcvlY049SeeuJLcXznmRcBPmD-NF8Qo70vqG",
+        "genre": "Terror"
+      },
+      {
+        "studio": "dsa",
+        "budget": 564,
+        "revenue": 65,
+        "id": 791,
+        "name": "Soul",
+        "director": "dsa",
+        "description": "dsa",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/movies/791.png",
+        "videoURL": "https://www.youtube.com/watch?v=3QIdlo4uIVg&t=1s",
+        "coverURL": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQZihNrmaDPhGzwiJ90h2JOf1aRQbk398YGPV7yEjMBTY_gGCfI",
+        "genre": "Terror"
+      }
+    ],
+    "series": [
+      {
+        "seasons": [
+          {
+            "seasonName": "1",
+            "episodes": [],
+            "backgroundCover": "#000000",
+            "textCover": "#FFFFFF"
+          },
+          {
+            "seasonName": "2",
+            "episodes": [],
+            "backgroundCover": "#000000",
+            "textCover": "#FFFFFF"
+          }
+        ],
+        "id": 231,
+        "name": "South park",
+        "director": "Trey Parker",
+        "description": "Trey Parker",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/231South park.png",
+        "coverURL": "https://static.wikia.nocookie.net/doblaje/images/f/fb/Poster-South-Park.jpg/revision/latest?cb=20201015031131&path-prefix=es",
+        "genre": "Terror"
+      },
+      {
+        "seasons": [
+          {
+            "seasonName": "1",
+            "episodes": [],
+            "backgroundCover": "#000000",
+            "textCover": "#FFFFFF"
+          },
+          {
+            "seasonName": "2",
+            "episodes": [],
+            "backgroundCover": "#000000",
+            "textCover": "#FFFFFF"
+          }
+        ],
+        "id": 341,
+        "name": "Kid vs Cat",
+        "director": "Kanye West",
+        "description": "Kanye West",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/341Kid vs Cat.png",
+        "coverURL": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRuUBZXgFkigyS2AXqFJ2fHedOpiHRKmKzjzMi3CavUsyHwDk9M",
+        "genre": "Terror"
+      },
+      {
+        "seasons": [
+          {
+            "seasonName": "1",
+            "episodes": [],
+            "backgroundCover": "#000000",
+            "textCover": "#FFFFFF"
+          },
+          {
+            "seasonName": "2",
+            "episodes": [],
+            "backgroundCover": "#000000",
+            "textCover": "#FFFFFF"
+          }
+        ],
+        "id": 231,
+        "name": "South park",
+        "director": "Trey Parker",
+        "description": "Trey Parker",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/231South park.png",
+        "coverURL": "https://static.wikia.nocookie.net/doblaje/images/f/fb/Poster-South-Park.jpg/revision/latest?cb=20201015031131&path-prefix=es",
+        "genre": "Terror"
+      }
+    ]
   },
   {
     "name": "Suspense",
-    "movies": [],
-    "series": []
+    "movies": [
+      
+      {
+        "studio": "dsa",
+        "budget": 654,
+        "revenue": 654,
+        "id": 887,
+        "name": "Inside Out",
+        "director": "dsa",
+        "description": "dsa",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/movies/887.png",
+        "videoURL": "https://www.youtube.com/watch?v=EhoqrwKaqRo",
+        "coverURL": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS9ROW0arSCxRuxwgSr2DJIuk-5l9vx24AHccabErGFeblLQDIY",
+        "genre": "Suspense"
+      }
+    ],
+    "series": [
+      {
+        "seasons": [
+          {
+            "seasonName": "1",
+            "episodes": [],
+            "backgroundCover": "#000000",
+            "textCover": "#FFFFFF"
+          },
+          {
+            "seasonName": "2",
+            "episodes": [],
+            "backgroundCover": "#000000",
+            "textCover": "#FFFFFF"
+          },
+          {
+            "seasonName": "3",
+            "episodes": [],
+            "backgroundCover": "#000000",
+            "textCover": "#FFFFFF"
+          }
+        ],
+        "id": 246,
+        "name": "Family Guy",
+        "director": "Travis Scott",
+        "description": "Travis Scott",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/246Family Guy.png",
+        "coverURL": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/star/7238583A12BC3EE570A6D8E240D67D0E6CACE9C782B434F7FFE09747512BDE0C/scale?width=1200&aspectRatio=1.78&format=jpeg",
+        "genre": "Suspense"
+      }
+    ]
   },
   {
     "name": "Accion",
-    "movies": [],
-    "series": []
-  },
-  {
-    "name": "Niggas",
-    "movies": [],
-    "series": []
+    "movies": [
+      {
+        "studio": "das",
+        "budget": 432,
+        "revenue": 423,
+        "id": 205,
+        "name": "Drive",
+        "director": "das",
+        "description": "dsa",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/movies/205.png",
+        "videoURL": "https://www.youtube.com/watch?v=KBiOF3y1W0Y",
+        "coverURL": "https://compote.slate.com/images/09fd0e3a-6c34-43d3-b9dd-10459573d23d.jpg",
+        "genre": "Action"
+      },
+      {
+        "studio": "dsa",
+        "budget": 432,
+        "revenue": 432,
+        "id": 862,
+        "name": "Taxi Driver",
+        "director": "dsa",
+        "description": "das",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/movies/862.png",
+        "videoURL": "https://www.youtube.com/watch?v=T5IligQP7Fo&t=3s",
+        "coverURL": "https://lwlies.com/wp-content/uploads/2016/12/taxi-driver-travis-bickle-900x0-c-default.jpg",
+        "genre": "Action"
+      },
+      {
+        "studio": "das",
+        "budget": 432,
+        "revenue": 423,
+        "id": 442,
+        "name": "Goodfellas",
+        "director": "dsa",
+        "description": "dsa",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/movies/442.png",
+        "videoURL": "https://www.youtube.com/watch?v=2ilzidi_J8Q",
+        "coverURL": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ_hqADaeJSNf--zdL7hMyUYAyC-nSRdsNkVLBJizz4GUTQgni0",
+        "genre": "Action"
+      },
+      {
+        "studio": "das",
+        "budget": 432,
+        "revenue": 432,
+        "id": 22,
+        "name": "The Godfather",
+        "director": "dsa",
+        "description": "das",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/movies/22.png",
+        "videoURL": "https://www.youtube.com/watch?v=UaVTIH8mujA",
+        "coverURL": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRFnUIGQQtTzUxD9Y19nl3uum8SZA6TSA8eWnJoPy1UdHVF8fDn",
+        "genre": "Action"
+      },
+      {
+        "studio": "fsd",
+        "budget": 543,
+        "revenue": 567,
+        "id": 539,
+        "name": "Scarface",
+        "director": "dasfds",
+        "description": "fds",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/movies/539.png",
+        "videoURL": "https://www.youtube.com/watch?v=7pQQHnqBa2E",
+        "coverURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYgxUAx8cnOxNJGjWhjJT6l-A1P7mts2WjrmnIpwyzXXXW7UiR",
+        "genre": "Action"
+      },
+      {
+        "studio": "das",
+        "budget": 432,
+        "revenue": 432,
+        "id": 580,
+        "name": "In My Room",
+        "director": "dsa",
+        "description": "das",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/movies/580.png",
+        "videoURL": "https://www.youtube.com/watch?v=dZu98_pC0kU",
+        "coverURL": "https://s3.amazonaws.com/thumbnails.thecrimson.com/photos/2019/11/11/200609_1340826.jpg.1500x1500_q95_crop-smart_upscale.jpg",
+        "genre": "Action"
+      },
+      {
+        "studio": "dsa",
+        "budget": 43,
+        "revenue": 543,
+        "id": 559,
+        "name": "Flashing Lights",
+        "director": "das",
+        "description": "das",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/movies/559.png",
+        "videoURL": "https://www.youtube.com/watch?v=ila-hAUXR5U",
+        "coverURL": "https://i.ytimg.com/vi/UYXa2yBF5ms/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAfrSX5f5aBehPKXEgJob7HMPbUoQ",
+        "genre": "Action"
+      }
+    ],
+    "series": [
+      {
+        "seasons": [
+          {
+            "seasonName": "Season 1",
+            "episodes": [
+              {
+                "id": 912,
+                "name": "Nigga being Dumb",
+                "description": "dsa",
+                "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season1NiggabeingDumb.png",
+                "videoURL": "https://www.youtube.com/watch?v=0Kvw2BPKjz0",
+                "coverURL": "https://media.vogue.es/photos/5ebc032a62e90b6607c16c1d/2:3/w_2560%2Cc_limit/CP_15-09-05_1485.jpg"
+              },
+              {
+                "id": 912,
+                "name": "Nigga dumb again",
+                "description": "dsa",
+                "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season1Niggadumbagain.png",
+                "videoURL": "https://www.youtube.com/watch?v=mfokPqeSNcw",
+                "coverURL": "https://i.blogs.es/a7956b/michael-scott/1366_2000.jpeg"
+              }
+            ],
+            "backgroundCover": "#001A80FF",
+            "textCover": "#FFFFFF"
+          },
+          {
+            "seasonName": "Season 2",
+            "episodes": [
+              {
+                "id": 912,
+                "name": "Not that again",
+                "description": "fdsfds",
+                "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season2Notthatagain.png",
+                "videoURL": "https://www.youtube.com/watch?v=_R3HQQRdNc0",
+                "coverURL": "https://resizer.glanacion.com/resizer/v2/the-Z5CTGL4MCRASXLHRUQCISDOYD4.jpg?auth=21c21b0bc99f28300f6dcda533d8f67e4dd2294f9ffb28d82d32fde24a6b2904&width=1920&height=1280&quality=70&smart=true"
+              },
+              {
+                "id": 912,
+                "name": "wtf niggga",
+                "description": "dsa",
+                "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season2wtfniggga.png",
+                "videoURL": "https://www.youtube.com/watch?v=8GxqvnQyaxs",
+                "coverURL": "https://indiehoy.com/wp-content/uploads/2020/09/the-office.jpg"
+              }
+            ],
+            "backgroundCover": "#FFCC80FF",
+            "textCover": "#000000FF"
+          },
+          {
+            "seasonName": "Season 3",
+            "episodes": [
+              {
+                "id": 912,
+                "name": "Almos ending",
+                "description": "dsa",
+                "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season3Almosending.png",
+                "videoURL": "https://www.youtube.com/watch?v=umDr0mPuyQc",
+                "coverURL": "https://alafueraart.files.wordpress.com/2021/02/the-office-1200.jpg"
+              },
+              {
+                "id": 912,
+                "name": "End",
+                "description": "dsa",
+                "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912Season3End.png",
+                "videoURL": "https://www.youtube.com/watch?v=lC5lsemxaJo",
+                "coverURL": "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2022/07/office-2766993.jpg?tf=3840x"
+              }
+            ],
+            "backgroundCover": "#000000",
+            "textCover": "#FFFFFF"
+          }
+        ],
+        "id": 912,
+        "name": "The Office",
+        "director": "dsa",
+        "description": "dsa",
+        "imageLocalPathURL": "C:/Users/HP/Desktop/GitHubProjects/Multimedia_Project_Solo/src/main/java/co/edu/uptc/persistence/series/912The Office.png",
+        "coverURL": "https://es.web.img3.acsta.net/pictures/14/02/04/13/20/128334.jpg",
+        "genre": "Action"
+      }
+    ]
   }
 ]

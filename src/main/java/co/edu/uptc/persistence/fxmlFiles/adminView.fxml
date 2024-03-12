@@ -2,28 +2,24 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.shape.QuadCurve?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uptc.view.AdminView">
@@ -32,7 +28,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#returnToLogin" text="Return" />
+                  <MenuItem mnemonicParsing="false" onAction="#returnToLogin" text="Return To LogIn" />
+                  <MenuItem mnemonicParsing="false" onAction="#adminMenu" text="Return to Admin Menu" />
                </items>
           </Menu>
         </menus>
@@ -40,16 +37,16 @@
 
       <AnchorPane fx:id="welcomePane" layoutY="25.0" prefHeight="575.0" prefWidth="1000.0" style="-fx-background-color: #021024;">
          <children>
-            <ImageView fitHeight="150" fitWidth="200" layoutX="90.0" layoutY="160.0" pickOnBounds="true" onMouseEntered="#serieOptionsIn" onMouseExited="#serieOptionsOut">
+            <ImageView fitHeight="150" fitWidth="200" layoutX="90.0" layoutY="160.0" onMouseEntered="#serieOptionsIn" onMouseExited="#serieOptionsOut" pickOnBounds="true">
                <image>
                   <Image url="@../icons/serieIcon.png" />
                </image>
             </ImageView>
-            <VBox fx:id="serieOptions" prefWidth="150" prefHeight="400" layoutX="200" layoutY="250" onMouseEntered="#serieOptionsIn" onMouseExited="#serieOptionsOut" visible="false">
+            <VBox fx:id="serieOptions" layoutX="200" layoutY="250" onMouseEntered="#serieOptionsIn" onMouseExited="#serieOptionsOut" prefHeight="400" prefWidth="150" visible="false">
                <children>
-                  <Button onAction="#seeAvailableSeries" prefWidth="250" prefHeight="80" text="See" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                  <Button onAction="#seeAvailableSeries" prefHeight="80" prefWidth="250" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;" text="See">
                      <font>
-                        <Font name="SimSun" size="24"/>
+                        <Font name="SimSun" size="24" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -58,9 +55,9 @@
                         <Color fx:constant="WHITE" />
                      </textFill>
                   </Button>
-                  <Button onAction="#addSerie" prefWidth="250" prefHeight="80" text="Add" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                  <Button onAction="#addSerie" prefHeight="80" prefWidth="250" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;" text="Add">
                      <font>
-                        <Font name="SimSun" size="24"/>
+                        <Font name="SimSun" size="24" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -69,9 +66,9 @@
                         <Color fx:constant="WHITE" />
                      </textFill>
                   </Button>
-                  <Button onAction="#seriesToEdit" prefWidth="250" prefHeight="80" text="Edit" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                  <Button onAction="#seriesToEdit" prefHeight="80" prefWidth="250" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;" text="Edit">
                      <font>
-                        <Font name="SimSun" size="24"/>
+                        <Font name="SimSun" size="24" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -80,9 +77,9 @@
                         <Color fx:constant="WHITE" />
                      </textFill>
                   </Button>
-                  <Button onAction="#seriesToDelete" prefWidth="250" prefHeight="80" text="Delete" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                  <Button onAction="#seriesToDelete" prefHeight="80" prefWidth="250" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;" text="Delete">
                      <font>
-                        <Font name="SimSun" size="24"/>
+                        <Font name="SimSun" size="24" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -94,16 +91,16 @@
                </children>
             </VBox> 
 
-            <ImageView fitHeight="150" fitWidth="200" layoutX="400.0" layoutY="160.0" pickOnBounds="true" onMouseEntered="#movieOptionsIn" onMouseExited="#movieOptionsOut">
+            <ImageView fitHeight="150" fitWidth="200" layoutX="400.0" layoutY="160.0" onMouseEntered="#movieOptionsIn" onMouseExited="#movieOptionsOut" pickOnBounds="true">
                <image>
                   <Image url="@../icons/movieIcon.png" />
                </image>
             </ImageView>
-            <VBox fx:id="movieOptions" prefWidth="150" prefHeight="400" layoutX="500" layoutY="250" onMouseEntered="#movieOptionsIn" onMouseExited="#movieOptionsOut" visible="false">
+            <VBox fx:id="movieOptions" layoutX="500" layoutY="250" onMouseEntered="#movieOptionsIn" onMouseExited="#movieOptionsOut" prefHeight="400" prefWidth="150" visible="false">
                <children>
-                  <Button onAction="#seeAvailableMovies" prefWidth="250" prefHeight="80" text="See" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                  <Button onAction="#seeAvailableMovies" prefHeight="80" prefWidth="250" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;" text="See">
                      <font>
-                        <Font name="SimSun" size="24"/>
+                        <Font name="SimSun" size="24" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -112,9 +109,9 @@
                         <Color fx:constant="WHITE" />
                      </textFill>
                   </Button>
-                  <Button onAction="#addMovie" prefWidth="250" prefHeight="80" text="Add" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                  <Button onAction="#addMovie" prefHeight="80" prefWidth="250" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;" text="Add">
                      <font>
-                        <Font name="SimSun" size="24"/>
+                        <Font name="SimSun" size="24" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -123,9 +120,9 @@
                         <Color fx:constant="WHITE" />
                      </textFill>
                   </Button>
-                  <Button onAction="#moviesToEdit" prefWidth="250" prefHeight="80" text="Edit" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                  <Button onAction="#moviesToEdit" prefHeight="80" prefWidth="250" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;" text="Edit">
                      <font>
-                        <Font name="SimSun" size="24"/>
+                        <Font name="SimSun" size="24" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -134,9 +131,9 @@
                         <Color fx:constant="WHITE" />
                      </textFill>
                   </Button>
-                  <Button onAction="#moviesToDelete" prefWidth="250" prefHeight="80" text="Delete" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;">
+                  <Button onAction="#moviesToDelete" prefHeight="80" prefWidth="250" style="-fx-background-color: #052659; -fx-border-color: #7DA0CA;" text="Delete">
                      <font>
-                        <Font name="SimSun" size="24"/>
+                        <Font name="SimSun" size="24" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -148,15 +145,15 @@
                </children>
             </VBox> 
 
-            <ImageView fitWidth="200" fitHeight="150" layoutX="710" layoutY="160" onMouseEntered="#showSubOptions" onMouseExited="#hideSubOptions">
+            <ImageView fitHeight="150" fitWidth="200" layoutX="710" layoutY="160" onMouseEntered="#showSubOptions" onMouseExited="#hideSubOptions">
                 <image>
                     <Image url="@../icons/subscriptionIcon.png" />
                 </image>
             </ImageView>
-            <VBox fx:id="subsOptions" layoutX="820" layoutY="250" prefWidth="150" prefHeight="300" onMouseEntered="#showSubOptions" onMouseExited="#hideSubOptions" visible="false">
+            <VBox fx:id="subsOptions" layoutX="820" layoutY="250" onMouseEntered="#showSubOptions" onMouseExited="#hideSubOptions" prefHeight="300" prefWidth="150" visible="false">
                
                 <children>
-                    <Button text="See" prefWidth="250" prefHeight="80" onAction="#seeAvailableSubscriptions" style="-fx-background-color: #052659; -fx-border-color: #5483B3;">
+                    <Button onAction="#seeAvailableSubscriptions" prefHeight="80" prefWidth="250" style="-fx-background-color: #052659; -fx-border-color: #5483B3;" text="See">
                         <font>
                             <Font name="SimSun" size="24.0" />
                         </font>
@@ -164,10 +161,10 @@
                             <Color fx:constant="WHITE" />
                         </textFill>
                         <cursor>
-                            <Cursor fx:constant ="HAND"/>
+                            <Cursor fx:constant="HAND" />
                         </cursor>
                     </Button>
-                    <Button text="Add" prefWidth="250" prefHeight="80" onAction="#addSubscription" style="-fx-background-color: #052659; -fx-border-color: #5483B3;" >
+                    <Button onAction="#addSubscription" prefHeight="80" prefWidth="250" style="-fx-background-color: #052659; -fx-border-color: #5483B3;" text="Add">
                         <font>
                             <Font name="SimSun" size="24" />
                         </font>
@@ -175,10 +172,10 @@
                             <Color fx:constant="WHITE" />
                         </textFill>
                         <cursor>
-                            <Cursor fx:constant ="HAND"/>
+                            <Cursor fx:constant="HAND" />
                         </cursor>
                     </Button>
-                    <Button text="Edit" prefWidth="250" prefHeight="80" onAction="#subscriptionsToEdit" style="-fx-background-color: #052659; -fx-border-color: #5483B3;">
+                    <Button onAction="#subscriptionsToEdit" prefHeight="80" prefWidth="250" style="-fx-background-color: #052659; -fx-border-color: #5483B3;" text="Edit">
                         <font>
                             <Font name="SimSun" size="24" />
                         </font>
@@ -186,10 +183,10 @@
                             <Color fx:constant="WHITE" />
                         </textFill>
                         <cursor>
-                            <Cursor fx:constant ="HAND"/>
+                            <Cursor fx:constant="HAND" />
                         </cursor>
                     </Button>
-                    <Button text="Delete" prefWidth="250" prefHeight="80" onAction="#subscriptionsToDelete" style="-fx-background-color: #052659; -fx-border-color: #5483B3;">
+                    <Button onAction="#subscriptionsToDelete" prefHeight="80" prefWidth="250" style="-fx-background-color: #052659; -fx-border-color: #5483B3;" text="Delete">
                         <font>
                             <Font name="SimSun" size="24" />
                         </font>
@@ -197,7 +194,7 @@
                             <Color fx:constant="WHITE" />
                         </textFill>
                         <cursor>
-                            <Cursor fx:constant ="HAND"/>
+                            <Cursor fx:constant="HAND" />
                         </cursor>
                     </Button>
                 </children>
@@ -205,6 +202,21 @@
             <Label layoutX="329.0" layoutY="14.0" prefHeight="68.0" prefWidth="343.0" text="Welcome Admin" textFill="WHITE">
                <font>
                   <Font name="NSimSun" size="46.0" />
+               </font>
+            </Label>
+            <Label layoutX="115.0" layoutY="104.0" text="SERIES" textFill="WHITE">
+               <font>
+                  <Font name="NSimSun" size="50.0" />
+               </font>
+            </Label>
+            <Label layoutX="426.0" layoutY="104.0" text="MOVIES" textFill="WHITE">
+               <font>
+                  <Font name="NSimSun" size="50.0" />
+               </font>
+            </Label>
+            <Label layoutX="745.0" layoutY="104.0" text="SUBS" textFill="WHITE">
+               <font>
+                  <Font name="NSimSun" size="50.0" />
                </font>
             </Label>
             
@@ -258,12 +270,12 @@
                      <TextField fx:id="serieCoverField" alignment="CENTER" layoutX="40.0" layoutY="375.0" prefHeight="25.0" prefWidth="318.0" promptText="Cover of Serie" />
                      <Label fx:id="serieCoverLabel" layoutX="40.0" layoutY="395.0" prefHeight="25.0" prefWidth="318.0" text="Serie Cover Up Here" textFill="#052659" />
 
-                     <Button fx:id="createSerie" onAction="#createSerie" layoutX="159.0" layoutY="450.0" prefHeight="20" prefWidth="80" style="-fx-background-color: #7DA0CA;" text="Create">
+                     <Button fx:id="createSerie" layoutX="159.0" layoutY="450.0" onAction="#createSerie" prefHeight="20" prefWidth="80" style="-fx-background-color: #7DA0CA;" text="Create">
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <Button fx:id="return" onAction="#adminMenu" layoutX="159.0" layoutY="500.0" prefHeight="20" prefWidth="80" style="-fx-background-color: #052659;" text="Return" TextFill="#ffffff">
+                     <Button fx:id="return" TextFill="#ffffff" layoutX="159.0" layoutY="500.0" onAction="#adminMenu" prefHeight="20" prefWidth="80" style="-fx-background-color: #052659;" text="Return">
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
@@ -283,7 +295,7 @@
                         </cursor>
                      </VBox>
 
-                     <VBox fx:id="editSeason" onMouseClicked="#editSeason" alignment="CENTER" layoutX="520.0" layoutY="150.0" prefHeight="50.0" prefWidth="80.0" visible="false">
+                     <VBox fx:id="editSeason" alignment="CENTER" layoutX="520.0" layoutY="150.0" onMouseClicked="#editSeason" prefHeight="50.0" prefWidth="80.0" visible="false">
                         <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true" preserveRatio="true">
                            <image>
                                  <Image url="@../Icons/editIcon.png" />
@@ -295,7 +307,7 @@
                         </cursor>
                      </VBox>
 
-                     <VBox fx:id="deleteSeason" onMouseClicked="#removeSeason" alignment="CENTER" layoutX="640.0" layoutY="150.0" prefHeight="50.0" prefWidth="80.0" visible="false">
+                     <VBox fx:id="deleteSeason" alignment="CENTER" layoutX="640.0" layoutY="150.0" onMouseClicked="#removeSeason" prefHeight="50.0" prefWidth="80.0" visible="false">
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                                  <Image url="@../Icons/deleteIcon.png" />
@@ -344,7 +356,7 @@
                      </VBox>
 
                      <ComboBox fx:id="allGenresSeries" layoutX="450.0" layoutY="420.0" prefHeight="25.0" prefWidth="320.0" promptText="Genres" />
-                     <ImageView fx:id="addGenre" onMouseClicked="#addGenre" fitHeight="50.0" fitWidth="44.0" layoutX="796.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fx:id="addGenre" fitHeight="50.0" fitWidth="44.0" layoutX="796.0" layoutY="410.0" onMouseClicked="#addGenre" pickOnBounds="true" preserveRatio="true">
                         <image>
                            <Image url="@../Icons/addIcon.png" />
                         </image>

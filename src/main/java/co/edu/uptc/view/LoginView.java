@@ -91,7 +91,6 @@ public class LoginView implements Initializable{
         passwordField.setText("Cami1234...");
         // emailField.setText("Elon1@uptc.admin.co");
         // passwordField.setText("1");
-        userC.setUsers(userC.loadUsersFromJson());
         Media media = new Media("file:///" + System.getProperty("user.dir").replace("\\", "/").replace(" ", "%20") + "/src/main/java/co/edu/uptc/persistence/icons/backgroundLoginMenu.mp4");
         MediaPlayer player = new MediaPlayer(media);
         backgroundLogin.setMediaPlayer(player);
@@ -170,10 +169,10 @@ public class LoginView implements Initializable{
         if(!emailField.getText().contains("@uptc.admin.co") && !emailField.getText().contains("@uptc.edu.co")){
             emailLabel.setText("User Incorrect");
             emailLabel.setTextFill(Color.RED);
-            passwordLabel.setTextFill(Color.web("#006cff"));
+            passwordLabel.setTextFill(Color.web("#021024"));
         }else{
-            passwordLabel.setTextFill(Color.web("#006cff"));
-            emailLabel.setTextFill(Color.web("#006cff"));
+            passwordLabel.setTextFill(Color.web("##021024"));
+            emailLabel.setTextFill(Color.web("##021024"));
         }
     }
 

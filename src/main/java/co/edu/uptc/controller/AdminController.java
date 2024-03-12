@@ -177,9 +177,7 @@ public class AdminController {
             int exitCode = process.waitFor();
 
             if (exitCode == 0) {
-                System.out.println("Cover Downloaded Successfully");
             } else {
-                System.err.println("Error, output code: " + exitCode);
             }
         } catch (IOException | InterruptedException e2) {
             e2.printStackTrace();
